@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BHS AI Institute Day — April 6, 2026</title>
+  <style>
+    :root {
+      --red: #9D2235;
+      --red-dark: #7a1a28;
+      --red-light: #c42a42;
+      --gold: #FFC72C;
+      --grey: #53565A;
+      --grey-light: #f0eded;
+      --white: #ffffff;
+      --text: #1a1a1a;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: Verdana, Geneva, Tahoma, sans-serif;
+      color: var(--text);
+      background: #f7f5f5;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--red-dark);
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 16px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: rgba(255,255,255,0.85);
+      text-decoration: none;
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 6px 14px;
+      border-radius: 999px;
+      transition: background 0.2s, color 0.2s;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    nav a:hover {
+      background: var(--gold);
+      color: var(--text);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      background: linear-gradient(135deg, var(--red-dark) 0%, var(--red) 60%, var(--red-light) 100%);
+      color: #fff;
+      text-align: center;
+      padding: 80px 24px 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      background: rgba(255,199,44,0.08);
+      border-radius: 50%;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 400px; height: 400px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 50%;
+    }
+
+    .hero .badge {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 6px 20px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+      animation: popIn 0.5s ease;
+    }
+
+    .hero h1 {
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 14px;
+      animation: slideUp 0.6s ease;
+    }
+
+    .hero h1 .gold { color: var(--gold); }
+
+    .hero p.subtitle {
+      font-size: 1rem;
+      opacity: 0.92;
+      max-width: 620px;
+      margin: 0 auto 36px;
+      line-height: 1.8;
+      animation: slideUp 0.7s ease;
+    }
+
+    .hero .meta {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+      font-size: 0.83rem;
+    }
+
+    .hero .meta span {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 999px;
+      padding: 7px 16px;
+    }
+
+    .btn-gold {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--text);
+      font-weight: 700;
+      font-size: 0.97rem;
+      font-family: Verdana, sans-serif;
+      padding: 15px 38px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.15s, box-shadow 0.15s;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.25);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.3);
+    }
+
+    .btn-red {
+      display: inline-block;
+      background: var(--red);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.88rem;
+      font-family: Verdana, sans-serif;
+      padding: 10px 22px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .btn-red:hover { background: var(--red-dark); transform: translateY(-2px); }
+
+    /* ─── SECTION WRAPPER ─── */
+    .section {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+
+    .section-label {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--text);
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 4px;
+      margin-bottom: 12px;
+    }
+
+    h2.section-title {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 10px;
+    }
+
+    .divider {
+      width: 56px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 2px;
+      margin: 0 0 24px;
+    }
+
+    /* ─── ACCORDION ─── */
+    .accordion { margin-top: 28px; }
+
+    .accordion-item {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+      overflow: hidden;
+      background: #fff;
+    }
+
+    .accordion-header {
+      width: 100%;
+      background: #fff;
+      border: none;
+      padding: 18px 22px;
+      text-align: left;
+      font-family: Verdana, sans-serif;
+      font-size: 0.93rem;
+      font-weight: 700;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: background 0.2s;
+    }
+
+    .accordion-header:hover { background: #fdf5f5; }
+
+    .accordion-header.open { background: var(--red); color: #fff; }
+
+    .accordion-header .chevron {
+      font-size: 1.1rem;
+      transition: transform 0.3s;
+      flex-shrink: 0;
+      margin-left: 12px;
+    }
+
+    .accordion-header.open .chevron { transform: rotate(180deg); }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s;
+      padding: 0 22px;
+      font-size: 0.88rem;
+      line-height: 1.8;
+      color: var(--grey);
+    }
+
+    .accordion-body.open {
+      max-height: 600px;
+      padding: 18px 22px 22px;
+    }
+
+    .accordion-body ul {
+      padding-left: 20px;
+      margin-top: 8px;
+    }
+
+    .accordion-body li { margin-bottom: 6px; }
+
+    /* ─── TABS ─── */
+    .tabs-wrapper { margin-top: 32px; }
+
+    .tab-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .tab-btn {
+      padding: 9px 20px;
+      border-radius: 999px;
+      border: 2px solid var(--red);
+      background: transparent;
+      color: var(--red);
+      font-family: Verdana, sans-serif;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-btn:hover, .tab-btn.active {
+      background: var(--red);
+      color: #fff;
+    }
+
+    .tab-pane { display: none; animation: fadeIn 0.3s ease; }
+    .tab-pane.active { display: block; }
+
+    .tier-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+
+    .tier-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 22px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      border-top: 4px solid var(--red);
+      position: relative;
+    }
+
+    .tier-badge {
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 3px 10px;
+      border-radius: 999px;
+      margin-bottom: 12px;
+      display: inline-block;
+    }
+
+    .tier-badge.easy { background: #e8f5e9; color: #2e7d32; }
+    .tier-badge.mid  { background: #fff3e0; color: #e65100; }
+    .tier-badge.adv  { background: #fce4ec; color: #880e4f; }
+
+    .tier-card h3 {
+      font-size: 0.93rem;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 8px;
+    }
+
+    .tier-card p {
+      font-size: 0.85rem;
+      color: var(--grey);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.55);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open { display: flex; }
+
+    .modal {
+      background: #fff;
+      border-radius: 12px;
+      max-width: 600px;
+      width: 100%;
+      padding: 36px;
+      position: relative;
+      animation: popIn 0.25s ease;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .modal h3 {
+      font-size: 1.1rem;
+      color: var(--red);
+      margin-bottom: 16px;
+    }
+
+    .modal .prompt-box {
+      background: #f7f5f5;
+      border-left: 4px solid var(--gold);
+      border-radius: 0 8px 8px 0;
+      padding: 18px;
+      font-size: 0.87rem;
+      line-height: 1.75;
+      color: var(--text);
+      white-space: pre-wrap;
+      margin-bottom: 16px;
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px; right: 18px;
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      cursor: pointer;
+      color: var(--grey);
+      line-height: 1;
+    }
+
+    .modal-close:hover { color: var(--red); }
+
+    .copy-btn {
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      padding: 9px 20px;
+      font-family: Verdana, sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .copy-btn:hover { background: var(--red-dark); }
+    .copy-btn.copied { background: #2e7d32; }
+
+    /* ─── PROMPT BEFORE/AFTER ─── */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 28px;
+    }
+
+    @media(max-width: 600px) { .compare-grid { grid-template-columns: 1fr; } }
+
+    .compare-card {
+      border-radius: 10px;
+      padding: 24px;
+    }
+
+    .compare-card.bad {
+      background: #fff5f5;
+      border: 2px solid #ffcccc;
+    }
+
+    .compare-card.good {
+      background: #f0fff4;
+      border: 2px solid #a8d5b5;
+    }
+
+    .compare-card .label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .compare-card.bad .label { color: #c0392b; }
+    .compare-card.good .label { color: #27ae60; }
+
+    .compare-card pre {
+      font-family: Verdana, sans-serif;
+      font-size: 0.83rem;
+      line-height: 1.7;
+      color: var(--text);
+      white-space: pre-wrap;
+    }
+
+    .compare-card .result {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      line-height: 1.65;
+      font-style: italic;
+    }
+
+    .compare-card.bad .result { background: #ffe0e0; color: #7f1f1f; }
+    .compare-card.good .result { background: #d4edda; color: #155724; }
+
+    /* ─── QUIZ ─── */
+    .quiz-bg { background: var(--red-dark); }
+
+    .quiz-container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+
+    .quiz-container .section-label { background: var(--gold); }
+
+    .quiz-container h2 {
+      color: #fff;
+      font-size: 1.6rem;
+      margin-bottom: 8px;
+    }
+
+    .quiz-container > p {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.9rem;
+      margin-bottom: 36px;
+      line-height: 1.7;
+    }
+
+    .quiz-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 28px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .quiz-card .q-number {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 8px;
+    }
+
+    .quiz-card .q-text {
+      font-size: 0.97rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .quiz-card .q-type {
+      font-size: 0.72rem;
+      color: var(--grey);
+      margin-bottom: 14px;
+      font-style: italic;
+    }
+
+    .quiz-options { display: flex; flex-direction: column; gap: 10px; }
+
+    .quiz-option {
+      padding: 12px 18px;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+      background: #fff;
+      font-family: Verdana, sans-serif;
+      font-size: 0.87rem;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.2s;
+      line-height: 1.5;
+    }
+
+    .quiz-option:hover:not(:disabled) {
+      border-color: var(--red);
+      background: #fff5f5;
+    }
+
+    .quiz-option.correct { border-color: #27ae60; background: #d4edda; color: #155724; }
+    .quiz-option.wrong   { border-color: #e74c3c; background: #fde8e8; color: #7f1f1f; }
+
+    .quiz-multi { display: flex; flex-wrap: wrap; gap: 10px; }
+
+    .quiz-multi label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+      cursor: pointer;
+      font-size: 0.87rem;
+      transition: all 0.2s;
+    }
+
+    .quiz-multi label:hover { border-color: var(--red); background: #fff5f5; }
+    .quiz-multi label.selected { border-color: var(--red); background: #fde8e8; }
+    .quiz-multi label.correct-sel { border-color: #27ae60; background: #d4edda; }
+    .quiz-multi label.wrong-sel   { border-color: #e74c3c; background: #fde8e8; }
+
+    .quiz-multi input[type=checkbox] { accent-color: var(--red); width: 16px; height: 16px; }
+
+    .quiz-tf { display: flex; gap: 12px; }
+
+    .quiz-tf button {
+      flex: 1;
+      padding: 14px;
+      border-radius: 8px;
+      border: 2px solid #ddd;
+      font-family: Verdana, sans-serif;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #fff;
+    }
+
+    .quiz-tf button:hover:not(:disabled) { border-color: var(--red); background: #fff5f5; }
+    .quiz-tf button.correct { border-color: #27ae60; background: #d4edda; color: #155724; }
+    .quiz-tf button.wrong   { border-color: #e74c3c; background: #fde8e8; color: #7f1f1f; }
+
+    .quiz-feedback {
+      margin-top: 14px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      line-height: 1.65;
+      display: none;
+    }
+
+    .quiz-feedback.show { display: block; }
+    .quiz-feedback.pass { background: #d4edda; color: #155724; }
+    .quiz-feedback.fail { background: #fde8e8; color: #7f1f1f; }
+
+    .quiz-submit-multi {
+      margin-top: 12px;
+      padding: 10px 24px;
+      background: var(--red);
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-family: Verdana, sans-serif;
+      font-size: 0.87rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .quiz-submit-multi:hover { background: var(--red-dark); }
+
+    .quiz-score-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 36px;
+      text-align: center;
+      display: none;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+    }
+
+    .quiz-score-card.show { display: block; }
+
+    .quiz-score-card .big-score {
+      font-size: 3.5rem;
+      font-weight: 700;
+      color: var(--red);
+      margin-bottom: 8px;
+    }
+
+    .quiz-score-card p {
+      font-size: 0.93rem;
+      color: var(--grey);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+
+    /* ─── TOOLS CARDS ─── */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+      margin-top: 32px;
+    }
+
+    .tool-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 24px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      border-bottom: 4px solid var(--gold);
+    }
+
+    .tool-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.12); }
+
+    .tool-card .tool-icon { font-size: 2.4rem; margin-bottom: 12px; }
+
+    .tool-card h3 { font-size: 0.93rem; font-weight: 700; color: var(--red); margin-bottom: 6px; }
+
+    .tool-card p { font-size: 0.82rem; color: var(--grey); line-height: 1.6; }
+
+    .tool-card .click-hint {
+      font-size: 0.72rem;
+      color: var(--red);
+      font-weight: 700;
+      margin-top: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── SCHEDULE ─── */
+    .schedule-bg { background: var(--grey-light); }
+
+    .timeline { margin-top: 32px; position: relative; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 20px;
+      top: 0; bottom: 0;
+      width: 3px;
+      background: var(--red);
+      border-radius: 2px;
+    }
+
+    .tl-item {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 28px;
+      position: relative;
+    }
+
+    .tl-dot {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+      background: var(--red);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 1.1rem;
+      box-shadow: 0 0 0 4px var(--grey-light);
+      position: relative;
+      z-index: 1;
+    }
+
+    .tl-content { padding-top: 8px; }
+
+    .tl-content .time {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--red);
+      margin-bottom: 4px;
+    }
+
+    .tl-content h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+
+    .tl-content p { font-size: 0.85rem; color: var(--grey); line-height: 1.65; }
+
+    /* ─── QUOTE ─── */
+    .quote-strip {
+      background: var(--red);
+      color: #fff;
+      padding: 56px 24px;
+      text-align: center;
+    }
+
+    .quote-strip blockquote {
+      max-width: 740px;
+      margin: 0 auto;
+      font-size: clamp(0.97rem, 2.5vw, 1.2rem);
+      line-height: 1.8;
+      font-style: italic;
+    }
+
+    .quote-strip blockquote::before { content: '\201C'; color: var(--gold); font-size: 2.5rem; line-height: 0; vertical-align: -0.4em; margin-right: 4px; }
+    .quote-strip blockquote::after  { content: '\201D'; color: var(--gold); font-size: 2.5rem; line-height: 0; vertical-align: -0.4em; margin-left: 4px; }
+
+    /* ─── REGISTER ─── */
+    .register-bg {
+      background: linear-gradient(135deg, var(--red-dark), var(--red));
+      color: #fff;
+      text-align: center;
+      padding: 72px 24px;
+    }
+
+    .register-bg h2 { font-size: 1.7rem; margin-bottom: 10px; }
+    .register-bg > p { font-size: 0.95rem; opacity: 0.9; max-width: 500px; margin: 0 auto 36px; line-height: 1.75; }
+
+    .register-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .register-form input, .register-form select {
+      flex: 1;
+      min-width: 180px;
+      padding: 13px 16px;
+      border-radius: 6px;
+      border: none;
+      font-size: 0.9rem;
+      font-family: Verdana, sans-serif;
+      outline: none;
+      color: var(--text);
+    }
+
+    .register-form .full { flex-basis: 100%; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center;
+      padding: 30px 24px;
+      font-size: 0.78rem;
+      color: var(--grey);
+      background: #f7f5f5;
+      line-height: 1.9;
+    }
+
+    footer .tagline { font-weight: 700; color: var(--red); font-size: 0.85rem; margin-bottom: 6px; }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes popIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
+
+    /* ─── RESPONSIVE ─── */
+    @media(max-width: 540px) {
+      .tab-buttons { gap: 6px; }
+      .tab-btn { font-size: 0.72rem; padding: 7px 14px; }
+      .quiz-multi { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#ai-basics">AI Basics</a>
+  <a href="#subjects">By Subject</a>
+  <a href="#prompting">Prompting</a>
+  <a href="#quiz">Quiz</a>
+  <a href="#tools">Tools</a>
+  <a href="#schedule">Schedule</a>
+  <a href="#register">Register</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">&#127891; Teacher Professional Development &nbsp;|&nbsp; April 6, 2026</div>
+  <h1>BHS <span class="gold">AI Institute Day</span></h1>
+  <p class="subtitle">
+    A hands-on, interactive morning where you'll actually <em>use</em> AI —
+    experiment, discover, and walk away with tools you can use in your classroom tomorrow.
+    No experience required. Open mind required.
+  </p>
+  <div class="meta">
+    <span>&#128197; Sunday, April 6, 2026</span>
+    <span>&#128205; Batavia High School</span>
+    <span>&#9203; Morning Session</span>
+    <span>&#127775; All Comfort Levels Welcome</span>
+  </div>
+  <a href="#ai-basics" class="btn-gold">Start Exploring &#8595;</a>
+</section>
+
+<!-- ─── AI BASICS (ACCORDION) ─── -->
+<section id="ai-basics" style="background:#fff;">
+  <div class="section">
+    <div class="section-label">&#129504; AI Basics</div>
+    <h2 class="section-title">What Even Is AI?</h2>
+    <div class="divider"></div>
+    <p style="font-size:0.95rem;line-height:1.85;color:#333;max-width:760px;">
+      Before we dive into applications, let's build a shared foundation.
+      Tap any section below to explore — from the quick version to the deeper dive.
+    </p>
+    <div class="accordion">
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          &#9889; The 60-Second Explanation <span class="chevron">&#9660;</span>
+        </button>
+        <div class="accordion-body">
+          <p>AI (Artificial Intelligence) refers to computer systems trained to do things that normally require human intelligence — understanding language, recognizing images, generating text, and more.</p>
+          <p style="margin-top:10px;">Modern tools like ChatGPT and Gemini are <strong>Large Language Models (LLMs)</strong>. They've read a massive portion of the internet and learned to predict what helpful, coherent text looks like. When you type a prompt, the AI blends what it learned from the web with what you told it — and generates a response.</p>
+          <p style="margin-top:10px;"><strong>Key takeaway:</strong> The more context and detail you give it, the more useful and accurate its response will be.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          &#9878; Enhance vs. Replace — Our Core Belief <span class="chevron">&#9660;</span>
+        </button>
+        <div class="accordion-body">
+          <p>The most important idea of today: AI should <strong>enhance</strong> learning and teaching, not replace it.</p>
+          <ul>
+            <li><strong>Enhance learning, not replace it:</strong> A student who has AI write their essay hasn't learned anything. But a student who uses AI to brainstorm, get feedback, and revise — that's enhanced learning.</li>
+            <li><strong>Enhance teaching, not replace it:</strong> AI can grade routine feedback, generate practice problems, and improve slide decks — freeing you for the high-value work only a teacher can do.</li>
+            <li><strong>Don't force it:</strong> Sometimes direct instruction is simply the best approach. AI doesn't need to be in every lesson.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          &#128161; Myths vs. Reality <span class="chevron">&#9660;</span>
+        </button>
+        <div class="accordion-body">
+          <ul>
+            <li><strong>Myth:</strong> AI is always accurate. <strong>Reality:</strong> AI can "hallucinate" — confidently stating incorrect information. Always verify important facts.</li>
+            <li><strong>Myth:</strong> Students will just use AI to cheat. <strong>Reality:</strong> Students who would cheat were always going to find a way. The solution is designing assignments where AI is a tool, not a shortcut.</li>
+            <li><strong>Myth:</strong> AI is too complicated for me. <strong>Reality:</strong> If you can type a sentence, you can use AI. The learning curve is prompt quality, not tech skills.</li>
+            <li><strong>Myth:</strong> AI will replace teachers. <strong>Reality:</strong> AI cannot build relationships, read a room, or adapt to a student's emotional state. It's a tool — a very powerful one.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          &#127919; Why Act Now? <span class="chevron">&#9660;</span>
+        </button>
+        <div class="accordion-body">
+          <p>Our students are already using AI — often in inefficient or academically dishonest ways — because no one has taught them how to use it well. That's our job.</p>
+          <p style="margin-top:10px;">When students leave BHS, they'll enter a world where AI fluency is expected in almost every career: healthcare, trades, business, arts, and beyond. Our district's mission is to prepare students to be successful in what comes next. That means AI literacy is part of our responsibility now.</p>
+          <p style="margin-top:10px;"><strong>We have to act fast — not because of hype, but because our students can't afford to be behind.</strong></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── SUBJECT TABS ─── -->
+<section id="subjects" style="background:#f7f5f5;">
+  <div class="section">
+    <div class="section-label">&#128218; By Subject</div>
+    <h2 class="section-title">AI in Your Classroom</h2>
+    <div class="divider"></div>
+    <p style="font-size:0.95rem;line-height:1.85;color:#333;max-width:760px;">
+      Select your department to see practical, tiered examples — from quick wins you can try today to advanced systems that save hours of work.
+    </p>
+    <div class="tabs-wrapper">
+      <div class="tab-buttons">
+        <button class="tab-btn active" onclick="switchTab(this,'ela')">&#128221; ELA</button>
+        <button class="tab-btn" onclick="switchTab(this,'math')">&#10133; Math</button>
+        <button class="tab-btn" onclick="switchTab(this,'science')">&#128300; Science</button>
+        <button class="tab-btn" onclick="switchTab(this,'ss')">&#127758; Social Studies</button>
+        <button class="tab-btn" onclick="switchTab(this,'arts')">&#127912; Fine Arts</button>
+        <button class="tab-btn" onclick="switchTab(this,'pe')">&#127936; PE / Health</button>
+      </div>
+
+      <!-- ELA -->
+      <div class="tab-pane active" id="tab-ela">
+        <div class="tier-grid">
+          <div class="tier-card">
+            <span class="tier-badge easy">&#9889; Quick Win</span>
+            <h3>Instant Essay Feedback</h3>
+            <p>Paste a student paper into ChatGPT with your rubric. Ask it to give specific, actionable feedback aligned to your criteria. Students get detailed notes the same day.</p>
+            <button class="btn-red" onclick="openModal('ela1')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge mid">&#128293; Intermediate</span>
+            <h3>Voice Memo Feedback System</h3>
+            <p>Record a voice memo describing your assignment goals. Upload it + your rubric + a scanned student paper. AI gives personalized feedback from YOUR perspective — overnight, for every student.</p>
+            <button class="btn-red" onclick="openModal('ela2')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge adv">&#127775; Advanced</span>
+            <h3>Differentiated Writing Scaffolds</h3>
+            <p>Upload a writing assignment and ask AI to generate versions at different reading levels or with different levels of scaffolding — supporting IEP, ELL, and honors students from one prompt.</p>
+            <button class="btn-red" onclick="openModal('ela3')">&#128196; See the Prompt</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MATH -->
+      <div class="tab-pane" id="tab-math">
+        <div class="tier-grid">
+          <div class="tier-card">
+            <span class="tier-badge easy">&#9889; Quick Win</span>
+            <h3>Worksheet & Answer Key Generator</h3>
+            <p>Describe the skill and grade level — AI generates a practice worksheet AND the answer key in seconds. Customize difficulty, format, and number of problems.</p>
+            <button class="btn-red" onclick="openModal('math1')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge mid">&#128293; Intermediate</span>
+            <h3>Visual Concept Maps</h3>
+            <p>Describe a math concept and ask AI to create a concept map or visual explanation. Adjust colors, layout, and vocabulary level until it matches your students' needs.</p>
+            <button class="btn-red" onclick="openModal('math2')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge adv">&#127775; Advanced</span>
+            <h3>ACT Question Bank by Course</h3>
+            <p>Upload a past ACT, categorize questions by BHS course (Algebra → Int. Algebra → Geometry → Adv. Algebra → Pre-Calc), then generate unlimited practice questions. One PD session builds your whole department's ACT prep bank.</p>
+            <button class="btn-red" onclick="openModal('math3')">&#128196; See the Prompt</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SCIENCE -->
+      <div class="tab-pane" id="tab-science">
+        <div class="tier-grid">
+          <div class="tier-card">
+            <span class="tier-badge easy">&#9889; Quick Win</span>
+            <h3>Lab Report Feedback</h3>
+            <p>Paste your lab report rubric and a student's draft. Ask AI to identify specific weaknesses and suggest improvements the student can act on before final submission.</p>
+            <button class="btn-red" onclick="openModal('sci1')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge mid">&#128293; Intermediate</span>
+            <h3>Study Guide Builder</h3>
+            <p>Paste your unit notes or a chapter summary. Ask AI to generate a differentiated study guide — vocabulary, concept summaries, and self-quiz questions at multiple difficulty levels.</p>
+            <button class="btn-red" onclick="openModal('sci2')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge adv">&#127775; Advanced</span>
+            <h3>Socratic Discussion Designer</h3>
+            <p>Describe a science controversy (GMOs, climate models, CRISPR ethics). Ask AI to generate a structured Socratic seminar with discussion prompts, devil's advocate positions, and real-world evidence links for each side.</p>
+            <button class="btn-red" onclick="openModal('sci3')">&#128196; See the Prompt</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SOCIAL STUDIES -->
+      <div class="tab-pane" id="tab-ss">
+        <div class="tier-grid">
+          <div class="tier-card">
+            <span class="tier-badge easy">&#9889; Quick Win</span>
+            <h3>Primary Source Simplifier</h3>
+            <p>Paste a primary source document (Declaration, Federalist Papers, treaty text). Ask AI to rewrite it at a specific Lexile level while preserving the key arguments — making it accessible to all readers.</p>
+            <button class="btn-red" onclick="openModal('ss1')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge mid">&#128293; Intermediate</span>
+            <h3>Essay Argument Scaffold</h3>
+            <p>Share your essay prompt and rubric. Ask AI to generate a structured argument outline with thesis options, supporting evidence suggestions, and counterargument prompts — that students then build on themselves.</p>
+            <button class="btn-red" onclick="openModal('ss2')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge adv">&#127775; Advanced</span>
+            <h3>Multi-Perspective Simulation</h3>
+            <p>Give AI a historical event and ask it to roleplay multiple stakeholders (e.g., a factory worker, a plantation owner, a suffragette in 1900). Students can "interview" each perspective in a live chat.</p>
+            <button class="btn-red" onclick="openModal('ss3')">&#128196; See the Prompt</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- FINE ARTS -->
+      <div class="tab-pane" id="tab-arts">
+        <div class="tier-grid">
+          <div class="tier-card">
+            <span class="tier-badge easy">&#9889; Quick Win</span>
+            <h3>Artist Statement Helper</h3>
+            <p>Have students describe their artwork in their own words (voice or text). AI transforms it into a polished artist statement — students then revise it back into their own voice. Great writing AND reflection exercise.</p>
+            <button class="btn-red" onclick="openModal('arts1')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge mid">&#128293; Intermediate</span>
+            <h3>Project Rubric Generator</h3>
+            <p>Describe your arts project and the skills you want to assess. AI generates a detailed, weighted rubric with performance level descriptors — ready to use or customize in minutes.</p>
+            <button class="btn-red" onclick="openModal('arts2')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge adv">&#127775; Advanced</span>
+            <h3>AI Image Exploration (Gemini)</h3>
+            <p>Use Gemini to generate visual references, color palette options, and composition examples for student projects. Discuss what the AI got right and wrong — a built-in critical thinking exercise about art and AI.</p>
+            <button class="btn-red" onclick="openModal('arts3')">&#128196; See the Prompt</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- PE / HEALTH -->
+      <div class="tab-pane" id="tab-pe">
+        <div class="tier-grid">
+          <div class="tier-card">
+            <span class="tier-badge easy">&#9889; Quick Win</span>
+            <h3>Lesson Plan Variations</h3>
+            <p>Describe a PE activity and your class constraints (gym size, equipment available, skill level). Ask AI to generate three variations — beginner, standard, and advanced — so every student is appropriately challenged.</p>
+            <button class="btn-red" onclick="openModal('pe1')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge mid">&#128293; Intermediate</span>
+            <h3>Personalized Fitness Plan Builder</h3>
+            <p>Have students input their fitness goals and current activity level. AI generates a personalized 4-week fitness plan — students learn to evaluate and adapt it. Real health literacy in action.</p>
+            <button class="btn-red" onclick="openModal('pe2')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge adv">&#127775; Advanced</span>
+            <h3>Health Research Analyzer</h3>
+            <p>Paste a health news article or nutrition label. Ask AI to fact-check it, identify misleading claims, and explain the science — turning media literacy into a health class activity.</p>
+            <button class="btn-red" onclick="openModal('pe3')">&#128196; See the Prompt</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<div class="quote-strip">
+  <blockquote>
+    AI is not going to replace the teaching — but it can enhance how you use it,
+    make the learning better, make the teaching better, and give better feedback.
+  </blockquote>
+</div>
+
+<!-- ─── PROMPTING (BEFORE/AFTER + ACCORDION) ─── -->
+<section id="prompting" style="background:#fff;">
+  <div class="section">
+    <div class="section-label">&#9999; Prompt Engineering</div>
+    <h2 class="section-title">The Skill That Changes Everything</h2>
+    <div class="divider"></div>
+    <p style="font-size:0.95rem;line-height:1.85;color:#333;max-width:760px;">
+      The single biggest reason AI feels useless to most people? Weak prompts.
+      AI blends what it learned from the web with what <em>you</em> give it.
+      The more detail you provide upfront, the more it sounds like <em>you</em>.
+    </p>
+
+    <div class="compare-grid">
+      <div class="compare-card bad">
+        <div class="label">&#10060; Weak Prompt</div>
+        <pre>Write a recommendation letter for my student, John Smith.</pre>
+        <div class="result">
+          Result: Generic, forgettable letter. Could be for any student. Says nothing meaningful. You might as well not have used AI.
+        </div>
+      </div>
+      <div class="compare-card good">
+        <div class="label">&#9989; Strong Prompt</div>
+        <pre>Write a college recommendation letter for John Smith, a junior in my AP English class. John struggled with severe test anxiety freshman year but completely transformed his approach — he now leads our writing workshop voluntarily. His analysis of Toni Morrison was the best I've read from a high school student. He's applying to UChicago for English Lit. Tone: warm, specific, confident.</pre>
+        <div class="result">
+          Result: A letter that actually sounds like you, tells John's real story, and will stand out to admissions officers.
+        </div>
+      </div>
+    </div>
+
+    <div class="accordion" style="margin-top:36px;">
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          &#127908; The Voice Memo Trick — Skip the Typing <span class="chevron">&#9660;</span>
+        </button>
+        <div class="accordion-body">
+          <p>Don't want to type a long prompt? Don't. Here's the workflow:</p>
+          <ul>
+            <li>Open <strong>Voice Memo</strong> on your iPhone (or any Android recorder)</li>
+            <li>Talk through everything about your assignment — the context, goals, what good work looks like, what you're worried students are missing</li>
+            <li>Upload that recording to ChatGPT or Gemini (or use Google Docs voice-to-text and paste the transcript)</li>
+            <li>The AI now has your full mental model — and responds from your perspective</li>
+          </ul>
+          <p style="margin-top:10px;">This is especially powerful for grading feedback: record your rubric walkthrough, upload a scanned student paper, and ask for specific, actionable feedback. Done for every student, overnight.</p>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          &#128295; When AI Gets It Wrong — Troubleshooting Tips <span class="chevron">&#9660;</span>
+        </button>
+        <div class="accordion-body">
+          <p>AI doesn't always nail it the first try. That's normal — and fixable.</p>
+          <ul>
+            <li><strong>"That's too generic."</strong> → Add more specific context. Say: "This is for 10th graders who just read The Great Gatsby, not a general audience."</li>
+            <li><strong>"That's not my tone."</strong> → Say: "Rewrite this in a warmer, more conversational tone" or "Make this sound like a teacher speaking to students, not a textbook."</li>
+            <li><strong>"It missed the point."</strong> → Add a constraint: "Focus only on the thesis and evidence. Ignore formatting for now."</li>
+            <li><strong>"It's too long."</strong> → Say: "Condense this to 3 bullet points" or "Give me the version a student could read in 2 minutes."</li>
+            <li><strong>Nothing is working.</strong> → Start a new chat. Long conversations can confuse the model. Fresh context often fixes it.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          &#128214; Prompt Formulas That Work Every Time <span class="chevron">&#9660;</span>
+        </button>
+        <div class="accordion-body">
+          <p>These structures consistently produce better results:</p>
+          <ul>
+            <li><strong>Role + Task + Context + Constraints:</strong> "Act as a high school English teacher. Write feedback on this essay [paste essay] based on this rubric [paste rubric]. The student is a 10th grader who struggles with organization. Be encouraging but specific. Max 200 words."</li>
+            <li><strong>The Before/After request:</strong> "Here's my current Google Slides summary slide [paste text]. Rewrite it to be more engaging for high school students without losing accuracy."</li>
+            <li><strong>The Variation request:</strong> "Give me 3 different versions of this discussion question: one for below-grade readers, one for grade level, one for advanced students."</li>
+            <li><strong>The Chain prompt:</strong> Start broad, then refine. "Give me 5 ideas for a project on the Civil Rights Movement." → "Expand option 3 into a full project description with rubric."</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <button class="accordion-header" onclick="toggleAccordion(this)">
+          &#128683; What AI Should NOT Do in Your Classroom <span class="chevron">&#9660;</span>
+        </button>
+        <div class="accordion-body">
+          <ul>
+            <li>AI should not <strong>replace student thinking</strong> — having it write an essay from scratch is not learning.</li>
+            <li>AI should not be used to <strong>generate grades</strong> without teacher judgment reviewing the output.</li>
+            <li>AI should not be trusted for <strong>factual claims without verification</strong> — it can confidently state false information.</li>
+            <li>AI should not be <strong>forced into every lesson</strong> — sometimes the best instruction is still direct teaching and genuine conversation.</li>
+            <li>AI should not replace the <strong>teacher-student relationship</strong> — no AI can do what you do in knowing, encouraging, and challenging your students.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── QUIZ ─── -->
+<section id="quiz" class="quiz-bg">
+  <div class="quiz-container">
+    <div class="section-label">&#127881; Test Your Knowledge</div>
+    <h2>AI Literacy Check</h2>
+    <p>Let's see where you're at — and fill in some gaps. Answer all 5 questions, then see your score. No stakes, just learning.</p>
+
+    <!-- Q1 - Multiple Choice -->
+    <div class="quiz-card" id="q1">
+      <div class="q-number">Question 1 of 5</div>
+      <div class="q-text">You ask an AI to "write a lesson plan for a history class." The result is generic and not useful. What's the most likely cause?</div>
+      <div class="q-type">Multiple choice — select one</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answerMC(this,'q1','wrong')">The AI doesn't know anything about history</button>
+        <button class="quiz-option" onclick="answerMC(this,'q1','correct')">The prompt lacked specific context and detail</button>
+        <button class="quiz-option" onclick="answerMC(this,'q1','wrong')">You need a paid subscription for better results</button>
+        <button class="quiz-option" onclick="answerMC(this,'q1','wrong')">AI can't write lesson plans</button>
+      </div>
+      <div class="quiz-feedback" id="q1-fb">
+        <strong>Correct!</strong> AI blends what it knows with what <em>you</em> give it. A vague prompt produces a vague answer. Add your grade level, specific topic, student needs, and desired format — and the output transforms completely.
+      </div>
+    </div>
+
+    <!-- Q2 - True/False -->
+    <div class="quiz-card" id="q2">
+      <div class="q-number">Question 2 of 5</div>
+      <div class="q-text">True or False: AI should replace the teacher's role in providing feedback to students.</div>
+      <div class="q-type">True / False</div>
+      <div class="quiz-tf">
+        <button onclick="answerTF(this,'q2',false)">&#10003; True</button>
+        <button onclick="answerTF(this,'q2',true)">&#10007; False</button>
+      </div>
+      <div class="quiz-feedback" id="q2-fb">
+        <strong>False — and this is core to everything we believe.</strong> AI <em>enhances</em> the feedback process — it can handle first-pass comments, flag issues, and save you time — but teacher judgment, relationships, and context are irreplaceable. You review, refine, and personalize what AI produces.
+      </div>
+    </div>
+
+    <!-- Q3 - Multiple Choice -->
+    <div class="quiz-card" id="q3">
+      <div class="q-number">Question 3 of 5</div>
+      <div class="q-text">Which of the following best describes "frontloading" in AI prompting?</div>
+      <div class="q-type">Multiple choice — select one</div>
+      <div class="quiz-options">
+        <button class="quiz-option" onclick="answerMC(this,'q3','wrong')">Typing your prompt very quickly to get faster results</button>
+        <button class="quiz-option" onclick="answerMC(this,'q3','wrong')">Sending multiple prompts at once</button>
+        <button class="quiz-option" onclick="answerMC(this,'q3','correct')">Providing rich, detailed context upfront before making your request</button>
+        <button class="quiz-option" onclick="answerMC(this,'q3','wrong')">Uploading a document at the start of every chat</button>
+      </div>
+      <div class="quiz-feedback" id="q3-fb">
+        <strong>Exactly right.</strong> Frontloading means giving the AI everything it needs before you ask your question — your role, the student context, your goals, your constraints. The more you put in, the more you get back that actually fits your situation.
+      </div>
+    </div>
+
+    <!-- Q4 - Multi-select -->
+    <div class="quiz-card" id="q4">
+      <div class="q-number">Question 4 of 5</div>
+      <div class="q-text">Which of the following are good uses of AI in education? Select ALL that apply.</div>
+      <div class="q-type">Select all that apply, then click Submit</div>
+      <div class="quiz-multi" id="q4-options">
+        <label><input type="checkbox" value="a"> Generating a first draft of student feedback based on a rubric</label>
+        <label><input type="checkbox" value="b"> Having AI write student essays for them to submit as their own</label>
+        <label><input type="checkbox" value="c"> Creating differentiated versions of a reading passage</label>
+        <label><input type="checkbox" value="d"> Building a question bank from past ACT tests by course level</label>
+        <label><input type="checkbox" value="e"> Replacing the teacher entirely for unit instruction</label>
+        <label><input type="checkbox" value="f"> Using voice memos to give AI your context before prompting</label>
+      </div>
+      <button class="quiz-submit-multi" onclick="answerMulti('q4',['a','c','d','f'])">Submit Answer</button>
+      <div class="quiz-feedback" id="q4-fb"></div>
+    </div>
+
+    <!-- Q5 - True/False -->
+    <div class="quiz-card" id="q5">
+      <div class="q-number">Question 5 of 5</div>
+      <div class="q-text">True or False: If AI gives you a bad first response, you should start completely over and try a totally different tool.</div>
+      <div class="q-type">True / False</div>
+      <div class="quiz-tf">
+        <button onclick="answerTF(this,'q5',false)">&#10003; True</button>
+        <button onclick="answerTF(this,'q5',true)">&#9989; False</button>
+      </div>
+      <div class="quiz-feedback" id="q5-fb">
+        <strong>False!</strong> A bad first response is totally normal — and usually fixable in the same chat. Tell the AI what's wrong: "That's too generic," "Adjust the tone to be more encouraging," or "Focus only on the thesis." Iterating within the same conversation is usually faster and more effective than starting over.
+      </div>
+    </div>
+
+    <!-- Score card -->
+    <div class="quiz-score-card" id="quiz-score">
+      <div class="big-score" id="score-display">0/5</div>
+      <p id="score-msg"></p>
+      <button class="btn-gold" onclick="restartQuiz()">&#128260; Retake Quiz</button>
+    </div>
+
+  </div>
+</section>
+
+<!-- ─── TOOLS ─── -->
+<section id="tools" style="background:#f7f5f5;">
+  <div class="section">
+    <div class="section-label">&#128736; Tools You'll Use</div>
+    <h2 class="section-title">Your AI Toolkit</h2>
+    <div class="divider"></div>
+    <p style="font-size:0.95rem;line-height:1.85;color:#333;max-width:760px;">
+      Tap any tool to learn what it's best for and how to get started. All of these are free to use.
+    </p>
+    <div class="tools-grid">
+      <div class="tool-card" onclick="openModal('tool-chatgpt')">
+        <div class="tool-icon">&#129302;</div>
+        <h3>ChatGPT</h3>
+        <p>Text generation, feedback, lesson plans, rubrics, recommendation letters.</p>
+        <div class="click-hint">Tap to learn more &#8594;</div>
+      </div>
+      <div class="tool-card" onclick="openModal('tool-gemini')">
+        <div class="tool-icon">&#10024;</div>
+        <h3>Gemini</h3>
+        <p>Text + image generation. Great for visuals, concept maps, and Google Workspace integration.</p>
+        <div class="click-hint">Tap to learn more &#8594;</div>
+      </div>
+      <div class="tool-card" onclick="openModal('tool-notebooklm')">
+        <div class="tool-icon">&#128211;</div>
+        <h3>NotebookLM</h3>
+        <p>Upload your own documents and have AI answer questions, summarize, and create study guides from them.</p>
+        <div class="click-hint">Tap to learn more &#8594;</div>
+      </div>
+      <div class="tool-card" onclick="openModal('tool-voice')">
+        <div class="tool-icon">&#127908;</div>
+        <h3>Voice Memos</h3>
+        <p>Your iPhone or Android recorder + AI = the fastest way to give AI rich, personalized context without typing.</p>
+        <div class="click-hint">Tap to learn more &#8594;</div>
+      </div>
+      <div class="tool-card" onclick="openModal('tool-gdocs')">
+        <div class="tool-icon">&#128196;</div>
+        <h3>Google Docs</h3>
+        <p>Voice type directly into a doc and paste the transcript into any AI tool. Also integrates with Gemini natively.</p>
+        <div class="click-hint">Tap to learn more &#8594;</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SCHEDULE ─── -->
+<section id="schedule" class="schedule-bg">
+  <div class="section">
+    <div class="section-label">&#128197; April 6, 2026</div>
+    <h2 class="section-title">Morning Schedule</h2>
+    <div class="divider"></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot">&#127381;</div>
+        <div class="tl-content">
+          <div class="time">Opening</div>
+          <h3>Welcome &amp; Setting the Tone</h3>
+          <p>An honest conversation about where our staff is — skeptics, curious explorers, and enthusiasts alike. All we ask: come in with an open mind. You don't have to change your values by the end of the day.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">&#128161;</div>
+        <div class="tl-content">
+          <div class="time">Session 1</div>
+          <h3>The "Wow" Demo</h3>
+          <p>A live demonstration built to stop you in your tracks. The goal: at least one moment where you think, "That could make my life easier." That's the spark we're after.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">&#9999;</div>
+        <div class="tl-content">
+          <div class="time">Session 2</div>
+          <h3>Prompt Engineering Fundamentals</h3>
+          <p>Why generic prompts get generic results — and the techniques that transform AI output into something that actually sounds like you and serves your students.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">&#128218;</div>
+        <div class="tl-content">
+          <div class="time">Session 3</div>
+          <h3>Subject-Specific Breakouts</h3>
+          <p>Department-level deep dives with real, tiered examples — from quick wins you can use tomorrow to advanced systems that could save your whole department hours each week.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">&#127918;</div>
+        <div class="tl-content">
+          <div class="time">Session 4</div>
+          <h3>Hands-On Play Time</h3>
+          <p>Open exploration. Try the tools with your own content, your own courses. Ask questions. This is where the real learning happens — you'll come up with ideas we haven't even thought of yet.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot">&#127919;</div>
+        <div class="tl-content">
+          <div class="time">Closing</div>
+          <h3>Takeaways &amp; Teaching Students to Use AI Well</h3>
+          <p>What will you try first? And how do we help our students use AI as a learning enhancer — not a shortcut? We close by looking at the bigger picture: preparing BHS graduates for what comes next.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── REGISTER ─── -->
+<section id="register" class="register-bg">
+  <h2>Reserve Your Spot</h2>
+  <p>Space for hands-on activities is limited. Sign up to secure your place at the BHS AI Institute Day on April 6, 2026.</p>
+  <form class="register-form" onsubmit="handleRegister(event)">
+    <input type="text" placeholder="Your Full Name" required />
+    <input type="email" placeholder="BPS101 Email Address" required />
+    <select class="full">
+      <option value="" disabled selected>Select Your Department</option>
+      <option>English / ELA</option>
+      <option>Mathematics</option>
+      <option>Science</option>
+      <option>Social Studies</option>
+      <option>Fine Arts</option>
+      <option>Physical Education / Health</option>
+      <option>World Languages</option>
+      <option>Special Education</option>
+      <option>Administration / Support Staff</option>
+      <option>Other</option>
+    </select>
+    <button type="submit" class="btn-gold full" style="border:none;cursor:pointer;font-family:Verdana,sans-serif;font-size:0.97rem;">Reserve My Spot &#8594;</button>
+  </form>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="tagline">Always Learning, Always Growing&#8482;</p>
+  <p>&copy; 2026 Batavia High School AI Institute Day &nbsp;|&nbsp; Batavia Public School District 101 &nbsp;|&nbsp; BPS101.net</p>
+  <p style="margin-top:6px;">Questions? Reach out to your department head or visit BPS101.net</p>
+</footer>
+
+
+<!-- ═══════════════ MODALS ═══════════════ -->
+
+<!-- ELA 1 -->
+<div class="modal-overlay" id="modal-ela1">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('ela1')">&times;</button>
+    <h3>&#128221; ELA: Instant Essay Feedback</h3>
+    <div class="prompt-box">You are a high school English teacher reviewing student essays. Here is my assignment prompt: [paste your assignment prompt]. Here is my grading rubric: [paste rubric]. Below is a student paper: [paste student paper]. Please provide specific, constructive feedback that the student can act on immediately. Identify 2–3 strengths and 2–3 areas for improvement. Use encouraging language. Keep it under 250 words.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-ela1')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- ELA 2 -->
+<div class="modal-overlay" id="modal-ela2">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('ela2')">&times;</button>
+    <h3>&#127908; ELA: Voice Memo Feedback System</h3>
+    <div class="prompt-box">Step 1: Record a voice memo where you talk through: What is this assignment? What are you looking for? What are common mistakes? What does excellent work look like?
+
+Step 2: Upload that audio/transcript to ChatGPT or Gemini.
+
+Step 3: Also upload your rubric.
+
+Step 4: Paste or scan the student paper, then type:
+
+"Using my voice memo and rubric as your guide, provide detailed, personalized feedback for this student paper. Write it as if I am speaking directly to the student. Be specific, encouraging, and actionable. Max 300 words."</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-ela2')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- ELA 3 -->
+<div class="modal-overlay" id="modal-ela3">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('ela3')">&times;</button>
+    <h3>&#127775; ELA: Differentiated Writing Scaffolds</h3>
+    <div class="prompt-box">Here is a writing assignment prompt for my 10th grade ELA class: [paste prompt]. Please create three versions of a writing scaffold for this assignment: 1) A heavily scaffolded version for students who need extra support (sentence starters, paragraph frames, vocabulary bank), 2) A standard scaffold with an outline and guiding questions, 3) A minimal scaffold for advanced students with just the essential thinking prompts. Each version should help students think through their argument — not give them the argument.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-ela3')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- MATH 1 -->
+<div class="modal-overlay" id="modal-math1">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('math1')">&times;</button>
+    <h3>&#9889; Math: Worksheet &amp; Answer Key</h3>
+    <div class="prompt-box">Create a practice worksheet for [grade level] students on the topic of [specific skill, e.g., "solving two-step equations with fractions"]. Include: 12 problems ranging from straightforward to challenging, a word problem section (3 problems), and a complete answer key. Format it cleanly so it could be printed and handed out directly. Match the difficulty to [class level, e.g., Intermediate Algebra].</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-math1')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- MATH 2 -->
+<div class="modal-overlay" id="modal-math2">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('math2')">&times;</button>
+    <h3>&#128202; Math: Visual Concept Map</h3>
+    <div class="prompt-box">Create a detailed concept map (in text/ASCII format or described clearly for a graphic) that explains [math concept, e.g., "the relationship between slope, rate of change, and linear equations"] for high school students. Include: the central concept, 4–6 connected sub-concepts, a real-world example for each, and key vocabulary. Use arrows to show relationships. Make it visual and student-friendly.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-math2')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- MATH 3 -->
+<div class="modal-overlay" id="modal-math3">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('math3')">&times;</button>
+    <h3>&#127775; Math: ACT Question Bank</h3>
+    <div class="prompt-box">Step 1 — Categorize:
+"Here are questions from a past ACT Math section: [paste questions]. Categorize each question by the BHS math course where students learn that content. Our course sequence is: Algebra → Intermediate Algebra → Geometry → Advanced Algebra → Pre-Calculus. All ACT Math content comes from Advanced Algebra and below."
+
+Step 2 — Build the bank:
+"Now use these categorized questions as a reference bank. Generate 5 new practice questions similar to the [Intermediate Algebra] questions — same concept, different numbers and context. Make them ACT-style (multiple choice, 4 options)."</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-math3')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- SCI 1 -->
+<div class="modal-overlay" id="modal-sci1">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('sci1')">&times;</button>
+    <h3>&#128300; Science: Lab Report Feedback</h3>
+    <div class="prompt-box">You are a high school science teacher. Here is my lab report rubric: [paste rubric]. Here is a student's draft lab report: [paste report]. Provide specific feedback on: hypothesis clarity, data analysis quality, conclusion alignment with results, and scientific writing conventions. Highlight what the student did well and give 2–3 concrete revision suggestions. Write this as a comment the student will read — be direct but supportive.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-sci1')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- SCI 2 -->
+<div class="modal-overlay" id="modal-sci2">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('sci2')">&times;</button>
+    <h3>&#128218; Science: Study Guide Builder</h3>
+    <div class="prompt-box">Using the following unit notes, create a student study guide for [unit name, e.g., "Cell Division and Mitosis"]: [paste notes or chapter summary]. The study guide should include: 1) Key vocabulary with definitions in student-friendly language, 2) A concept summary (one paragraph per major idea), 3) 10 self-quiz questions at three levels — recall, application, and analysis. Format it so students can print and use it to study independently.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-sci2')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- SCI 3 -->
+<div class="modal-overlay" id="modal-sci3">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('sci3')">&times;</button>
+    <h3>&#127775; Science: Socratic Seminar Designer</h3>
+    <div class="prompt-box">Design a Socratic seminar for high school students on this science controversy: [topic, e.g., "Should CRISPR gene editing be used on human embryos?"]. Include: an opening question, 6 discussion prompts that push students toward deeper analysis, 3 devil's advocate positions (with supporting evidence), a closing synthesis question, and a brief background reading summary students can reference. The goal is genuine inquiry, not debate — students should be challenged to think, not win.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-sci3')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- SS 1 -->
+<div class="modal-overlay" id="modal-ss1">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('ss1')">&times;</button>
+    <h3>&#127758; Social Studies: Primary Source Simplifier</h3>
+    <div class="prompt-box">Rewrite the following primary source excerpt at a [6th / 8th / 10th] grade reading level. Preserve the main argument, key historical figures, and essential vocabulary. Define any terms you cannot simplify in brackets next to the word. Do not change the historical meaning or oversimplify to the point of losing nuance. Here is the original text: [paste primary source].</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-ss1')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- SS 2 -->
+<div class="modal-overlay" id="modal-ss2">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('ss2')">&times;</button>
+    <h3>&#128218; Social Studies: Essay Argument Scaffold</h3>
+    <div class="prompt-box">Here is my essay prompt: [paste prompt]. Here is my rubric: [paste rubric]. Create a structured essay outline scaffold for high school students that: 1) Offers 3 possible thesis statement options (not a fill-in-the-blank — actual thesis arguments students must choose and commit to), 2) Lists 3–4 types of evidence students should look for (not specific evidence — they find it), 3) Provides a counterargument prompt so students must address the opposing view. The scaffold should push student thinking, not replace it.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-ss2')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- SS 3 -->
+<div class="modal-overlay" id="modal-ss3">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('ss3')">&times;</button>
+    <h3>&#127775; Social Studies: Multi-Perspective Simulation</h3>
+    <div class="prompt-box">You will roleplay four historical figures from [time period and event, e.g., "the US in 1905 during the labor movement"]: a factory owner, a factory worker, a Progressive Era journalist, and a government official. When I address one of them by name, respond only as that character — use first person, their known beliefs, and historically accurate details. Stay in character even if challenged. I will use this in class so students can "interview" each perspective. Ready?</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-ss3')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- ARTS 1 -->
+<div class="modal-overlay" id="modal-arts1">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('arts1')">&times;</button>
+    <h3>&#127912; Fine Arts: Artist Statement Helper</h3>
+    <div class="prompt-box">A high school student described their artwork to me in their own words (below). Transform this into a polished artist statement (150–200 words) that sounds authentic, uses arts vocabulary, and clearly communicates the student's intent and process. Do not add meaning the student didn't express — only elevate the language. After the statement, list 5 words or phrases the student could swap back in to make it sound more like themselves. Student's words: [paste student description].</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-arts1')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- ARTS 2 -->
+<div class="modal-overlay" id="modal-arts2">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('arts2')">&times;</button>
+    <h3>&#128218; Fine Arts: Project Rubric Generator</h3>
+    <div class="prompt-box">Create a detailed rubric for the following high school arts project: [describe project — medium, goals, grade level]. The rubric should assess: [list 4–5 skills you want to evaluate, e.g., technique, creativity, craftsmanship, reflection]. Use 4 performance levels: Exemplary, Proficient, Developing, Beginning. Write specific, observable descriptors for each cell — not vague terms like "good" or "poor." Format as a table.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-arts2')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- ARTS 3 -->
+<div class="modal-overlay" id="modal-arts3">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('arts3')">&times;</button>
+    <h3>&#127775; Fine Arts: AI Image Exploration (Gemini)</h3>
+    <div class="prompt-box">In Gemini (gemini.google.com), try this:
+
+"Generate 3 variations of a [style/medium, e.g., 'impressionist watercolor'] depicting [subject]. Variation 1: warm color palette, soft edges. Variation 2: cool tones, high contrast. Variation 3: minimal, abstract interpretation."
+
+Then use the results as a class discussion:
+— What did AI interpret well? What did it miss?
+— How does AI "decide" on composition?
+— What can a human artist do that AI cannot?
+
+This turns AI into a critical thinking tool about art itself.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-arts3')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- PE 1 -->
+<div class="modal-overlay" id="modal-pe1">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('pe1')">&times;</button>
+    <h3>&#127936; PE: Lesson Plan Variations</h3>
+    <div class="prompt-box">Create three variations of this PE activity: [describe activity, e.g., "a volleyball passing drill"]. Constraints: [describe your gym, equipment, class size]. Variation 1: beginner level — minimal prior skill required, focus on basic mechanics. Variation 2: standard — assumes baseline skill, adds game-like elements. Variation 3: advanced — competitive, tactical, self-directed. For each: list setup, instructions, coaching cues, and a modification for students with physical limitations.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-pe1')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- PE 2 -->
+<div class="modal-overlay" id="modal-pe2">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('pe2')">&times;</button>
+    <h3>&#128293; PE: Personalized Fitness Plan</h3>
+    <div class="prompt-box">A high school student has shared the following fitness information: Goal: [e.g., improve cardiovascular endurance and build upper body strength]. Current activity level: [e.g., plays recreational basketball twice a week, no formal training]. Access: [e.g., school gym, no equipment at home]. Create a 4-week progressive fitness plan with 3 workout days per week. Include warm-up, main work, and cool-down for each session. Use age-appropriate language. Flag any exercises that require supervision or technique coaching.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-pe2')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- PE 3 -->
+<div class="modal-overlay" id="modal-pe3">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('pe3')">&times;</button>
+    <h3>&#127775; PE/Health: Health Research Analyzer</h3>
+    <div class="prompt-box">Analyze the following health article/claim for a high school health class: [paste article or claim]. Please: 1) Summarize the main claim in one sentence, 2) Identify any misleading language, cherry-picked data, or logical fallacies, 3) Explain what the science actually says about this topic (cite the general scientific consensus), 4) Give me 3 discussion questions I can ask students to help them evaluate health information critically in the future.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-pe3')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- TOOL: ChatGPT -->
+<div class="modal-overlay" id="modal-tool-chatgpt">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('tool-chatgpt')">&times;</button>
+    <h3>&#129302; ChatGPT — chat.openai.com</h3>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;margin-bottom:14px;">The most widely used AI tool. Best for: text generation, feedback, lesson planning, rubric creation, recommendation letters, and any task that's primarily language-based.</p>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;margin-bottom:14px;"><strong>Free tier:</strong> GPT-4o mini — very capable. <strong>Paid ($20/mo):</strong> GPT-4o — more powerful, can analyze images and PDFs.</p>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;"><strong>Best practice:</strong> Start every session with context. Tell it who you are, what you're doing, and who your students are — before you make your first request.</p>
+  </div>
+</div>
+
+<!-- TOOL: Gemini -->
+<div class="modal-overlay" id="modal-tool-gemini">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('tool-gemini')">&times;</button>
+    <h3>&#10024; Gemini — gemini.google.com</h3>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;margin-bottom:14px;">Google's AI — fully free and integrated with Google Workspace. Best for: image generation, visual content, Google Slides enhancement, and anything in your Google ecosystem.</p>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;margin-bottom:14px;"><strong>Key advantage:</strong> It can generate images (unlike basic ChatGPT). Great for concept maps, visual references, and creative projects.</p>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;"><strong>Try it:</strong> Open a Google Doc, click the Gemini icon, and ask it to help you rewrite or expand any section of text.</p>
+  </div>
+</div>
+
+<!-- TOOL: NotebookLM -->
+<div class="modal-overlay" id="modal-tool-notebooklm">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('tool-notebooklm')">&times;</button>
+    <h3>&#128211; NotebookLM — notebooklm.google.com</h3>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;margin-bottom:14px;">Upload your own documents (textbooks, notes, articles, rubrics) and NotebookLM becomes an AI that only references YOUR sources. No hallucinations about things it doesn't know — it stays grounded in what you uploaded.</p>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;margin-bottom:14px;"><strong>Best for:</strong> Creating study guides from your own materials, Q&A from a unit's readings, summarizing long documents, building student resource packets.</p>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;"><strong>Bonus:</strong> It can generate an audio "podcast" summary of your uploaded documents — students can listen to it as a review.</p>
+  </div>
+</div>
+
+<!-- TOOL: Voice -->
+<div class="modal-overlay" id="modal-tool-voice">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('tool-voice')">&times;</button>
+    <h3>&#127908; Voice Memos — Your Best Prompting Tool</h3>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;margin-bottom:14px;">Typing detailed prompts takes time. Talking is faster. Here's the workflow that transforms your AI output:</p>
+    <ol style="font-size:0.88rem;line-height:1.85;color:#333;padding-left:18px;">
+      <li>Open Voice Memos (iPhone) or any recorder app (Android)</li>
+      <li>Talk for 2–3 minutes about your assignment, your goals, your students</li>
+      <li>Upload the recording directly to ChatGPT or Gemini (they transcribe it automatically)</li>
+      <li>Now make your request — the AI has full context and responds like it knows your class</li>
+    </ol>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;margin-top:12px;"><strong>Alternative:</strong> Use Google Docs voice typing (Tools → Voice Typing), talk your thoughts, then paste the transcript into any AI tool.</p>
+  </div>
+</div>
+
+<!-- TOOL: Google Docs -->
+<div class="modal-overlay" id="modal-tool-gdocs">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('tool-gdocs')">&times;</button>
+    <h3>&#128196; Google Docs — Your AI Integration Hub</h3>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;margin-bottom:14px;"><strong>Voice typing:</strong> Tools → Voice Typing. Talk your thoughts, get a transcript, paste it into any AI tool as your prompt context.</p>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;margin-bottom:14px;"><strong>Built-in Gemini:</strong> Click the Gemini icon (&#10024;) in any Google Doc to get AI help directly inside the document — rewrite, expand, summarize, or ask questions about the content.</p>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;"><strong>Great for:</strong> Having students do voice-dictation drafts that AI then helps them refine — keeps the thinking student-driven, uses AI for the editing process.</p>
+  </div>
+</div>
+
+
+<!-- ═══════════════ JAVASCRIPT ═══════════════ -->
+<script>
+  // ── ACCORDION ──
+  function toggleAccordion(btn) {
+    const body = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.accordion-header.open').forEach(b => {
+      b.classList.remove('open');
+      b.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      btn.classList.add('open');
+      body.classList.add('open');
+    }
+  }
+
+  // ── TABS ──
+  function switchTab(btn, id) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-' + id).classList.add('active');
+  }
+
+  // ── MODALS ──
+  function openModal(id) {
+    document.getElementById('modal-' + id).classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(id) {
+    document.getElementById('modal-' + id).classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Close modal on overlay click
+  document.querySelectorAll('.modal-overlay').forEach(overlay => {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === this) {
+        this.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    });
+  });
+
+  // Close modal on Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      document.querySelectorAll('.modal-overlay.open').forEach(m => {
+        m.classList.remove('open');
+        document.body.style.overflow = '';
+      });
+    }
+  });
+
+  // ── COPY PROMPT ──
+  function copyPrompt(btn, modalId) {
+    const text = document.querySelector('#modal-' + modalId + ' .prompt-box').innerText;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✓ Copied!';
+      btn.classList.add('copied');
+      setTimeout(() => {
+        btn.textContent = '📋 Copy Prompt';
+        btn.classList.remove('copied');
+      }, 2000);
+    });
+  }
+
+  // ── QUIZ ──
+  let score = 0;
+  let answered = { q1: false, q2: false, q3: false, q4: false, q5: false };
+
+  function answerMC(btn, qId, result) {
+    if (answered[qId]) return;
+    answered[qId] = true;
+    const opts = btn.closest('.quiz-options').querySelectorAll('.quiz-option');
+    opts.forEach(o => o.disabled = true);
+    const fb = document.getElementById(qId + '-fb');
+    if (result === 'correct') {
+      btn.classList.add('correct');
+      fb.classList.add('pass');
+      score++;
+    } else {
+      btn.classList.add('wrong');
+      fb.classList.add('fail');
+      // Reveal correct
+      opts.forEach(o => {
+        if (o.getAttribute('onclick').includes("'correct'")) o.classList.add('correct');
+      });
+    }
+    fb.classList.add('show');
+    checkQuizComplete();
+  }
+
+  function answerTF(btn, qId, isCorrect) {
+    if (answered[qId]) return;
+    answered[qId] = true;
+    const btns = btn.closest('.quiz-tf').querySelectorAll('button');
+    btns.forEach(b => b.disabled = true);
+    const fb = document.getElementById(qId + '-fb');
+    if (isCorrect) {
+      btn.classList.add('correct');
+      fb.classList.add('pass');
+      score++;
+    } else {
+      btn.classList.add('wrong');
+      fb.classList.add('fail');
+    }
+    fb.classList.add('show');
+    checkQuizComplete();
+  }
+
+  function answerMulti(qId, correctVals) {
+    if (answered[qId]) return;
+    answered[qId] = true;
+    const labels = document.querySelectorAll('#' + qId + '-options label');
+    const fb = document.getElementById(qId + '-fb');
+    let allCorrect = true;
+    labels.forEach(label => {
+      const cb = label.querySelector('input');
+      const val = cb.value;
+      const checked = cb.checked;
+      const shouldBeChecked = correctVals.includes(val);
+      cb.disabled = true;
+      if (checked && shouldBeChecked) label.classList.add('correct-sel');
+      else if (checked && !shouldBeChecked) { label.classList.add('wrong-sel'); allCorrect = false; }
+      else if (!checked && shouldBeChecked) { label.classList.add('correct-sel'); allCorrect = false; }
+    });
+    document.querySelector('.quiz-submit-multi').disabled = true;
+    if (allCorrect) {
+      fb.innerHTML = '<strong>Perfect!</strong> The correct answers are: generating first-pass feedback, creating differentiated passages, building ACT question banks, and using voice memos. AI replaces neither students\' thinking nor the teacher.';
+      fb.classList.add('pass');
+      score++;
+    } else {
+      fb.innerHTML = '<strong>Not quite.</strong> The correct answers are A, C, D, and F. Having AI write student work (B) and replacing the teacher entirely (E) are exactly what AI should NOT do.';
+      fb.classList.add('fail');
+    }
+    fb.classList.add('show');
+    checkQuizComplete();
+  }
+
+  function checkQuizComplete() {
+    const allDone = Object.values(answered).every(v => v);
+    if (allDone) {
+      setTimeout(() => {
+        const scoreCard = document.getElementById('quiz-score');
+        document.getElementById('score-display').textContent = score + '/5';
+        const msgs = {
+          5: "Outstanding! You're ready to lead the session. 🎉",
+          4: "Excellent! You've got a strong foundation — today will deepen it.",
+          3: "Good start! Today's hands-on time will make these click.",
+          2: "That's okay — this is exactly why today matters. You'll leave with all of this.",
+          1: "No worries at all. Every expert started at zero. Let's learn together.",
+          0: "The best place to be is curious. You're in exactly the right place today."
+        };
+        document.getElementById('score-msg').textContent = msgs[score] || msgs[0];
+        scoreCard.classList.add('show');
+        scoreCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 600);
+    }
+  }
+
+  function restartQuiz() {
+    score = 0;
+    answered = { q1: false, q2: false, q3: false, q4: false, q5: false };
+    // Reset all MC
+    document.querySelectorAll('.quiz-option').forEach(o => {
+      o.classList.remove('correct','wrong');
+      o.disabled = false;
+    });
+    // Reset TF
+    document.querySelectorAll('.quiz-tf button').forEach(b => {
+      b.classList.remove('correct','wrong');
+      b.disabled = false;
+    });
+    // Reset multi
+    document.querySelectorAll('#q4-options label').forEach(l => {
+      l.classList.remove('correct-sel','wrong-sel','selected');
+      l.querySelector('input').checked = false;
+      l.querySelector('input').disabled = false;
+    });
+    document.querySelector('.quiz-submit-multi').disabled = false;
+    // Reset feedback
+    document.querySelectorAll('.quiz-feedback').forEach(f => {
+      f.classList.remove('show','pass','fail');
+    });
+    document.getElementById('quiz-score').classList.remove('show');
+    document.getElementById('q1').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // ── REGISTER ──
+  function handleRegister(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = "✓ You're Registered!";
+    btn.style.background = '#2e7d32';
+    btn.style.color = '#fff';
+    btn.disabled = true;
+  }
+</script>
+
+</body>
+</html>
