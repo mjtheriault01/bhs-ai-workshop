@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>BHS AI Institute Day — April 6, 2026</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     :root {
       --red: #9D2235;
@@ -823,7 +824,9 @@
   <a href="#ai-basics">AI Basics</a>
   <a href="#subjects">By Subject</a>
   <a href="#prompting">Prompting</a>
+  <a href="#deepdive">&#128218; Deep Dive</a>
   <a href="#stoplight">Stoplight</a>
+  <a href="#lab">&#127918; Lab</a>
   <a href="#quiz">Quiz</a>
   <a href="#tools">Tools</a>
   <a href="#schedule">Schedule</a>
@@ -1264,6 +1267,128 @@
   </div>
 </section>
 
+<!-- ─── DEEP RESEARCH ARCHIVE ─── -->
+<section id="deepdive" style="background:#0f172a;">
+  <div style="max-width:960px;margin:0 auto;padding:64px 24px;">
+    <span style="display:inline-block;background:#f59e0b;color:#1a1a1a;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 14px;border-radius:4px;margin-bottom:14px;">&#128218; Deep Research Archive</span>
+    <h2 style="font-size:1.6rem;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.2;">Evidence-Based AI Integration</h2>
+    <p style="color:rgba(255,255,255,0.6);font-size:0.88rem;line-height:1.75;max-width:700px;margin-bottom:32px;">Peer-reviewed frameworks and 2025–2026 research behind everything we're doing today. Go deeper on the science behind the practice.</p>
+
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin-bottom:28px;">
+      <button class="dr-tab" onclick="switchDR(this,'itpack')" style="padding:8px 18px;border-radius:999px;border:2px solid #f59e0b;background:#f59e0b;color:#1a1a1a;font-family:Verdana,sans-serif;font-size:0.76rem;font-weight:700;cursor:pointer;transition:all 0.2s;">I-TPACK Framework</button>
+      <button class="dr-tab" onclick="switchDR(this,'cogload')" style="padding:8px 18px;border-radius:999px;border:2px solid #334155;background:transparent;color:rgba(255,255,255,0.7);font-family:Verdana,sans-serif;font-size:0.76rem;font-weight:700;cursor:pointer;transition:all 0.2s;">Cognitive Load Theory</button>
+      <button class="dr-tab" onclick="switchDR(this,'gold')" style="padding:8px 18px;border-radius:999px;border:2px solid #334155;background:transparent;color:rgba(255,255,255,0.7);font-family:Verdana,sans-serif;font-size:0.76rem;font-weight:700;cursor:pointer;transition:all 0.2s;">Subject Gold Standards</button>
+      <button class="dr-tab" onclick="switchDR(this,'barriers')" style="padding:8px 18px;border-radius:999px;border:2px solid #334155;background:transparent;color:rgba(255,255,255,0.7);font-family:Verdana,sans-serif;font-size:0.76rem;font-weight:700;cursor:pointer;transition:all 0.2s;">Barrier Analysis</button>
+    </div>
+
+    <!-- I-TPACK -->
+    <div id="dr-itpack" class="dr-pane">
+      <div style="background:#1e293b;border-radius:12px;padding:28px;margin-bottom:16px;border-left:4px solid #f59e0b;">
+        <h3 style="color:#f59e0b;font-size:0.97rem;font-weight:700;margin-bottom:12px;">&#129504; From TPACK to I-TPACK: The 2026 Evolution</h3>
+        <p style="color:rgba(255,255,255,0.8);font-size:0.85rem;line-height:1.8;margin-bottom:16px;">The original TPACK framework was designed for static, predictable tools. Generative AI breaks that model — it's probabilistic, dynamic, and capable of producing original content. The <strong style="color:#fbbf24;">Intelligent-TPACK (I-TPACK)</strong> framework adds AI Literacy and Ethical Competency as foundational pillars. Empirical evidence from 2025 shows intentional I-TPACK-based PD produces large effect sizes in teacher competence across all five domains.</p>
+        <div style="overflow-x:auto;">
+          <table style="width:100%;border-collapse:collapse;font-size:0.8rem;">
+            <thead><tr style="background:#0f172a;"><th style="padding:10px 12px;text-align:left;color:#f59e0b;white-space:nowrap;">Domain</th><th style="padding:10px 12px;text-align:left;color:#94a3b8;">What It Means</th><th style="padding:10px 12px;text-align:left;color:#94a3b8;">For BHS Teachers</th></tr></thead>
+            <tbody>
+              <tr style="border-top:1px solid #0f172a;"><td style="padding:10px 12px;color:#fbbf24;font-weight:700;white-space:nowrap;">AI-Tech Knowledge</td><td style="padding:10px 12px;color:rgba(255,255,255,0.7);">How LLMs work — tokenization, temperature, hallucinations</td><td style="padding:10px 12px;color:rgba(255,255,255,0.7);">Know why AI gives confident wrong answers</td></tr>
+              <tr style="border-top:1px solid #0f172a;background:rgba(255,255,255,0.03);"><td style="padding:10px 12px;color:#fbbf24;font-weight:700;white-space:nowrap;">AI-Content Knowledge</td><td style="padding:10px 12px;color:rgba(255,255,255,0.7);">How AI shapes discipline-specific knowledge creation</td><td style="padding:10px 12px;color:rgba(255,255,255,0.7);">Spot AI errors in historical or scientific content</td></tr>
+              <tr style="border-top:1px solid #0f172a;"><td style="padding:10px 12px;color:#fbbf24;font-weight:700;white-space:nowrap;">AI-Pedagogical Knowledge</td><td style="padding:10px 12px;color:rgba(255,255,255,0.7);">Using AI to facilitate learning — adaptive tutoring, Socratic dialogue</td><td style="padding:10px 12px;color:rgba(255,255,255,0.7);">Design AI discussions that preserve productive struggle</td></tr>
+              <tr style="border-top:1px solid #0f172a;background:rgba(255,255,255,0.03);"><td style="padding:10px 12px;color:#fbbf24;font-weight:700;white-space:nowrap;">Human-AI Collaboration</td><td style="padding:10px 12px;color:rgba(255,255,255,0.7);">Co-teaching and co-assessing alongside an AI agent</td><td style="padding:10px 12px;color:rgba(255,255,255,0.7);">Decide what to delegate vs. what needs your judgment</td></tr>
+              <tr style="border-top:1px solid #0f172a;"><td style="padding:10px 12px;color:#fbbf24;font-weight:700;white-space:nowrap;">Ethical Knowledge</td><td style="padding:10px 12px;color:rgba(255,255,255,0.7);">Algorithmic bias, data privacy, societal impact</td><td style="padding:10px 12px;color:rgba(255,255,255,0.7);">Implement SOPPA-compliant workflows, protect students</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div style="background:#1e293b;border-radius:12px;padding:28px;border-left:4px solid #60a5fa;">
+        <h3 style="color:#60a5fa;font-size:0.97rem;font-weight:700;margin-bottom:10px;">&#9888; Algorithmic Awareness — What It Actually Means</h3>
+        <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;line-height:1.75;margin-bottom:14px;">Algorithmic awareness is not about understanding code — it's about understanding <em>behavior</em>. Teachers with this awareness know three things:</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+          <div style="background:#0f172a;border-radius:8px;padding:14px;"><div style="color:#fbbf24;font-weight:700;font-size:0.8rem;margin-bottom:6px;">&#128204; AI reflects its training data</div><p style="color:rgba(255,255,255,0.65);font-size:0.78rem;line-height:1.65;">Outputs reflect patterns — including historical biases. A "default" recommendation letter may skew toward certain demographics. Always review critically.</p></div>
+          <div style="background:#0f172a;border-radius:8px;padding:14px;"><div style="color:#fbbf24;font-weight:700;font-size:0.8rem;margin-bottom:6px;">&#127919; Context shapes output</div><p style="color:rgba(255,255,255,0.65);font-size:0.78rem;line-height:1.65;">The same question gets dramatically different answers based on framing. Prompt engineering is a literacy skill, not a trick.</p></div>
+          <div style="background:#0f172a;border-radius:8px;padding:14px;"><div style="color:#fbbf24;font-weight:700;font-size:0.8rem;margin-bottom:6px;">&#10067; Confidence ≠ Accuracy</div><p style="color:rgba(255,255,255,0.65);font-size:0.78rem;line-height:1.65;">AI presents hallucinations with the same confident tone as accurate facts. Verification is always the teacher's responsibility.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- COGNITIVE LOAD -->
+    <div id="dr-cogload" class="dr-pane" style="display:none;">
+      <div style="background:#1e293b;border-radius:12px;padding:28px;margin-bottom:16px;border-left:4px solid #f59e0b;">
+        <h3 style="color:#f59e0b;font-size:0.97rem;font-weight:700;margin-bottom:14px;">&#129504; Three Types of Cognitive Load — and Where AI Fits</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px;margin-bottom:16px;">
+          <div style="background:#0f172a;border-radius:8px;padding:16px;"><div style="color:#f87171;font-weight:700;font-size:0.83rem;margin-bottom:6px;">Intrinsic Load</div><p style="color:rgba(255,255,255,0.7);font-size:0.8rem;line-height:1.65;">The inherent complexity of the material. Can't and shouldn't be eliminated — it's what makes learning challenging and valuable. AI should not touch this.</p></div>
+          <div style="background:#0f172a;border-radius:8px;padding:16px;"><div style="color:#fb923c;font-weight:700;font-size:0.83rem;margin-bottom:6px;">Extraneous Load</div><p style="color:rgba(255,255,255,0.7);font-size:0.8rem;line-height:1.65;">Mental effort on things that don't help learning — formatting, logistics, searching for resources. <strong style="color:#fbbf24;">This is AI's primary target.</strong> Reducing it frees bandwidth for thinking.</p></div>
+          <div style="background:#0f172a;border-radius:8px;padding:16px;"><div style="color:#4ade80;font-weight:700;font-size:0.83rem;margin-bottom:6px;">Germane Load</div><p style="color:rgba(255,255,255,0.7);font-size:0.8rem;line-height:1.65;">The productive struggle that builds long-term understanding. This is what we protect with "Enhance, Not Replace." AI should never eliminate this.</p></div>
+        </div>
+        <div style="background:#0f172a;border-radius:8px;padding:14px;border-left:3px solid #4ade80;"><p style="color:rgba(255,255,255,0.85);font-size:0.85rem;line-height:1.75;"><strong style="color:#4ade80;">The AI Opportunity:</strong> When AI reduces Extraneous Load (grading logistics, formatting, resource hunting), it frees students' cognitive bandwidth for Germane Load — the deep thinking that actually builds skills and long-term retention.</p></div>
+      </div>
+      <div style="background:#1e293b;border-radius:12px;padding:28px;border-left:4px solid #f43f5e;">
+        <h3 style="color:#f43f5e;font-size:0.97rem;font-weight:700;margin-bottom:10px;">&#9888; The Fluency Illusion — A Critical Warning</h3>
+        <p style="color:rgba(255,255,255,0.8);font-size:0.85rem;line-height:1.8;margin-bottom:14px;">Stanford's 2026 Review identified a troubling pattern: students who receive AI-generated summaries <em>feel</em> like they've learned the content — but fail to retain it when assessed independently. The AI's fluency creates the <em>illusion</em> of understanding without the substance.</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+          <div style="background:#1a0505;border-radius:8px;padding:14px;border:1px solid rgba(244,63,94,0.3);"><div style="color:#f87171;font-weight:700;font-size:0.8rem;margin-bottom:8px;">&#128683; Cognitive Offloading</div><ul style="color:rgba(255,255,255,0.65);font-size:0.78rem;line-height:1.7;padding-left:16px;"><li>AI does the synthesis</li><li>Student accepts output without questioning</li><li>Feels productive, builds no lasting skill</li><li>Leads to "Digital Amnesia" without the AI</li></ul></div>
+          <div style="background:#05150a;border-radius:8px;padding:14px;border:1px solid rgba(74,222,128,0.3);"><div style="color:#4ade80;font-weight:700;font-size:0.8rem;margin-bottom:8px;">&#9989; Cognitive Augmentation</div><ul style="color:rgba(255,255,255,0.65);font-size:0.78rem;line-height:1.7;padding-left:16px;"><li>AI provides hints and perspectives</li><li>Student still constructs understanding</li><li>Productive struggle is preserved</li><li>Long-term retention and skill transfer</li></ul></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GOLD STANDARDS -->
+    <div id="dr-gold" class="dr-pane" style="display:none;">
+      <div style="background:#1e293b;border-radius:12px;padding:28px;margin-bottom:16px;border-left:4px solid #60a5fa;">
+        <h3 style="color:#60a5fa;font-size:0.97rem;font-weight:700;margin-bottom:14px;">&#10133; Math &amp; Science: Logic Debugging + Bayesian Knowledge Tracing</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;">
+          <div style="background:#0f172a;border-radius:8px;padding:18px;"><div style="color:#60a5fa;font-weight:700;font-size:0.83rem;margin-bottom:8px;">Logic Debugging</div><p style="color:rgba(255,255,255,0.7);font-size:0.8rem;line-height:1.7;margin-bottom:8px;">Instead of giving the answer, AI acts as a reviewer. Prompt it to identify logical inconsistencies without revealing the solution — then ask a Socratic question pointing toward the error. Preserves productive struggle while giving targeted support.</p><div style="background:#1e293b;border-radius:6px;padding:10px;font-size:0.75rem;color:#fbbf24;font-style:italic;">"Review this proof and identify the logical error. Do not give the answer. Ask one question that points the student in the right direction."</div></div>
+          <div style="background:#0f172a;border-radius:8px;padding:18px;"><div style="color:#60a5fa;font-weight:700;font-size:0.83rem;margin-bottom:8px;">Bayesian Knowledge Tracing</div><p style="color:rgba(255,255,255,0.7);font-size:0.8rem;line-height:1.7;">Advanced adaptive systems use real-time performance data to dynamically adjust difficulty — keeping students in their Zone of Proximal Development. Research shows a <strong style="color:#4ade80;">33.7% reduction</strong> in prediction deviation vs. traditional practice. This is what powers Khan Academy's AI tutor. For BHS: your ACT question bank can be built to approximate this by manually sorting by difficulty after categorizing by course.</p></div>
+        </div>
+      </div>
+      <div style="background:#1e293b;border-radius:12px;padding:28px;margin-bottom:16px;border-left:4px solid #a78bfa;">
+        <h3 style="color:#a78bfa;font-size:0.97rem;font-weight:700;margin-bottom:14px;">&#128221; Humanities: Socratic Partnering + FeedbackWriter Pipeline</h3>
+        <div style="background:#0f172a;border-radius:8px;padding:18px;margin-bottom:12px;">
+          <div style="color:#a78bfa;font-weight:700;font-size:0.83rem;margin-bottom:12px;">The FeedbackWriter 3-Step Pipeline (2025 Randomized Trial)</div>
+          <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px;text-align:center;margin-bottom:12px;">
+            <div style="background:#1e293b;border-radius:8px;padding:12px;"><div style="color:#fbbf24;font-size:1.2rem;margin-bottom:4px;font-weight:700;">1</div><div style="color:#fff;font-weight:700;font-size:0.78rem;margin-bottom:4px;">Extract</div><p style="color:rgba(255,255,255,0.6);font-size:0.73rem;line-height:1.5;">AI identifies sentences relevant to each rubric criterion in student work</p></div>
+            <div style="background:#1e293b;border-radius:8px;padding:12px;"><div style="color:#fbbf24;font-size:1.2rem;margin-bottom:4px;font-weight:700;">2</div><div style="color:#fff;font-weight:700;font-size:0.78rem;margin-bottom:4px;">Judge + Rationale</div><p style="color:rgba(255,255,255,0.6);font-size:0.73rem;line-height:1.5;">AI evaluates each criterion and explains its reasoning — not just a grade</p></div>
+            <div style="background:#1e293b;border-radius:8px;padding:12px;"><div style="color:#fbbf24;font-size:1.2rem;margin-bottom:4px;font-weight:700;">3</div><div style="color:#fff;font-weight:700;font-size:0.78rem;margin-bottom:4px;">Socratic Prompt</div><p style="color:rgba(255,255,255,0.6);font-size:0.73rem;line-height:1.5;">AI asks a guiding question rather than rewriting — student does the revision</p></div>
+          </div>
+          <div style="text-align:center;background:#1e293b;border-radius:8px;padding:10px;"><span style="color:#4ade80;font-weight:700;font-size:0.85rem;">Result: Students moved from 50th → 70th percentile in writing proficiency</span><span style="color:rgba(255,255,255,0.5);font-size:0.73rem;display:block;margin-top:3px;">2025 randomized trial with FeedbackWriter system</span></div>
+        </div>
+      </div>
+      <div style="background:#1e293b;border-radius:12px;padding:28px;border-left:4px solid #34d399;">
+        <h3 style="color:#34d399;font-size:0.97rem;font-weight:700;margin-bottom:12px;">&#128188; CTE: AI Venture Capitalist Simulations</h3>
+        <p style="color:rgba(255,255,255,0.75);font-size:0.85rem;line-height:1.75;margin-bottom:14px;">AI-powered simulations allow CTE and INCubatorEdu students to practice high-stakes decisions in risk-free environments. 78% of high school students report AI received little attention in their education — CTE is uniquely positioned to close that gap.</p>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;">
+          <div style="background:#0f172a;border-radius:8px;padding:14px;text-align:center;"><div style="color:#34d399;font-size:1.4rem;margin-bottom:6px;">&#127917;</div><div style="color:#fff;font-weight:700;font-size:0.78rem;margin-bottom:4px;">Customer Roleplay</div><p style="color:rgba(255,255,255,0.6);font-size:0.73rem;">AI simulates skeptical customers — students handle objections before real pitches</p></div>
+          <div style="background:#0f172a;border-radius:8px;padding:14px;text-align:center;"><div style="color:#34d399;font-size:1.4rem;margin-bottom:6px;">&#128202;</div><div style="color:#fff;font-weight:700;font-size:0.78rem;margin-bottom:4px;">Market Simulation</div><p style="color:rgba(255,255,255,0.6);font-size:0.73rem;">AI replicates market reactions to business model decisions — iterate before investing</p></div>
+          <div style="background:#0f172a;border-radius:8px;padding:14px;text-align:center;"><div style="color:#34d399;font-size:1.4rem;margin-bottom:6px;">&#127760;</div><div style="color:#fff;font-weight:700;font-size:0.78rem;margin-bottom:4px;">10x Workflows</div><p style="color:rgba(255,255,255,0.6);font-size:0.73rem;">Students learn workflow automation — mirrors actual 2026 industry expectations</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BARRIER ANALYSIS -->
+    <div id="dr-barriers" class="dr-pane" style="display:none;">
+      <div style="background:#1e293b;border-radius:12px;padding:28px;margin-bottom:16px;border-left:4px solid #f43f5e;">
+        <h3 style="color:#f43f5e;font-size:0.97rem;font-weight:700;margin-bottom:14px;">&#128683; Illinois Red Lines — Non-Negotiable Boundaries</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;">
+          <div style="background:#1a0505;border-radius:8px;padding:14px;border:1px solid rgba(244,63,94,0.3);"><div style="color:#f87171;font-weight:700;font-size:0.8rem;margin-bottom:6px;">IEP Exclusivity (IDEA)</div><p style="color:rgba(255,255,255,0.7);font-size:0.78rem;line-height:1.65;">AI cannot be the sole basis for IEP development. Human analysis is a statutory requirement under Illinois law. Use AI to brainstorm, but a qualified human makes all decisions.</p></div>
+          <div style="background:#1a0505;border-radius:8px;padding:14px;border:1px solid rgba(244,63,94,0.3);"><div style="color:#f87171;font-weight:700;font-size:0.8rem;margin-bottom:6px;">PII Minimization (SOPPA)</div><p style="color:rgba(255,255,255,0.7);font-size:0.78rem;line-height:1.65;">Never input student names, IDs, grades, or personal details into public AI tools. Use anonymized descriptions. SOPPA and FERPA apply to all student records.</p></div>
+          <div style="background:#1a0505;border-radius:8px;padding:14px;border:1px solid rgba(244,63,94,0.3);"><div style="color:#f87171;font-weight:700;font-size:0.8rem;margin-bottom:6px;">Immigration Status (IL Law)</div><p style="color:rgba(255,255,255,0.7);font-size:0.78rem;line-height:1.65;">Schools are prohibited from requesting, collecting, or disclosing immigration/citizenship status via AI tools or any other means.</p></div>
+          <div style="background:#1a0505;border-radius:8px;padding:14px;border:1px solid rgba(244,63,94,0.3);"><div style="color:#f87171;font-weight:700;font-size:0.8rem;margin-bottom:6px;">Vendor DPAs Required</div><p style="color:rgba(255,255,255,0.7);font-size:0.78rem;line-height:1.65;">Any AI tool used with students must have a signed Data Privacy Agreement with BPS101. Check with administration before introducing new tools to students.</p></div>
+        </div>
+      </div>
+      <div style="background:#1e293b;border-radius:12px;padding:28px;border-left:4px solid #4ade80;">
+        <h3 style="color:#4ade80;font-size:0.97rem;font-weight:700;margin-bottom:16px;">&#9200; The Time-Reclaimer: What the Research Shows</h3>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:18px;">
+          <div style="text-align:center;background:#0f172a;border-radius:8px;padding:20px;"><div style="font-size:2.2rem;font-weight:700;color:#fbbf24;margin-bottom:4px;">5.9</div><div style="color:rgba(255,255,255,0.7);font-size:0.78rem;line-height:1.5;">hours saved/week<br>for frequent AI users<br><span style="color:#475569;font-size:0.7rem;">Gallup-Walton, 2025</span></div></div>
+          <div style="text-align:center;background:#0f172a;border-radius:8px;padding:20px;"><div style="font-size:2.2rem;font-weight:700;color:#fbbf24;margin-bottom:4px;">57%</div><div style="color:rgba(255,255,255,0.7);font-size:0.78rem;line-height:1.5;">say AI improves<br>feedback quality<br><span style="color:#475569;font-size:0.7rem;">2025 research</span></div></div>
+          <div style="text-align:center;background:#0f172a;border-radius:8px;padding:20px;"><div style="font-size:2.2rem;font-weight:700;color:#fbbf24;margin-bottom:4px;">28%</div><div style="color:rgba(255,255,255,0.7);font-size:0.78rem;line-height:1.5;">use AI to differentiate<br>materials for learners<br><span style="color:#475569;font-size:0.7rem;">2025 survey</span></div></div>
+          <div style="text-align:center;background:#0f172a;border-radius:8px;padding:20px;"><div style="font-size:2.2rem;font-weight:700;color:#fbbf24;margin-bottom:4px;">350+</div><div style="color:rgba(255,255,255,0.7);font-size:0.78rem;line-height:1.5;">hours reclaimed<br>in one school year<br><span style="color:#475569;font-size:0.7rem;">Chagrin Falls case study</span></div></div>
+        </div>
+        <div style="background:#0f172a;border-radius:8px;padding:14px;"><p style="color:rgba(255,255,255,0.8);font-size:0.83rem;line-height:1.75;"><strong style="color:#4ade80;">The framing that works:</strong> Don't position today as "learning a new tool." Position it as "auditing your biggest time drains and deploying AI against them." Teachers choose their own starting point — the one that reclaims the most time fastest. That's the hook.</p></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <!-- ─── STOPLIGHT MODEL ─── -->
 <section id="stoplight" style="background:#fff;">
   <div class="section">
@@ -1339,6 +1464,166 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ─── LEARNING LAB ─── -->
+<section id="lab" style="background:#eff6ff;">
+  <div style="max-width:960px;margin:0 auto;padding:64px 24px;">
+    <span style="display:inline-block;background:#9D2235;color:#fff;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 14px;border-radius:4px;margin-bottom:14px;">&#127918; Gamified Learning Lab</span>
+    <h2 style="font-size:1.6rem;font-weight:700;color:#1e3a5f;margin-bottom:8px;">Learn by Doing</h2>
+    <p style="color:#53565A;font-size:0.9rem;line-height:1.75;max-width:700px;margin-bottom:40px;">Four interactive games designed to build real AI skills. No slides — just hands-on learning with immediate feedback.</p>
+
+    <!-- ── GAME 1: PRIVACY SORT ── -->
+    <div style="background:#fff;border-radius:14px;padding:32px;margin-bottom:28px;box-shadow:0 4px 20px rgba(0,0,0,0.08);border-top:5px solid #9D2235;">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px;">
+        <span style="font-size:1.8rem;">&#128272;</span>
+        <div><h3 style="font-size:1rem;font-weight:700;color:#9D2235;margin-bottom:2px;">Privacy Red Line Sorter</h3><p style="font-size:0.78rem;color:#53565A;">Swipe SAFE or RED LINE — 10 real scenarios, immediate SOPPA/FERPA feedback</p></div>
+        <div id="priv-score-badge" style="margin-left:auto;background:#f0eded;border-radius:999px;padding:6px 16px;font-size:0.8rem;font-weight:700;color:#53565A;">0 / 10</div>
+      </div>
+      <div style="background:#f7f5f5;border-radius:10px;padding:24px;min-height:160px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;" id="priv-card-area">
+        <div id="priv-card">
+          <div id="priv-progress" style="position:absolute;top:0;left:0;height:4px;background:#9D2235;border-radius:2px;transition:width 0.4s;width:0%;"></div>
+          <p id="priv-scenario" style="font-size:0.93rem;line-height:1.75;color:#1a1a1a;max-width:600px;margin-bottom:22px;font-weight:600;"></p>
+          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+            <button onclick="privAnswer('safe')" style="padding:13px 32px;background:#27ae60;color:#fff;border:none;border-radius:8px;font-family:Verdana,sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;transition:transform 0.15s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">&#10003; SAFE</button>
+            <button onclick="privAnswer('red')" style="padding:13px 32px;background:#9D2235;color:#fff;border:none;border-radius:8px;font-family:Verdana,sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;transition:transform 0.15s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">&#9888; RED LINE</button>
+          </div>
+        </div>
+        <div id="priv-feedback" style="display:none;width:100%;">
+          <div id="priv-feedback-icon" style="font-size:2rem;margin-bottom:10px;"></div>
+          <div id="priv-feedback-text" style="font-size:0.87rem;line-height:1.75;color:#333;max-width:560px;margin:0 auto 18px;"></div>
+          <button onclick="privNext()" style="padding:10px 28px;background:#9D2235;color:#fff;border:none;border-radius:6px;font-family:Verdana,sans-serif;font-size:0.87rem;font-weight:700;cursor:pointer;">Next Scenario &#8594;</button>
+        </div>
+        <div id="priv-done" style="display:none;text-align:center;">
+          <div style="font-size:2.5rem;font-weight:700;color:#9D2235;margin-bottom:8px;" id="priv-final-score"></div>
+          <p style="font-size:0.9rem;color:#333;margin-bottom:18px;" id="priv-final-msg"></p>
+          <button onclick="privRestart()" style="padding:10px 28px;background:#FFC72C;color:#1a1a1a;border:none;border-radius:6px;font-family:Verdana,sans-serif;font-size:0.87rem;font-weight:700;cursor:pointer;">&#128260; Play Again</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GAME 2: TIME CALCULATOR ── -->
+    <div style="background:#fff;border-radius:14px;padding:32px;margin-bottom:28px;box-shadow:0 4px 20px rgba(0,0,0,0.08);border-top:5px solid #FFC72C;">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+        <span style="font-size:1.8rem;">&#9200;</span>
+        <div><h3 style="font-size:1rem;font-weight:700;color:#9D2235;margin-bottom:2px;">The Gift of Time Calculator</h3><p style="font-size:0.78rem;color:#53565A;">Drag the sliders to reflect your weekly hours — see how much time AI gives back</p></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;">
+        <div>
+          <div style="margin-bottom:20px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;"><label style="font-size:0.85rem;font-weight:700;color:#333;">&#9999; Grading &amp; Feedback</label><span id="val-grading" style="font-size:0.85rem;font-weight:700;color:#9D2235;">8 hrs/wk</span></div>
+            <input type="range" id="slider-grading" min="0" max="15" value="8" oninput="updateTimeCalc()" style="width:100%;accent-color:#9D2235;cursor:pointer;">
+          </div>
+          <div style="margin-bottom:20px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;"><label style="font-size:0.85rem;font-weight:700;color:#333;">&#128218; Lesson Planning</label><span id="val-planning" style="font-size:0.85rem;font-weight:700;color:#9D2235;">5 hrs/wk</span></div>
+            <input type="range" id="slider-planning" min="0" max="10" value="5" oninput="updateTimeCalc()" style="width:100%;accent-color:#9D2235;cursor:pointer;">
+          </div>
+          <div style="margin-bottom:24px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;"><label style="font-size:0.85rem;font-weight:700;color:#333;">&#128196; Admin &amp; Emails</label><span id="val-admin" style="font-size:0.85rem;font-weight:700;color:#9D2235;">3 hrs/wk</span></div>
+            <input type="range" id="slider-admin" min="0" max="8" value="3" oninput="updateTimeCalc()" style="width:100%;accent-color:#9D2235;cursor:pointer;">
+          </div>
+          <div style="background:#f7f5f5;border-radius:10px;padding:18px;text-align:center;">
+            <div style="font-size:2.4rem;font-weight:700;color:#9D2235;line-height:1;" id="time-saved-display">6.3</div>
+            <div style="font-size:0.78rem;color:#53565A;margin-top:4px;">hours reclaimed per week</div>
+            <div style="margin-top:12px;padding-top:12px;border-top:1px solid #ddd;font-size:0.8rem;color:#333;" id="time-extra-display"></div>
+          </div>
+        </div>
+        <div>
+          <canvas id="timeChart" style="width:100%;max-height:260px;"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GAME 3: PROMPT SURGEON ── -->
+    <div style="background:#fff;border-radius:14px;padding:32px;margin-bottom:28px;box-shadow:0 4px 20px rgba(0,0,0,0.08);border-top:5px solid #60a5fa;">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;">
+        <span style="font-size:1.8rem;">&#128295;</span>
+        <div><h3 style="font-size:1rem;font-weight:700;color:#9D2235;margin-bottom:2px;">The Prompt Surgeon Lab</h3><p style="font-size:0.78rem;color:#53565A;">Transform a weak prompt into an expert prompt — watch the quality score rise in real time</p></div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div>
+          <div style="background:#fff5f5;border-radius:8px;padding:14px;margin-bottom:18px;border-left:4px solid #f87171;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#c0392b;margin-bottom:6px;">&#10060; Weak Prompt</div>
+            <p style="font-size:0.87rem;color:#333;font-style:italic;">"Write a lesson plan."</p>
+          </div>
+          <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:0.78rem;font-weight:700;color:#333;margin-bottom:5px;">Your Role &amp; Subject</label>
+            <input type="text" id="ps-role" oninput="updatePS()" placeholder="e.g. I am a 10th grade Biology teacher" style="width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:6px;font-family:Verdana,sans-serif;font-size:0.83rem;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#9D2235'" onblur="this.style.borderColor='#ddd'">
+          </div>
+          <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:0.78rem;font-weight:700;color:#333;margin-bottom:5px;">Specific Topic</label>
+            <input type="text" id="ps-topic" oninput="updatePS()" placeholder="e.g. covering cell mitosis and meiosis" style="width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:6px;font-family:Verdana,sans-serif;font-size:0.83rem;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#9D2235'" onblur="this.style.borderColor='#ddd'">
+          </div>
+          <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:0.78rem;font-weight:700;color:#333;margin-bottom:5px;">Student Context</label>
+            <input type="text" id="ps-context" oninput="updatePS()" placeholder="e.g. for students who struggle with abstract concepts" style="width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:6px;font-family:Verdana,sans-serif;font-size:0.83rem;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#9D2235'" onblur="this.style.borderColor='#ddd'">
+          </div>
+          <div style="margin-bottom:14px;">
+            <label style="display:block;font-size:0.78rem;font-weight:700;color:#333;margin-bottom:5px;">Format &amp; Length</label>
+            <input type="text" id="ps-format" oninput="updatePS()" placeholder="e.g. as a 50-minute lesson with 3 activities" style="width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:6px;font-family:Verdana,sans-serif;font-size:0.83rem;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#9D2235'" onblur="this.style.borderColor='#ddd'">
+          </div>
+          <div style="margin-bottom:18px;">
+            <label style="display:block;font-size:0.78rem;font-weight:700;color:#333;margin-bottom:5px;">Key Learning Goal</label>
+            <input type="text" id="ps-goal" oninput="updatePS()" placeholder="e.g. include a hands-on lab component" style="width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:6px;font-family:Verdana,sans-serif;font-size:0.83rem;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#9D2235'" onblur="this.style.borderColor='#ddd'">
+          </div>
+          <div style="background:#f7f5f5;border-radius:8px;padding:14px;">
+            <div style="display:flex;justify-content:space-between;margin-bottom:8px;"><span style="font-size:0.78rem;font-weight:700;color:#333;">Prompt Quality</span><span id="ps-label" style="font-size:0.78rem;font-weight:700;color:#9D2235;">Weak</span></div>
+            <div style="background:#ddd;border-radius:999px;height:10px;overflow:hidden;"><div id="ps-meter" style="height:100%;background:linear-gradient(90deg,#9D2235,#FFC72C);border-radius:999px;width:0%;transition:width 0.4s;"></div></div>
+          </div>
+        </div>
+        <div>
+          <div style="background:#f0fff4;border-radius:8px;padding:14px;margin-bottom:14px;border-left:4px solid #27ae60;height:100%;min-height:280px;display:flex;flex-direction:column;">
+            <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#27ae60;margin-bottom:10px;">&#9989; Expert Prompt Preview</div>
+            <div id="ps-output" style="font-size:0.85rem;color:#333;line-height:1.75;flex:1;white-space:pre-wrap;font-family:Verdana,sans-serif;">Fill in the fields on the left to build your expert prompt...</div>
+            <button onclick="copyPS()" style="margin-top:14px;padding:10px;background:#9D2235;color:#fff;border:none;border-radius:6px;font-family:Verdana,sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;width:100%;" id="ps-copy-btn">&#128203; Copy Expert Prompt</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── GAME 4: STOPLIGHT MATCHER ── -->
+    <div style="background:#fff;border-radius:14px;padding:32px;box-shadow:0 4px 20px rgba(0,0,0,0.08);border-top:5px solid #27ae60;">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:8px;">
+        <span style="font-size:1.8rem;">&#128308;&#127993;&#128994;</span>
+        <div><h3 style="font-size:1rem;font-weight:700;color:#9D2235;margin-bottom:2px;">Stoplight Assignment Matcher</h3><p style="font-size:0.78rem;color:#53565A;">Drag each assignment to the correct AI permission zone — then check your answers</p></div>
+      </div>
+      <p style="font-size:0.8rem;color:#53565A;margin-bottom:20px;">&#128073; Drag cards into the Red, Yellow, or Green zone — or tap a card then tap a zone on mobile.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;">
+        <div>
+          <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#53565A;margin-bottom:12px;">Assignment Cards</div>
+          <div id="sl-cards" style="display:flex;flex-direction:column;gap:10px;">
+            <div class="sl-card" id="slc-1" draggable="true" ondragstart="slDragStart(event)" onclick="slTap('slc-1')" data-answer="red" style="background:#f7f5f5;border:2px solid #ddd;border-radius:8px;padding:12px 14px;cursor:grab;font-size:0.83rem;color:#333;transition:all 0.2s;user-select:none;">&#128221; Final exam essay written entirely in class</div>
+            <div class="sl-card" id="slc-2" draggable="true" ondragstart="slDragStart(event)" onclick="slTap('slc-2')" data-answer="yellow" style="background:#f7f5f5;border:2px solid #ddd;border-radius:8px;padding:12px 14px;cursor:grab;font-size:0.83rem;color:#333;transition:all 0.2s;user-select:none;">&#129504; Using AI to brainstorm essay topic options</div>
+            <div class="sl-card" id="slc-3" draggable="true" ondragstart="slDragStart(event)" onclick="slTap('slc-3')" data-answer="red" style="background:#f7f5f5;border:2px solid #ddd;border-radius:8px;padding:12px 14px;cursor:grab;font-size:0.83rem;color:#333;transition:all 0.2s;user-select:none;">&#128140; Personal reflection: your earliest childhood memory</div>
+            <div class="sl-card" id="slc-4" draggable="true" ondragstart="slDragStart(event)" onclick="slTap('slc-4')" data-answer="yellow" style="background:#f7f5f5;border:2px solid #ddd;border-radius:8px;padding:12px 14px;cursor:grab;font-size:0.83rem;color:#333;transition:all 0.2s;user-select:none;">&#128202; AI generates concept map student then annotates</div>
+            <div class="sl-card" id="slc-5" draggable="true" ondragstart="slDragStart(event)" onclick="slTap('slc-5')" data-answer="green" style="background:#f7f5f5;border:2px solid #ddd;border-radius:8px;padding:12px 14px;cursor:grab;font-size:0.83rem;color:#333;transition:all 0.2s;user-select:none;">&#128300; AI-powered data analysis for statistics project</div>
+            <div class="sl-card" id="slc-6" draggable="true" ondragstart="slDragStart(event)" onclick="slTap('slc-6')" data-answer="green" style="background:#f7f5f5;border:2px solid #ddd;border-radius:8px;padding:12px 14px;cursor:grab;font-size:0.83rem;color:#333;transition:all 0.2s;user-select:none;">&#127760; Generating differentiated readings for ELL students</div>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:0.78rem;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#53565A;margin-bottom:12px;">Drop Zones</div>
+          <div id="sl-zone-red" ondragover="slDragOver(event)" ondrop="slDrop(event,'red')" onclick="slZoneTap('red')" data-zone="red" style="min-height:80px;border:2px dashed #f87171;border-radius:8px;padding:10px;margin-bottom:10px;background:#fff5f5;transition:background 0.2s;">
+            <div style="font-size:0.72rem;font-weight:700;color:#c0392b;margin-bottom:6px;">&#128308; RED — No AI</div>
+            <div class="sl-dropzone-cards" style="display:flex;flex-direction:column;gap:6px;"></div>
+          </div>
+          <div id="sl-zone-yellow" ondragover="slDragOver(event)" ondrop="slDrop(event,'yellow')" onclick="slZoneTap('yellow')" data-zone="yellow" style="min-height:80px;border:2px dashed #fbbf24;border-radius:8px;padding:10px;margin-bottom:10px;background:#fffbf0;transition:background 0.2s;">
+            <div style="font-size:0.72rem;font-weight:700;color:#e67e22;margin-bottom:6px;">&#127993; YELLOW — Limited Use</div>
+            <div class="sl-dropzone-cards" style="display:flex;flex-direction:column;gap:6px;"></div>
+          </div>
+          <div id="sl-zone-green" ondragover="slDragOver(event)" ondrop="slDrop(event,'green')" onclick="slZoneTap('green')" data-zone="green" style="min-height:80px;border:2px dashed #4ade80;border-radius:8px;padding:10px;background:#f0fff4;transition:background 0.2s;">
+            <div style="font-size:0.72rem;font-weight:700;color:#27ae60;margin-bottom:6px;">&#128994; GREEN — AI Encouraged</div>
+            <div class="sl-dropzone-cards" style="display:flex;flex-direction:column;gap:6px;"></div>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:20px;display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+        <button onclick="checkStoplight()" style="padding:12px 28px;background:#9D2235;color:#fff;border:none;border-radius:6px;font-family:Verdana,sans-serif;font-size:0.87rem;font-weight:700;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='#7a1a28'" onmouseout="this.style.background='#9D2235'">Check My Answers &#8594;</button>
+        <button onclick="resetStoplight()" style="padding:12px 20px;background:#f0eded;color:#53565A;border:none;border-radius:6px;font-family:Verdana,sans-serif;font-size:0.87rem;font-weight:700;cursor:pointer;">&#128260; Reset</button>
+        <div id="sl-result" style="display:none;font-weight:700;color:#9D2235;font-size:0.9rem;"></div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -2054,6 +2339,280 @@ This turns AI into a critical thinking tool about art itself.</div>
     });
     document.getElementById('quiz-score').classList.remove('show');
     document.getElementById('q1').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  // ── DEEP RESEARCH TABS ──
+  function switchDR(btn, id) {
+    document.querySelectorAll('.dr-tab').forEach(b => {
+      b.style.background = 'transparent';
+      b.style.borderColor = '#334155';
+      b.style.color = 'rgba(255,255,255,0.7)';
+    });
+    document.querySelectorAll('.dr-pane').forEach(p => p.style.display = 'none');
+    btn.style.background = '#f59e0b';
+    btn.style.borderColor = '#f59e0b';
+    btn.style.color = '#1a1a1a';
+    document.getElementById('dr-' + id).style.display = 'block';
+  }
+
+  // ── PRIVACY SORT GAME ──
+  const privScenarios = [
+    { text: "A teacher pastes a student's full name, grade level, and IEP accommodation goals into ChatGPT to brainstorm differentiation strategies.", answer: 'red', explanation: "RED LINE &#9888; — This contains student PII (name) and sensitive IEP data. SOPPA and FERPA prohibit sharing student records with unvetted AI tools. Use anonymized descriptions: 'a student with reading accommodations' instead." },
+    { text: "A teacher uses ChatGPT to generate a 20-question practice worksheet on the quadratic formula for Algebra 2 students.", answer: 'safe', explanation: "SAFE &#10003; — No student data involved. Generating generic educational content is an appropriate and encouraged use of AI. This is exactly what AI is for." },
+    { text: "A school counselor inputs a student's immigration status into an AI translation tool to help communicate with their family.", answer: 'red', explanation: "RED LINE &#9888; — Illinois law prohibits schools from requesting, collecting, or disclosing immigration or citizenship status via any means, including AI tools. Use a human interpreter or district-approved translation service." },
+    { text: "A teacher uploads an anonymized student essay — student name and ID removed — to ChatGPT to get feedback suggestions.", answer: 'safe', explanation: "SAFE &#10003; — Anonymized work without identifying information is generally appropriate. Always confirm no identifiable details remain, and check that the tool has a DPA with your district for regular use." },
+    { text: "A school purchases an AI-powered grading assistant that hasn't signed a Data Privacy Agreement with BPS101.", answer: 'red', explanation: "RED LINE &#9888; — Any AI tool used with student data must have a signed DPA with the district under SOPPA. Always check with administration before using a new tool with students." },
+    { text: "A teacher uses Gemini to generate 5 concept map variations for a unit on the American Revolution — no student data involved.", answer: 'safe', explanation: "SAFE &#10003; — Creating instructional materials without student data is a great use case. No privacy concerns here at all." },
+    { text: "An AI system is used as the sole basis for developing a student's Individualized Education Program without any educator review.", answer: 'red', explanation: "RED LINE &#9888; — IEP Exclusivity is a statutory requirement under IDEA and Illinois law. AI can inform and brainstorm, but a qualified human must make all IEP decisions. This is non-negotiable." },
+    { text: "A teacher uses AI to draft a parent newsletter about the upcoming science fair — no student names or personal information included.", answer: 'safe', explanation: "SAFE &#10003; — Drafting general communications without personal information is a practical and appropriate use of AI. This is a time-reclaimer that doesn't touch student privacy." },
+    { text: "A teacher uploads a class roster with student first names and last names into an AI tool to automatically create student groups.", answer: 'red', explanation: "RED LINE &#9888; — Student names constitute PII under FERPA and SOPPA. Never input student identifying information into public AI tools. Create groups manually or use a district-approved tool with a DPA." },
+    { text: "A math teacher uses AI to generate 30 ACT-style practice problems categorized by course level — no student information used.", answer: 'safe', explanation: "SAFE &#10003; — Building question banks and instructional materials with AI is encouraged. This is exactly the kind of time-saving workflow we're learning today." }
+  ];
+
+  let privIndex = 0, privScore = 0, privAnswered = false;
+
+  function privRender() {
+    if (privIndex >= privScenarios.length) { privShowDone(); return; }
+    const s = privScenarios[privIndex];
+    document.getElementById('priv-scenario').textContent = s.text;
+    document.getElementById('priv-progress').style.width = (privIndex / privScenarios.length * 100) + '%';
+    document.getElementById('priv-score-badge').textContent = privScore + ' / ' + privScenarios.length;
+    document.getElementById('priv-card').style.display = 'flex';
+    document.getElementById('priv-card').style.flexDirection = 'column';
+    document.getElementById('priv-card').style.alignItems = 'center';
+    document.getElementById('priv-feedback').style.display = 'none';
+    document.getElementById('priv-done').style.display = 'none';
+    privAnswered = false;
+  }
+
+  function privAnswer(choice) {
+    if (privAnswered) return;
+    privAnswered = true;
+    const s = privScenarios[privIndex];
+    const correct = choice === s.answer;
+    if (correct) privScore++;
+    document.getElementById('priv-card').style.display = 'none';
+    const fb = document.getElementById('priv-feedback');
+    document.getElementById('priv-feedback-icon').innerHTML = correct ? '&#9989; Correct!' : '&#10060; Not quite';
+    document.getElementById('priv-feedback-icon').style.color = correct ? '#27ae60' : '#e74c3c';
+    document.getElementById('priv-feedback-text').innerHTML = s.explanation;
+    fb.style.display = 'flex';
+    fb.style.flexDirection = 'column';
+    fb.style.alignItems = 'center';
+    document.getElementById('priv-score-badge').textContent = privScore + ' / ' + privScenarios.length;
+  }
+
+  function privNext() {
+    privIndex++;
+    privRender();
+  }
+
+  function privShowDone() {
+    document.getElementById('priv-card').style.display = 'none';
+    document.getElementById('priv-feedback').style.display = 'none';
+    const done = document.getElementById('priv-done');
+    done.style.display = 'block';
+    document.getElementById('priv-final-score').textContent = privScore + ' / 10';
+    const msgs = { 10:'Privacy expert! You\'re ready to lead compliance training.', 8:'Excellent — solid understanding of the Red Lines.', 6:'Good foundation. Review the Illinois compliance accordion above.', 4:'Keep learning — revisit the legal requirements before using AI with students.', 0:'Start with the Illinois Red Lines section in AI Basics above.' };
+    const key = Object.keys(msgs).reverse().find(k => privScore >= parseInt(k));
+    document.getElementById('priv-final-msg').textContent = msgs[key] || msgs[0];
+    document.getElementById('priv-progress').style.width = '100%';
+    document.getElementById('priv-score-badge').textContent = privScore + ' / 10';
+  }
+
+  function privRestart() {
+    privIndex = 0; privScore = 0; privAnswered = false;
+    document.getElementById('priv-done').style.display = 'none';
+    privRender();
+  }
+
+  document.addEventListener('DOMContentLoaded', privRender);
+
+  // ── TIME CALCULATOR ──
+  let timeChartInstance = null;
+
+  function initTimeChart() {
+    if (timeChartInstance) return;
+    const ctx = document.getElementById('timeChart');
+    if (!ctx) return;
+    timeChartInstance = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Grading & Feedback', 'Lesson Planning', 'Admin & Emails'],
+        datasets: [
+          { label: 'Current hrs/wk', data: [8, 5, 3], backgroundColor: '#9D2235', borderRadius: 4 },
+          { label: 'With AI (hrs/wk)', data: [3.4, 3.6, 1.8], backgroundColor: '#27ae60', borderRadius: 4 }
+        ]
+      },
+      options: {
+        indexAxis: 'y',
+        responsive: true,
+        plugins: { legend: { position: 'bottom', labels: { font: { family: 'Verdana', size: 11 }, boxWidth: 14 } }, tooltip: { callbacks: { label: ctx => ' ' + ctx.parsed.x.toFixed(1) + ' hrs/wk' } } },
+        scales: { x: { beginAtZero: true, max: 16, ticks: { font: { family: 'Verdana', size: 10 } }, title: { display: true, text: 'Hours per week', font: { family: 'Verdana', size: 10 } } }, y: { ticks: { font: { family: 'Verdana', size: 10 } } } }
+      }
+    });
+    updateTimeCalc();
+  }
+
+  function updateTimeCalc() {
+    const g = parseInt(document.getElementById('slider-grading').value);
+    const p = parseInt(document.getElementById('slider-planning').value);
+    const a = parseInt(document.getElementById('slider-admin').value);
+    document.getElementById('val-grading').textContent = g + ' hrs/wk';
+    document.getElementById('val-planning').textContent = p + ' hrs/wk';
+    document.getElementById('val-admin').textContent = a + ' hrs/wk';
+    const gAfter = +(g * 0.43).toFixed(1);
+    const pAfter = +(p * 0.72).toFixed(1);
+    const aAfter = +(a * 0.60).toFixed(1);
+    const saved = +((g - gAfter) + (p - pAfter) + (a - aAfter)).toFixed(1);
+    document.getElementById('time-saved-display').textContent = saved.toFixed(1);
+    const weeks = (saved * 36 / 40).toFixed(1);
+    document.getElementById('time-extra-display').innerHTML = `<strong style="color:#9D2235">${weeks} weeks</strong> reclaimed per school year<br><span style="color:#53565A;font-size:0.75rem;">That\'s ${Math.round(saved * 36 / 16)} weekends back</span>`;
+    if (timeChartInstance) {
+      timeChartInstance.data.datasets[0].data = [g, p, a];
+      timeChartInstance.data.datasets[1].data = [gAfter, pAfter, aAfter];
+      timeChartInstance.update();
+    }
+  }
+
+  // Init chart when it scrolls into view
+  const timeObserver = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) { initTimeChart(); timeObserver.disconnect(); }
+  }, { threshold: 0.3 });
+  document.addEventListener('DOMContentLoaded', () => {
+    const canvas = document.getElementById('timeChart');
+    if (canvas) timeObserver.observe(canvas);
+  });
+
+  // ── PROMPT SURGEON ──
+  const psLabels = ['Weak', 'Basic', 'Developing', 'Strong', 'Expert'];
+  const psColors = ['#e74c3c','#e67e22','#f1c40f','#2ecc71','#27ae60'];
+
+  function updatePS() {
+    const role = document.getElementById('ps-role').value.trim();
+    const topic = document.getElementById('ps-topic').value.trim();
+    const context = document.getElementById('ps-context').value.trim();
+    const format = document.getElementById('ps-format').value.trim();
+    const goal = document.getElementById('ps-goal').value.trim();
+    const filled = [role, topic, context, format, goal].filter(v => v.length > 2).length;
+    const pct = filled * 20;
+    document.getElementById('ps-meter').style.width = pct + '%';
+    const lIdx = Math.min(filled, 4);
+    document.getElementById('ps-label').textContent = psLabels[lIdx];
+    document.getElementById('ps-label').style.color = psColors[lIdx];
+    let prompt = '';
+    if (!role && !topic && !context && !format && !goal) {
+      document.getElementById('ps-output').textContent = 'Fill in the fields on the left to build your expert prompt...';
+      return;
+    }
+    if (role) prompt += role + '. ';
+    if (topic) prompt += 'Create a lesson plan ' + topic + '. ';
+    if (context) prompt += context.charAt(0).toUpperCase() + context.slice(1) + '. ';
+    if (format) prompt += 'Format: ' + format + '. ';
+    if (goal) prompt += 'Key goal: ' + goal + '.';
+    if (!prompt.trim()) prompt = 'Fill in the fields on the left...';
+    document.getElementById('ps-output').textContent = prompt.trim();
+  }
+
+  function copyPS() {
+    const text = document.getElementById('ps-output').textContent;
+    if (!text || text.includes('Fill in')) return;
+    navigator.clipboard.writeText(text).then(() => {
+      const btn = document.getElementById('ps-copy-btn');
+      btn.textContent = '✓ Copied to clipboard!';
+      btn.style.background = '#27ae60';
+      setTimeout(() => { btn.textContent = '📋 Copy Expert Prompt'; btn.style.background = '#9D2235'; }, 2000);
+    });
+  }
+
+  // ── STOPLIGHT MATCHER ──
+  let slSelected = null;
+
+  function slDragStart(e) {
+    e.dataTransfer.setData('text/plain', e.target.id);
+    e.target.style.opacity = '0.5';
+    setTimeout(() => e.target.style.opacity = '', 0);
+  }
+
+  function slDragOver(e) {
+    e.preventDefault();
+    e.currentTarget.style.background = e.currentTarget.dataset.zone === 'red' ? '#ffe4e4' : e.currentTarget.dataset.zone === 'yellow' ? '#fff8e1' : '#e8f5e9';
+  }
+
+  function slDrop(e, zone) {
+    e.preventDefault();
+    const id = e.dataTransfer.getData('text/plain');
+    const card = document.getElementById(id);
+    if (card) {
+      const zoneEl = document.getElementById('sl-zone-' + zone).querySelector('.sl-dropzone-cards');
+      zoneEl.appendChild(card);
+      card.style.cursor = 'grab';
+      card.classList.remove('sl-correct','sl-wrong');
+      card.style.border = '2px solid #ddd';
+      card.style.background = '#f7f5f5';
+    }
+    document.querySelectorAll('[id^="sl-zone-"]').forEach(z => {
+      const zn = z.dataset.zone;
+      z.style.background = zn === 'red' ? '#fff5f5' : zn === 'yellow' ? '#fffbf0' : '#f0fff4';
+    });
+    document.getElementById('sl-result').style.display = 'none';
+  }
+
+  function slTap(cardId) {
+    const card = document.getElementById(cardId);
+    if (!card) return;
+    if (slSelected === cardId) { slSelected = null; card.style.outline = ''; return; }
+    if (slSelected) document.getElementById(slSelected).style.outline = '';
+    // If it's already in a zone, allow re-selection
+    slSelected = cardId;
+    card.style.outline = '3px solid #9D2235';
+  }
+
+  function slZoneTap(zone) {
+    if (!slSelected) return;
+    const card = document.getElementById(slSelected);
+    if (!card) return;
+    const zoneEl = document.getElementById('sl-zone-' + zone).querySelector('.sl-dropzone-cards');
+    zoneEl.appendChild(card);
+    card.style.outline = '';
+    card.classList.remove('sl-correct','sl-wrong');
+    card.style.border = '2px solid #ddd';
+    card.style.background = '#f7f5f5';
+    slSelected = null;
+    document.getElementById('sl-result').style.display = 'none';
+  }
+
+  function checkStoplight() {
+    let correct = 0;
+    const zones = ['red','yellow','green'];
+    zones.forEach(zone => {
+      const cards = document.getElementById('sl-zone-' + zone).querySelectorAll('.sl-card');
+      cards.forEach(card => {
+        if (card.dataset.answer === zone) {
+          card.style.border = '2px solid #27ae60';
+          card.style.background = '#f0fff4';
+          correct++;
+        } else {
+          card.style.border = '2px solid #e74c3c';
+          card.style.background = '#fff5f5';
+        }
+      });
+    });
+    const res = document.getElementById('sl-result');
+    res.style.display = 'block';
+    res.textContent = correct + '/6 correct — ' + (correct === 6 ? 'Perfect! You\'ve mastered the Stoplight Model.' : correct >= 4 ? 'Nice work! Review the highlighted cards.' : 'Keep practicing — revisit the Stoplight section above.');
+    res.style.color = correct === 6 ? '#27ae60' : correct >= 4 ? '#e67e22' : '#e74c3c';
+  }
+
+  function resetStoplight() {
+    const pool = document.getElementById('sl-cards');
+    document.querySelectorAll('.sl-card').forEach(card => {
+      card.style.border = '2px solid #ddd';
+      card.style.background = '#f7f5f5';
+      pool.appendChild(card);
+    });
+    document.getElementById('sl-result').style.display = 'none';
+    slSelected = null;
   }
 
   // ── REGISTER ──
