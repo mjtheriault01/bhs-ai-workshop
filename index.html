@@ -2963,57 +2963,172 @@ This turns AI into a critical thinking tool about art itself.</div>
 
   document.addEventListener('DOMContentLoaded', jepBuildBoard);
 
-  // ── JEOPARDY MUSIC ──
-  let jepAudioCtx = null;
-  let jepMusicOn = false;
-  let jepMusicTimer = null;
-  let jepNoteIdx = 0;
-  // Fun game-show countdown melody (C major pentatonic loop)
-  const jepMelody = [
-    [523,160],[659,160],[784,160],[1047,320],[784,160],[659,160],
-    [523,320],[0,160],[523,160],[659,160],[523,160],[392,320],[0,320],
-    [523,160],[784,160],[659,160],[523,160],[392,160],[330,320],[0,320]
+  // ── JEOPARDY MUSIC: Thinking/Suspense Loop ──
+  // 118 BPM · 32-beat seamless loop (~16.3s) · layers build over loop
+  let jepAudioCtx = null, jepMusicOn = false, jepLoopTimer = null, jepMasterGain = null;
+
+  const _B   = 60 / 118;           // beat ≈ 0.508s
+  const _E   = _B / 2;             // eighth note
+  const _LB  = 32;                 // loop length in beats
+  const _LEN = _LB * _B;           // loop duration in seconds
+
+  // Frequencies used
+  const _f = {
+    G3:196.00, A3:220.00, C4:261.63, D4:293.66, E4:329.63, F4:349.23,
+    G4:392.00, A4:440.00, B4:493.88, C5:523.25, D5:587.33, E5:659.25,
+    G5:784.00, A5:880.00, C6:1046.50
+  };
+
+  // Marimba melody — full 32 beats [eighth_pos, freq, vel]
+  const _mel = [
+    [0,_f.G4,.72],[2,_f.B4,.58],[3,_f.D5,.70],[4,_f.C5,.62],[6,_f.A4,.66],
+    [8,_f.G4,.70],[10,_f.F4,.50],[11,_f.G4,.54],[12,_f.A4,.64],[14,_f.G4,.66],
+    [16,_f.D5,.70],[18,_f.C5,.64],[20,_f.B4,.58],[22,_f.A4,.54],
+    [24,_f.G4,.70],[26,_f.A4,.57],[28,_f.B4,.62],[29,_f.C5,.50],[30,_f.D5,.66],
+    [32,_f.E5,.76],[34,_f.D5,.63],[36,_f.C5,.60],[38,_f.B4,.57],
+    [40,_f.A4,.61],[42,_f.G4,.66],[44,_f.A4,.57],[46,_f.B4,.62],
+    [48,_f.C5,.70],[50,_f.D5,.66],[52,_f.E5,.74],[54,_f.D5,.61],
+    [56,_f.C5,.66],[58,_f.B4,.57],[60,_f.A4,.62],[62,_f.G4,.72],[63,_f.B4,.46]
   ];
 
-  function jepGetCtx() {
-    if (!jepAudioCtx) jepAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  // Counter melody — enters at beat 8 (e-pos 16)
+  const _cnt = [
+    [16,_f.G5,.32],[20,_f.E5,.28],[24,_f.D5,.32],[28,_f.E5,.28],
+    [32,_f.G5,.38],[36,_f.A5,.33],[40,_f.G5,.38],[44,_f.E5,.33],
+    [48,_f.D5,.38],[52,_f.E5,.35],[56,_f.G5,.40],[60,_f.E5,.35]
+  ];
+
+  // Bass pulse — enters at beat 16 (e-pos 32)
+  const _bas = [
+    [32,_f.G3,.50],[36,_f.C4,.46],[40,_f.D4,.50],[44,_f.G3,.46],
+    [48,_f.E4,.50],[52,_f.A3,.46],[56,_f.D4,.50],[60,_f.G3,.48]
+  ];
+
+  // High shimmer — enters at beat 24 (e-pos 48)
+  const _shi = [
+    [48,_f.G5,.24],[52,_f.A5,.20],[56,_f.G5,.24],[60,_f.C6,.22]
+  ];
+
+  function _getCtx() {
+    if (!jepAudioCtx) {
+      jepAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      jepMasterGain = jepAudioCtx.createGain();
+      jepMasterGain.connect(jepAudioCtx.destination);
+      jepMasterGain.gain.value = 0;
+    }
     return jepAudioCtx;
   }
 
-  function jepPlayTick() {
+  // Marimba: sine + harmonics, quick percussive decay
+  function _marimba(ctx, freq, t, vel) {
+    const env = ctx.createGain();
+    env.connect(jepMasterGain);
+    const dec = 0.28;
+    env.gain.setValueAtTime(0, t);
+    env.gain.linearRampToValueAtTime(vel * 0.78, t + 0.006);
+    env.gain.exponentialRampToValueAtTime(0.001, t + dec);
+    [[1,.100],[3.97,.10],[7.99,.03]].forEach(([r, g]) => {
+      const o = ctx.createOscillator(), gn = ctx.createGain();
+      o.type = 'sine'; o.frequency.value = freq * r; gn.gain.value = g;
+      o.connect(gn); gn.connect(env);
+      o.start(t); o.stop(t + dec + 0.04);
+    });
+  }
+
+  // Woodblock tick: bandpass-filtered square, very short
+  function _woodblock(ctx, t, accent) {
+    const flt = ctx.createBiquadFilter();
+    flt.type = 'bandpass'; flt.frequency.value = accent ? 900 : 680; flt.Q.value = 12;
+    flt.connect(jepMasterGain);
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'square'; o.frequency.value = accent ? 860 : 660;
+    o.connect(g); g.connect(flt);
+    const v = accent ? 0.46 : 0.24;
+    g.gain.setValueAtTime(v, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + (accent ? 0.052 : 0.035));
+    o.start(t); o.stop(t + 0.07);
+  }
+
+  // Light off-beat tick (clock feel)
+  function _tick(ctx, t) {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'sine'; o.frequency.value = 1300;
+    o.connect(g); g.connect(jepMasterGain);
+    g.gain.setValueAtTime(0.055, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.022);
+    o.start(t); o.stop(t + 0.03);
+  }
+
+  // Bass sine pulse
+  function _bass(ctx, freq, t, vel) {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'sine'; o.frequency.value = freq;
+    o.connect(g); g.connect(jepMasterGain);
+    g.gain.setValueAtTime(vel * 0.50, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.20);
+    o.start(t); o.stop(t + 0.25);
+  }
+
+  // Triangle shimmer
+  function _shimmer(ctx, freq, t, vel) {
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'triangle'; o.frequency.value = freq;
+    o.connect(g); g.connect(jepMasterGain);
+    g.gain.setValueAtTime(vel * 0.30, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + 0.42);
+    o.start(t); o.stop(t + 0.48);
+  }
+
+  function _scheduleLoop(startTime) {
     if (!jepMusicOn) return;
-    const ctx = jepGetCtx();
-    const [freq, dur] = jepMelody[jepNoteIdx % jepMelody.length];
-    jepNoteIdx++;
-    if (freq > 0) {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.connect(gain); gain.connect(ctx.destination);
-      osc.type = 'triangle';
-      osc.frequency.value = freq;
-      gain.gain.setValueAtTime(0.12, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + dur / 1000 * 0.85);
-      osc.start(ctx.currentTime);
-      osc.stop(ctx.currentTime + dur / 1000);
+    const ctx = _getCtx();
+
+    // Gain builds from 0.62 → 1.0 across the loop (the "grow" effect)
+    jepMasterGain.gain.cancelScheduledValues(startTime);
+    jepMasterGain.gain.setValueAtTime(0.62, startTime);
+    jepMasterGain.gain.linearRampToValueAtTime(1.0, startTime + _LEN - _B);
+
+    // Woodblock on every beat; accent on bar downbeats (every 4 beats = e-pos % 8 === 0)
+    for (let e = 0; e < _LB * 2; e += 2) {
+      _woodblock(ctx, startTime + e * _E, e % 8 === 0);
     }
-    jepMusicTimer = setTimeout(jepPlayTick, dur);
+    // Light ticking click on every off-eighth (the "clock" feel)
+    for (let e = 1; e < _LB * 2; e += 2) {
+      _tick(ctx, startTime + e * _E);
+    }
+
+    // Marimba melody (all 32 beats)
+    _mel.forEach(([ep, fr, v]) => _marimba(ctx, fr, startTime + ep * _E, v));
+    // Counter melody (from beat 8)
+    _cnt.forEach(([ep, fr, v]) => _marimba(ctx, fr, startTime + ep * _E, v));
+    // Bass (from beat 16)
+    _bas.forEach(([ep, fr, v]) => _bass(ctx, fr, startTime + ep * _E, v));
+    // Shimmer (from beat 24)
+    _shi.forEach(([ep, fr, v]) => _shimmer(ctx, fr, startTime + ep * _E, v));
+
+    // Re-schedule 150ms before loop ends for seamless transition
+    jepLoopTimer = setTimeout(
+      () => _scheduleLoop(startTime + _LEN),
+      (_LEN - 0.15) * 1000
+    );
   }
 
   function jepToggleMusic() {
     const btn = document.getElementById('jep-music-btn');
     if (jepMusicOn) {
       jepMusicOn = false;
-      clearTimeout(jepMusicTimer);
-      btn.textContent = '\uD83D\uDD07 Music Off';
-      btn.style.borderColor = '#FFC72C';
-      btn.style.color = '#FFC72C';
+      clearTimeout(jepLoopTimer);
+      if (jepMasterGain) {
+        jepMasterGain.gain.cancelScheduledValues(jepAudioCtx.currentTime);
+        jepMasterGain.gain.setTargetAtTime(0, jepAudioCtx.currentTime, 0.12);
+      }
+      btn.innerHTML = '&#128263; Music Off';
+      btn.style.borderColor = '#FFC72C'; btn.style.color = '#FFC72C';
     } else {
       jepMusicOn = true;
-      jepNoteIdx = 0;
-      jepGetCtx().resume().then(jepPlayTick);
-      btn.textContent = '\uD83D\uDD0A Music On';
-      btn.style.borderColor = '#4ade80';
-      btn.style.color = '#4ade80';
+      _getCtx().resume().then(() => _scheduleLoop(_getCtx().currentTime + 0.08));
+      btn.innerHTML = '&#128266; Music On';
+      btn.style.borderColor = '#4ade80'; btn.style.color = '#4ade80';
     }
   }
 
