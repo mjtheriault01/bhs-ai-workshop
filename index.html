@@ -778,8 +778,6 @@
     }
     .feedback-bg h2 { font-size: 1.7rem; margin-bottom: 10px; }
     .feedback-bg > p { font-size: 0.95rem; opacity: 0.9; max-width: 500px; margin: 0 auto 36px; line-height: 1.75; }
-    .feedback-modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.72); z-index: 4000; align-items: center; justify-content: center; }
-    .feedback-modal-overlay.open { display: flex; }
 
     /* ─── FOOTER ─── */
     footer {
@@ -2059,35 +2057,12 @@
 </section>
 
 <!-- ─── FEEDBACK ─── -->
-<section id="feedback" class="feedback-bg">
-  <h2>&#128172; Share Your Feedback</h2>
-  <p>Tell us what you learned, what you'll try first, and what would make this even better. Your input shapes the next session.</p>
-  <button onclick="openFeedbackModal()" style="display:inline-block;padding:16px 40px;background:#FFC72C;color:#1a1a1a;border:none;border-radius:8px;font-family:Verdana,sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">Give Feedback &#8594;</button>
+<section id="feedback" style="background:linear-gradient(135deg,#7a1a28,#9D2235);color:#fff;text-align:center;padding:72px 24px;">
+  <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#FFC72C;margin-bottom:14px;">&#128172; End of Day</div>
+  <h2 style="font-size:1.7rem;font-weight:700;margin-bottom:12px;">Share Your Feedback</h2>
+  <p style="font-size:0.95rem;opacity:0.9;max-width:500px;margin:0 auto 36px;line-height:1.75;">Tell us what you learned, what you'll try first, and what would make this even better. Takes about 3 minutes.</p>
+  <a href="feedback-form.html" target="_blank" style="display:inline-block;padding:16px 44px;background:#FFC72C;color:#1a1a1a;border-radius:8px;font-family:Verdana,sans-serif;font-size:1rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">Give Feedback &#8594;</a>
 </section>
-
-<!-- Feedback Modal -->
-<div id="feedback-modal" class="feedback-modal-overlay" onclick="if(event.target===this)closeFeedbackModal()">
-  <div style="background:#fff;border-radius:16px;overflow:hidden;max-width:680px;width:92%;max-height:90vh;display:flex;flex-direction:column;box-shadow:0 20px 60px rgba(0,0,0,0.4);">
-    <div style="background:#9D2235;color:#fff;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
-      <div>
-        <div style="font-size:1rem;font-weight:700;">BHS AI Institute Day — Feedback</div>
-        <div style="font-size:0.75rem;opacity:0.85;margin-top:2px;">April 6, 2026 &nbsp;|&nbsp; Batavia High School</div>
-      </div>
-      <button onclick="closeFeedbackModal()" style="background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;line-height:1;padding:0 4px;">&times;</button>
-    </div>
-    <div style="padding:28px;flex:1;overflow-y:auto;text-align:center;">
-      <p style="font-size:0.9rem;color:#53565A;margin-bottom:20px;">The Google Form will appear below once you add your link.</p>
-      <!-- ── REPLACE THE src BELOW WITH YOUR GOOGLE FORM EMBED URL ── -->
-      <iframe id="feedback-iframe"
-        src="PASTE_YOUR_GOOGLE_FORM_EMBED_URL_HERE"
-        style="width:100%;height:520px;border:none;border-radius:8px;"
-        loading="lazy"
-        title="Feedback Form">
-      </iframe>
-      <p style="font-size:0.75rem;color:#aaa;margin-top:12px;">To add your form: in Google Forms click Send → Embed → copy the URL from the src= attribute and paste it into index.html.</p>
-    </div>
-  </div>
-</div>
 
 <!-- FOOTER -->
 <footer>
@@ -3146,15 +3121,6 @@ This turns AI into a critical thinking tool about art itself.</div>
     }
   }
 
-  // ── FEEDBACK MODAL ──
-  function openFeedbackModal() {
-    document.getElementById('feedback-modal').classList.add('open');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeFeedbackModal() {
-    document.getElementById('feedback-modal').classList.remove('open');
-    document.body.style.overflow = '';
-  }
 </script>
 
 </body>
