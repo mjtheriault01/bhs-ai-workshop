@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BHS AI Institute Day — Feedback</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            bps: { red: '#9D2235', gold: '#FFC72C', grey: '#53565A' }
+          },
+          fontFamily: { sans: ['Verdana', 'Geneva', 'Tahoma', 'sans-serif'] }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: Verdana, Geneva, Tahoma, sans-serif; }
+
+    /* Star / scale button active state */
+    .scale-btn { transition: all 0.15s; }
+    .scale-btn.active-red    { background: #9D2235; color: #fff; border-color: #9D2235; }
+    .scale-btn.active-amber  { background: #FFC72C; color: #1a1a1a; border-color: #FFC72C; }
+    .scale-btn.active-green  { background: #4ade80; color: #14532d; border-color: #4ade80; }
+
+    /* Recommend bar buttons */
+    .rec-btn { transition: all 0.15s; }
+    .rec-btn.selected { background: #FFC72C; color: #1a1a1a; border-color: #FFC72C; font-weight: 700; }
+
+    /* Smooth fade for thank-you */
+    #thank-you { opacity: 0; transition: opacity 0.6s ease; }
+    #thank-you.visible { opacity: 1; }
+  </style>
+</head>
+<body class="bg-slate-900 min-h-screen text-white">
+
+  <!-- Header -->
+  <div class="bg-gradient-to-r from-slate-950 to-slate-900 border-b border-amber-400/30 px-6 py-5 text-center">
+    <div class="text-amber-400 text-xs font-bold tracking-widest uppercase mb-1">Batavia High School &nbsp;|&nbsp; April 6, 2026</div>
+    <h1 class="text-2xl font-bold text-white mb-1">AI Institute Day — Feedback</h1>
+    <p class="text-slate-400 text-sm">Always Learning, Always Growing&#8482;</p>
+  </div>
+
+  <!-- Form -->
+  <form id="feedback-form" class="max-w-2xl mx-auto px-5 py-10 space-y-10" novalidate>
+
+    <!-- Name + Email -->
+    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 space-y-4">
+      <h2 class="text-amber-400 font-bold text-sm uppercase tracking-widest mb-2">Your Info</h2>
+      <div>
+        <label class="block text-slate-300 text-sm font-bold mb-1" for="name">Full Name <span class="text-red-400">*</span></label>
+        <input id="name" name="name" type="text" required placeholder="e.g. Jane Smith"
+          class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-amber-400 transition" />
+      </div>
+      <div>
+        <label class="block text-slate-300 text-sm font-bold mb-1" for="email">BPS101 Email <span class="text-red-400">*</span></label>
+        <input id="email" name="email" type="email" required placeholder="you@bps101.net"
+          class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-amber-400 transition" />
+      </div>
+    </div>
+
+    <!-- Section 1: The Aha Factor -->
+    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 space-y-8">
+      <div>
+        <div class="text-amber-400 font-bold text-xs uppercase tracking-widest mb-1">Section 1</div>
+        <h2 class="text-white font-bold text-xl">The Aha Factor</h2>
+        <p class="text-slate-400 text-sm mt-1">Rate your agreement — 1 = Strongly Disagree &nbsp;·&nbsp; 5 = Strongly Agree</p>
+      </div>
+
+      <!-- Q1: Confidence -->
+      <div>
+        <label class="block text-slate-200 text-sm font-bold mb-3">
+          Confidence
+          <span class="block font-normal text-slate-400 mt-1">I feel more confident using AI to enhance my teaching while protecting student privacy.</span>
+        </label>
+        <div class="flex gap-2 flex-wrap" data-group="confidence">
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="1" onclick="selectScale(this,'confidence',1)">1</button>
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="2" onclick="selectScale(this,'confidence',2)">2</button>
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="3" onclick="selectScale(this,'confidence',3)">3</button>
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="4" onclick="selectScale(this,'confidence',4)">4</button>
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="5" onclick="selectScale(this,'confidence',5)">5</button>
+          <span id="confidence-label" class="self-center text-xs text-slate-500 italic ml-1"></span>
+        </div>
+        <input type="hidden" id="val-confidence" name="confidence" />
+      </div>
+
+      <!-- Q2: Gift of Time -->
+      <div>
+        <label class="block text-slate-200 text-sm font-bold mb-3">
+          Gift of Time
+          <span class="block font-normal text-slate-400 mt-1">I identified at least one AI workflow today that will save me 2+ hours of work per week.</span>
+        </label>
+        <div class="flex gap-2 flex-wrap" data-group="gift">
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="1" onclick="selectScale(this,'gift',1)">1</button>
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="2" onclick="selectScale(this,'gift',2)">2</button>
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="3" onclick="selectScale(this,'gift',3)">3</button>
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="4" onclick="selectScale(this,'gift',4)">4</button>
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="5" onclick="selectScale(this,'gift',5)">5</button>
+          <span id="gift-label" class="self-center text-xs text-slate-500 italic ml-1"></span>
+        </div>
+        <input type="hidden" id="val-gift" name="gift" />
+      </div>
+
+      <!-- Q3: Stoplight Model -->
+      <div>
+        <label class="block text-slate-200 text-sm font-bold mb-3">
+          Stoplight Model
+          <span class="block font-normal text-slate-400 mt-1">The Red/Yellow/Green framework is a clear and practical tool I can use in my classroom immediately.</span>
+        </label>
+        <div class="flex gap-2 flex-wrap" data-group="stoplight">
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="1" onclick="selectScale(this,'stoplight',1)">1</button>
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="2" onclick="selectScale(this,'stoplight',2)">2</button>
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="3" onclick="selectScale(this,'stoplight',3)">3</button>
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="4" onclick="selectScale(this,'stoplight',4)">4</button>
+          <button type="button" class="scale-btn w-12 h-12 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-sm" data-val="5" onclick="selectScale(this,'stoplight',5)">5</button>
+          <span id="stoplight-label" class="self-center text-xs text-slate-500 italic ml-1"></span>
+        </div>
+        <input type="hidden" id="val-stoplight" name="stoplight" />
+      </div>
+    </div>
+
+    <!-- Section 2: The Practical Win -->
+    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 space-y-6">
+      <div>
+        <div class="text-amber-400 font-bold text-xs uppercase tracking-widest mb-1">Section 2</div>
+        <h2 class="text-white font-bold text-xl">The Practical Win</h2>
+      </div>
+
+      <!-- The Creation -->
+      <div>
+        <label class="block text-slate-200 text-sm font-bold mb-1" for="creation">
+          The Creation <span class="text-red-400">*</span>
+          <span class="block font-normal text-slate-400 mt-1">What is one Yellow Light or Green Light assignment you drafted or imagined today?</span>
+        </label>
+        <textarea id="creation" name="creation" required rows="4" placeholder="e.g. I want to have students use AI to generate counterarguments for a debate unit, then write their own rebuttals..."
+          class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-amber-400 transition resize-y"></textarea>
+      </div>
+
+      <!-- The Value -->
+      <div>
+        <label class="block text-slate-200 text-sm font-bold mb-1" for="value">
+          The Value <span class="text-red-400">*</span>
+          <span class="block font-normal text-slate-400 mt-1">What was the most useful part of this training for you personally?</span>
+        </label>
+        <textarea id="value" name="value" required rows="4" placeholder="e.g. The Stoplight Model gave me a framework I can actually explain to students and parents..."
+          class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-amber-400 transition resize-y"></textarea>
+      </div>
+    </div>
+
+    <!-- Section 3: The Shout-Out (optional) -->
+    <div class="bg-slate-800 rounded-xl p-6 border border-slate-700 space-y-6">
+      <div>
+        <div class="text-amber-400 font-bold text-xs uppercase tracking-widest mb-1">Section 3 &nbsp;&#183;&nbsp; Optional</div>
+        <h2 class="text-white font-bold text-xl">The Shout-Out</h2>
+      </div>
+
+      <!-- Recommend scale 1-10 -->
+      <div>
+        <label class="block text-slate-200 text-sm font-bold mb-3">
+          How likely are you to recommend this type of AI training to a colleague?
+          <span class="block font-normal text-slate-400 mt-1">1 = Not at all likely &nbsp;·&nbsp; 10 = Absolutely would</span>
+        </label>
+        <div class="flex gap-2 flex-wrap">
+          <script>
+            document.write([1,2,3,4,5,6,7,8,9,10].map(n =>
+              `<button type="button" class="rec-btn w-10 h-10 rounded-lg border-2 border-slate-600 bg-slate-700 text-white font-bold text-xs" data-val="${n}" onclick="selectRec(this,${n})">${n}</button>`
+            ).join(''));
+          </script>
+          <span id="rec-label" class="self-center text-xs text-slate-500 italic ml-1"></span>
+        </div>
+        <input type="hidden" id="val-recommend" name="recommend" />
+      </div>
+
+      <!-- Testimonial -->
+      <div>
+        <label class="block text-slate-200 text-sm font-bold mb-1" for="testimonial">
+          Testimonial
+          <span class="block font-normal text-slate-400 mt-1">Anything you'd want to share about today — a quote, a reaction, a moment that stuck with you.</span>
+        </label>
+        <textarea id="testimonial" name="testimonial" rows="4" placeholder="e.g. I finally feel like AI is something I can actually use without feeling overwhelmed..."
+          class="w-full bg-slate-700 border border-slate-600 rounded-lg px-4 py-3 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-amber-400 transition resize-y"></textarea>
+      </div>
+    </div>
+
+    <!-- Error message -->
+    <div id="form-error" class="hidden bg-red-900/50 border border-red-500 text-red-300 rounded-lg px-5 py-4 text-sm"></div>
+
+    <!-- Submit -->
+    <button type="submit" id="submit-btn"
+      class="w-full py-4 bg-amber-400 hover:bg-amber-300 text-slate-900 font-bold text-base rounded-xl transition-all shadow-lg shadow-amber-400/20">
+      Submit Feedback &#8594;
+    </button>
+
+  </form>
+
+  <!-- Thank You Screen (hidden until submit) -->
+  <div id="thank-you" class="hidden max-w-2xl mx-auto px-5 py-20 text-center">
+    <div class="text-6xl mb-6">&#127881;</div>
+    <h2 class="text-3xl font-bold text-amber-400 mb-4">Thank You!</h2>
+    <p class="text-slate-300 text-lg leading-relaxed mb-8">
+      Good luck implementing what you learned today.<br />
+      <span class="text-amber-400 font-bold">Enhance, not replace.</span>
+    </p>
+    <div class="bg-slate-800 rounded-xl p-6 border border-amber-400/30 text-slate-400 text-sm">
+      <p class="font-bold text-white mb-2">BHS AI Institute Day &nbsp;&#183;&nbsp; April 6, 2026</p>
+      <p>Always Learning, Always Growing&#8482; &nbsp;&#183;&nbsp; Batavia Public School District 101</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="border-t border-slate-800 mt-10 py-6 text-center text-slate-600 text-xs">
+    Batavia High School &nbsp;&#183;&nbsp; BPS101.net &nbsp;&#183;&nbsp; &copy; 2026
+  </div>
+
+<script>
+  // ── SCALE LABELS ──
+  const scaleLabels = ['','Strongly Disagree','Disagree','Neutral','Agree','Strongly Agree'];
+  const recLabels   = {1:'Not at all',5:'Neutral',10:'Absolutely!'};
+
+  function selectScale(btn, group, val) {
+    document.querySelectorAll(`[data-group="${group}"] .scale-btn`).forEach(b => {
+      b.classList.remove('active-red','active-amber','active-green');
+    });
+    const cls = val <= 2 ? 'active-red' : val === 3 ? 'active-amber' : 'active-green';
+    btn.classList.add(cls);
+    document.getElementById('val-' + group).value = val;
+    document.getElementById(group + '-label').textContent = scaleLabels[val];
+  }
+
+  function selectRec(btn, val) {
+    document.querySelectorAll('.rec-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('val-recommend').value = val;
+    const label = document.getElementById('rec-label');
+    label.textContent = val <= 3 ? 'Not likely' : val <= 6 ? 'Somewhat likely' : val <= 8 ? 'Very likely' : 'Absolutely!';
+  }
+
+  // ── SUBMIT ──
+  const APPS_SCRIPT_URL = 'YOUR_APPS_SCRIPT_URL';
+
+  document.getElementById('feedback-form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    const errEl = document.getElementById('form-error');
+    errEl.classList.add('hidden');
+
+    // Validate required fields
+    const name       = document.getElementById('name').value.trim();
+    const email      = document.getElementById('email').value.trim();
+    const confidence = document.getElementById('val-confidence').value;
+    const gift       = document.getElementById('val-gift').value;
+    const stoplight  = document.getElementById('val-stoplight').value;
+    const creation   = document.getElementById('creation').value.trim();
+    const value      = document.getElementById('value').value.trim();
+
+    const missing = [];
+    if (!name)       missing.push('Full Name');
+    if (!email)      missing.push('BPS101 Email');
+    if (!confidence) missing.push('Confidence rating (Section 1)');
+    if (!gift)       missing.push('Gift of Time rating (Section 1)');
+    if (!stoplight)  missing.push('Stoplight Model rating (Section 1)');
+    if (!creation)   missing.push('The Creation (Section 2)');
+    if (!value)      missing.push('The Value (Section 2)');
+
+    if (missing.length) {
+      errEl.textContent = 'Please complete: ' + missing.join(', ') + '.';
+      errEl.classList.remove('hidden');
+      errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    const btn = document.getElementById('submit-btn');
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+
+    const payload = {
+      name, email,
+      confidence, gift, stoplight,
+      creation, value,
+      recommend:    document.getElementById('val-recommend').value || 'Not answered',
+      testimonial:  document.getElementById('testimonial').value.trim() || 'Not answered',
+      timestamp:    new Date().toISOString()
+    };
+
+    try {
+      await fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+    } catch (err) {
+      // no-cors mode doesn't return a readable response — treat as success
+    }
+
+    // Show thank you
+    document.getElementById('feedback-form').classList.add('hidden');
+    const ty = document.getElementById('thank-you');
+    ty.classList.remove('hidden');
+    requestAnimationFrame(() => requestAnimationFrame(() => ty.classList.add('visible')));
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+</body>
+</html>
