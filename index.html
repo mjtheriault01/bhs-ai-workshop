@@ -969,6 +969,17 @@
   </div>
 </div>
 
+<!-- ─── HERO VIDEO ─── -->
+<section id="hero-video" style="background:#1a1a1a;padding:48px 24px;">
+  <div style="max-width:860px;margin:0 auto;">
+    <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#FFC72C;text-align:center;margin-bottom:14px;">&#127916; Welcome to the Day</div>
+    <video controls preload="metadata" style="width:100%;border-radius:12px;background:#000;display:block;box-shadow:0 8px 40px rgba(0,0,0,0.5);">
+      <source src="https://res.cloudinary.com/dikkdclum/video/upload/v1774533840/AI_Hero_Video_aaylsj.mp4" type="video/mp4">
+      Your browser does not support video playback.
+    </video>
+  </div>
+</section>
+
 <!-- ─── AI BASICS (ACCORDION) ─── -->
 <section id="ai-basics" style="background:#fff;">
   <div class="section">
@@ -2102,6 +2113,12 @@
         <p>Voice type directly into a doc and paste the transcript into any AI tool. Also integrates with Gemini natively.</p>
         <div class="click-hint">Tap to learn more &#8594;</div>
       </div>
+      <div class="tool-card" onclick="openModal('tool-gslides')">
+        <div class="tool-icon">&#127912;</div>
+        <h3>Google Slides</h3>
+        <p>Add images with a prompt, auto-beautify layouts, and adjust designs instantly — AI makes presentation creation dramatically faster.</p>
+        <div class="click-hint">Tap to learn more &#8594;</div>
+      </div>
     </div>
   </div>
 </section>
@@ -2504,6 +2521,18 @@ This turns AI into a critical thinking tool about art itself.</div>
       <li>Now make your request — the AI has full context and responds like it knows your class</li>
     </ol>
     <p style="font-size:0.88rem;line-height:1.75;color:#333;margin-top:12px;"><strong>Alternative:</strong> Use Google Docs voice typing (Tools → Voice Typing), talk your thoughts, then paste the transcript into any AI tool.</p>
+  </div>
+</div>
+
+<!-- TOOL: Google Slides -->
+<div class="modal-overlay" id="modal-tool-gslides">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('tool-gslides')">&times;</button>
+    <h3>&#127912; Google Slides — AI-Powered Presentations</h3>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;margin-bottom:14px;"><strong>Add images instantly:</strong> In any slide, click Insert → Image → "Generate image with Gemini." Describe what you want and Gemini creates it directly in your slide — no switching tools, no downloading files.</p>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;margin-bottom:14px;"><strong>Beautify &amp; adjust layouts:</strong> Click the Gemini icon (&#10024;) in Slides to instantly restyle a slide, rewrite bullet points, suggest a better layout, or reformat an entire deck to match a theme — in seconds.</p>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;margin-bottom:14px;"><strong>Speed build slide decks:</strong> Start with a prompt like "Create a 5-slide lesson intro on the American Revolution for 10th grade" and Gemini will generate a full draft with titles, content, and suggested visuals.</p>
+    <p style="font-size:0.88rem;line-height:1.75;color:#333;"><strong>Great for:</strong> Building differentiated review slides quickly, creating visual warm-ups, or having students design AI-assisted presentations where they provide all the intellectual content and AI handles formatting.</p>
   </div>
 </div>
 
@@ -3105,172 +3134,22 @@ This turns AI into a critical thinking tool about art itself.</div>
 
   document.addEventListener('DOMContentLoaded', jepBuildBoard);
 
-  // ── JEOPARDY MUSIC: Thinking/Suspense Loop ──
-  // 118 BPM · 32-beat seamless loop (~16.3s) · layers build over loop
-  let jepAudioCtx = null, jepMusicOn = false, jepLoopTimer = null, jepMasterGain = null;
-
-  const _B   = 60 / 118;           // beat ≈ 0.508s
-  const _E   = _B / 2;             // eighth note
-  const _LB  = 32;                 // loop length in beats
-  const _LEN = _LB * _B;           // loop duration in seconds
-
-  // Frequencies used
-  const _f = {
-    G3:196.00, A3:220.00, C4:261.63, D4:293.66, E4:329.63, F4:349.23,
-    G4:392.00, A4:440.00, B4:493.88, C5:523.25, D5:587.33, E5:659.25,
-    G5:784.00, A5:880.00, C6:1046.50
-  };
-
-  // Marimba melody — full 32 beats [eighth_pos, freq, vel]
-  const _mel = [
-    [0,_f.G4,.72],[2,_f.B4,.58],[3,_f.D5,.70],[4,_f.C5,.62],[6,_f.A4,.66],
-    [8,_f.G4,.70],[10,_f.F4,.50],[11,_f.G4,.54],[12,_f.A4,.64],[14,_f.G4,.66],
-    [16,_f.D5,.70],[18,_f.C5,.64],[20,_f.B4,.58],[22,_f.A4,.54],
-    [24,_f.G4,.70],[26,_f.A4,.57],[28,_f.B4,.62],[29,_f.C5,.50],[30,_f.D5,.66],
-    [32,_f.E5,.76],[34,_f.D5,.63],[36,_f.C5,.60],[38,_f.B4,.57],
-    [40,_f.A4,.61],[42,_f.G4,.66],[44,_f.A4,.57],[46,_f.B4,.62],
-    [48,_f.C5,.70],[50,_f.D5,.66],[52,_f.E5,.74],[54,_f.D5,.61],
-    [56,_f.C5,.66],[58,_f.B4,.57],[60,_f.A4,.62],[62,_f.G4,.72],[63,_f.B4,.46]
-  ];
-
-  // Counter melody — enters at beat 8 (e-pos 16)
-  const _cnt = [
-    [16,_f.G5,.32],[20,_f.E5,.28],[24,_f.D5,.32],[28,_f.E5,.28],
-    [32,_f.G5,.38],[36,_f.A5,.33],[40,_f.G5,.38],[44,_f.E5,.33],
-    [48,_f.D5,.38],[52,_f.E5,.35],[56,_f.G5,.40],[60,_f.E5,.35]
-  ];
-
-  // Bass pulse — enters at beat 16 (e-pos 32)
-  const _bas = [
-    [32,_f.G3,.50],[36,_f.C4,.46],[40,_f.D4,.50],[44,_f.G3,.46],
-    [48,_f.E4,.50],[52,_f.A3,.46],[56,_f.D4,.50],[60,_f.G3,.48]
-  ];
-
-  // High shimmer — enters at beat 24 (e-pos 48)
-  const _shi = [
-    [48,_f.G5,.24],[52,_f.A5,.20],[56,_f.G5,.24],[60,_f.C6,.22]
-  ];
-
-  function _getCtx() {
-    if (!jepAudioCtx) {
-      jepAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      jepMasterGain = jepAudioCtx.createGain();
-      jepMasterGain.connect(jepAudioCtx.destination);
-      jepMasterGain.gain.value = 0;
-    }
-    return jepAudioCtx;
-  }
-
-  // Marimba: sine + harmonics, quick percussive decay
-  function _marimba(ctx, freq, t, vel) {
-    const env = ctx.createGain();
-    env.connect(jepMasterGain);
-    const dec = 0.28;
-    env.gain.setValueAtTime(0, t);
-    env.gain.linearRampToValueAtTime(vel * 0.78, t + 0.006);
-    env.gain.exponentialRampToValueAtTime(0.001, t + dec);
-    [[1,.100],[3.97,.10],[7.99,.03]].forEach(([r, g]) => {
-      const o = ctx.createOscillator(), gn = ctx.createGain();
-      o.type = 'sine'; o.frequency.value = freq * r; gn.gain.value = g;
-      o.connect(gn); gn.connect(env);
-      o.start(t); o.stop(t + dec + 0.04);
-    });
-  }
-
-  // Woodblock tick: bandpass-filtered square, very short
-  function _woodblock(ctx, t, accent) {
-    const flt = ctx.createBiquadFilter();
-    flt.type = 'bandpass'; flt.frequency.value = accent ? 900 : 680; flt.Q.value = 12;
-    flt.connect(jepMasterGain);
-    const o = ctx.createOscillator(), g = ctx.createGain();
-    o.type = 'square'; o.frequency.value = accent ? 860 : 660;
-    o.connect(g); g.connect(flt);
-    const v = accent ? 0.46 : 0.24;
-    g.gain.setValueAtTime(v, t);
-    g.gain.exponentialRampToValueAtTime(0.001, t + (accent ? 0.052 : 0.035));
-    o.start(t); o.stop(t + 0.07);
-  }
-
-  // Light off-beat tick (clock feel)
-  function _tick(ctx, t) {
-    const o = ctx.createOscillator(), g = ctx.createGain();
-    o.type = 'sine'; o.frequency.value = 1300;
-    o.connect(g); g.connect(jepMasterGain);
-    g.gain.setValueAtTime(0.055, t);
-    g.gain.exponentialRampToValueAtTime(0.001, t + 0.022);
-    o.start(t); o.stop(t + 0.03);
-  }
-
-  // Bass sine pulse
-  function _bass(ctx, freq, t, vel) {
-    const o = ctx.createOscillator(), g = ctx.createGain();
-    o.type = 'sine'; o.frequency.value = freq;
-    o.connect(g); g.connect(jepMasterGain);
-    g.gain.setValueAtTime(vel * 0.50, t);
-    g.gain.exponentialRampToValueAtTime(0.001, t + 0.20);
-    o.start(t); o.stop(t + 0.25);
-  }
-
-  // Triangle shimmer
-  function _shimmer(ctx, freq, t, vel) {
-    const o = ctx.createOscillator(), g = ctx.createGain();
-    o.type = 'triangle'; o.frequency.value = freq;
-    o.connect(g); g.connect(jepMasterGain);
-    g.gain.setValueAtTime(vel * 0.30, t);
-    g.gain.exponentialRampToValueAtTime(0.001, t + 0.42);
-    o.start(t); o.stop(t + 0.48);
-  }
-
-  function _scheduleLoop(startTime) {
-    if (!jepMusicOn) return;
-    const ctx = _getCtx();
-
-    // Gain builds from 0.62 → 1.0 across the loop (the "grow" effect)
-    jepMasterGain.gain.cancelScheduledValues(startTime);
-    jepMasterGain.gain.setValueAtTime(0.62, startTime);
-    jepMasterGain.gain.linearRampToValueAtTime(1.0, startTime + _LEN - _B);
-
-    // Woodblock on every beat; accent on bar downbeats (every 4 beats = e-pos % 8 === 0)
-    for (let e = 0; e < _LB * 2; e += 2) {
-      _woodblock(ctx, startTime + e * _E, e % 8 === 0);
-    }
-    // Light ticking click on every off-eighth (the "clock" feel)
-    for (let e = 1; e < _LB * 2; e += 2) {
-      _tick(ctx, startTime + e * _E);
-    }
-
-    // Marimba melody (all 32 beats)
-    _mel.forEach(([ep, fr, v]) => _marimba(ctx, fr, startTime + ep * _E, v));
-    // Counter melody (from beat 8)
-    _cnt.forEach(([ep, fr, v]) => _marimba(ctx, fr, startTime + ep * _E, v));
-    // Bass (from beat 16)
-    _bas.forEach(([ep, fr, v]) => _bass(ctx, fr, startTime + ep * _E, v));
-    // Shimmer (from beat 24)
-    _shi.forEach(([ep, fr, v]) => _shimmer(ctx, fr, startTime + ep * _E, v));
-
-    // Re-schedule 150ms before loop ends for seamless transition
-    jepLoopTimer = setTimeout(
-      () => _scheduleLoop(startTime + _LEN),
-      (_LEN - 0.15) * 1000
-    );
-  }
+  // ── JEOPARDY MUSIC ──
+  const _jepAudio = new Audio('https://res.cloudinary.com/dikkdclum/video/upload/v1774533548/The_Podium_Edge_snrzve.mp3');
+  _jepAudio.loop = true;
+  _jepAudio.volume = 0.6;
 
   function jepToggleMusic() {
     const btn = document.getElementById('jep-music-btn');
-    if (jepMusicOn) {
-      jepMusicOn = false;
-      clearTimeout(jepLoopTimer);
-      if (jepMasterGain) {
-        jepMasterGain.gain.cancelScheduledValues(jepAudioCtx.currentTime);
-        jepMasterGain.gain.setTargetAtTime(0, jepAudioCtx.currentTime, 0.12);
-      }
-      btn.innerHTML = '&#128263; Music Off';
-      btn.style.borderColor = '#FFC72C'; btn.style.color = '#FFC72C';
-    } else {
-      jepMusicOn = true;
-      _getCtx().resume().then(() => _scheduleLoop(_getCtx().currentTime + 0.08));
+    if (_jepAudio.paused) {
+      _jepAudio.play();
       btn.innerHTML = '&#128266; Music On';
       btn.style.borderColor = '#4ade80'; btn.style.color = '#4ade80';
+    } else {
+      _jepAudio.pause();
+      _jepAudio.currentTime = 0;
+      btn.innerHTML = '&#128263; Music Off';
+      btn.style.borderColor = '#FFC72C'; btn.style.color = '#FFC72C';
     }
   }
 
