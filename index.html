@@ -1095,6 +1095,8 @@
         <button class="tab-btn" onclick="switchTab(this,'arts')">&#127912; Fine Arts</button>
         <button class="tab-btn" onclick="switchTab(this,'pe')">&#127936; PE / Health</button>
         <button class="tab-btn" onclick="switchTab(this,'cte')">&#128188; CTE / INCubatorEdu</button>
+        <button class="tab-btn" onclick="switchTab(this,'wl')">&#127760; World Language</button>
+        <button class="tab-btn" onclick="switchTab(this,'trades')">&#128295; Skilled Trades</button>
       </div>
 
       <!-- ELA -->
@@ -1261,6 +1263,54 @@
             <h3>Decision-Twin Market Simulation</h3>
             <p>Students describe their business model to AI and ask it to simulate how different market segments would react — identifying decision errors and refining strategies iteratively. Mirrors real-world business intelligence workflows.</p>
             <button class="btn-red" onclick="openModal('cte3')">&#128196; See the Prompt</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- WORLD LANGUAGE -->
+      <div class="tab-pane" id="tab-wl">
+        <div class="tier-grid">
+          <div class="tier-card">
+            <span class="tier-badge easy">&#9889; Quick Win</span>
+            <h3>AI Conversation Partner</h3>
+            <p>Ask AI to roleplay as a native speaker at a specific proficiency level (e.g., "A2 French speaker, coffee shop setting"). Students practice dialogue, receive corrections, and get vocabulary suggestions — unlimited reps without fear of judgment.</p>
+            <button class="btn-red" onclick="openModal('wl1')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge mid">&#128293; Intermediate</span>
+            <h3>Grammar Error Explainer</h3>
+            <p>Paste a student's written paragraph in the target language. AI identifies errors, explains the grammar rule behind each one in English, and rewrites the corrected version — making errors into teachable moments instantly.</p>
+            <button class="btn-red" onclick="openModal('wl2')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge adv">&#127775; Advanced</span>
+            <h3>Cultural Immersion Scenario</h3>
+            <p>AI generates authentic, culturally rich role-play scenarios (e.g., navigating a Spanish market, ordering at a French pharmacy). Students must use real idioms and cultural norms — not just translated English. AI flags when responses feel "too American."</p>
+            <button class="btn-red" onclick="openModal('wl3')">&#128196; See the Prompt</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SKILLED TRADES -->
+      <div class="tab-pane" id="tab-trades">
+        <div class="tier-grid">
+          <div class="tier-card">
+            <span class="tier-badge easy">&#9889; Quick Win</span>
+            <h3>Safety Checklist Generator</h3>
+            <p>Describe a procedure (e.g., "changing a circuit breaker" or "welding in a confined space"). AI generates a plain-language, step-by-step safety checklist aligned to OSHA standards — ready to print and post in the shop.</p>
+            <button class="btn-red" onclick="openModal('trades1')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge mid">&#128293; Intermediate</span>
+            <h3>Technical Manual Translator</h3>
+            <p>Paste dense technical documentation or a code section from a manual. Ask AI to rewrite it in plain language at a 9th-grade reading level, define all jargon, and add a real-world analogy. Makes manufacturer specs actually usable in the classroom.</p>
+            <button class="btn-red" onclick="openModal('trades2')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge adv">&#127775; Advanced</span>
+            <h3>Job Site Problem Simulation</h3>
+            <p>Describe a real-world scenario (wiring fault, plumbing leak, HVAC malfunction). AI walks students through a diagnostic process — asking questions, presenting symptoms, and guiding them toward the solution. Students must justify every decision before AI confirms.</p>
+            <button class="btn-red" onclick="openModal('trades3')">&#128196; See the Prompt</button>
           </div>
         </div>
       </div>
@@ -2472,6 +2522,66 @@ This turns AI into a critical thinking tool about art itself.</div>
     <h3>&#127775; CTE: Market Reaction Simulation</h3>
     <div class="prompt-box">Here is a business model canvas for a student startup: [paste canvas or describe model — product, customer segments, revenue streams, channels, value proposition]. Simulate how three different customer segments would realistically react to this business: 1) An early adopter who loves new ideas, 2) A mainstream customer who needs proof before buying, 3) A skeptic who sees a reason this won't work. For each segment: describe their initial reaction, their biggest concern, and what would need to change to win them over. Then identify the #1 flaw in the business model that all three segments agree on.</div>
     <button class="copy-btn" onclick="copyPrompt(this,'modal-cte3')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- WORLD LANGUAGE 1 -->
+<div class="modal-overlay" id="modal-wl1">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('wl1')">&times;</button>
+    <h3>&#127760; World Language: AI Conversation Partner</h3>
+    <div class="prompt-box">You are a native [French/Spanish/German — choose one] speaker having a casual conversation with a language learner at the [A2/B1] level. Keep your sentences simple and natural. If the student makes a grammar or vocabulary error, gently correct it in parentheses after your response and explain the rule in one sentence in English. Topic for today: [e.g., ordering food at a café / talking about weekend plans / describing your neighborhood]. Start the conversation by greeting them and asking a simple opening question.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-wl1')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- WORLD LANGUAGE 2 -->
+<div class="modal-overlay" id="modal-wl2">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('wl2')">&times;</button>
+    <h3>&#128293; World Language: Grammar Error Explainer</h3>
+    <div class="prompt-box">Here is a paragraph written by a high school student in [Spanish/French/German]: [paste student writing]. Please do the following: 1) Identify each grammatical or vocabulary error and underline it. 2) For each error, explain the grammar rule it violates in plain English in 1-2 sentences. 3) Write a corrected version of the full paragraph at the bottom. Do NOT just fix it silently — the goal is for the student to understand WHY each correction was made so they can avoid the same mistake next time.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-wl2')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- WORLD LANGUAGE 3 -->
+<div class="modal-overlay" id="modal-wl3">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('wl3')">&times;</button>
+    <h3>&#127775; World Language: Cultural Immersion Scenario</h3>
+    <div class="prompt-box">You are going to run a cultural immersion role-play for a high school student learning [Spanish/French/German] at the B1 level. The scenario: [e.g., the student is navigating a market in Mexico City / checking into a hotel in Paris / asking for directions in Berlin]. Stay in character as a local throughout. If the student uses phrasing that is grammatically correct but sounds unnatural or "too textbook," flag it by saying "(Native note: a local would say ___)" and continue the scene. At the end, give a brief debrief: 2 cultural things they handled well and 1 thing that would stand out to a native speaker.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-wl3')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- TRADES 1 -->
+<div class="modal-overlay" id="modal-trades1">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('trades1')">&times;</button>
+    <h3>&#128295; Trades: Safety Checklist Generator</h3>
+    <div class="prompt-box">Create a safety checklist for the following procedure: [describe the task — e.g., "installing a 20-amp circuit breaker in a residential panel" or "MIG welding in a shop environment"]. The checklist should be: 1) Written in plain, direct language (short sentences, no jargon), 2) Organized into phases: Before You Start / During the Task / After Completion, 3) Include relevant OSHA standards or codes where applicable, 4) Highlight the top 3 hazards in bold with a brief explanation of why each is dangerous. Format it so it can be printed and posted in a shop or classroom.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-trades1')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- TRADES 2 -->
+<div class="modal-overlay" id="modal-trades2">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('trades2')">&times;</button>
+    <h3>&#128293; Trades: Technical Manual Translator</h3>
+    <div class="prompt-box">Here is a section from a technical manual or electrical/plumbing/HVAC code: [paste text]. Please rewrite this for a 10th-grade student who is new to the trade. Specifically: 1) Rewrite the entire section in plain language at a 9th-grade reading level, 2) Define every piece of jargon the first time it appears (bold the term, define it in parentheses), 3) Add a real-world analogy for any abstract concept — something a 16-year-old would recognize, 4) If there are numbered steps or procedures, keep them numbered and add a brief "why this matters" note after each step. The student is learning — not just following instructions.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-trades2')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- TRADES 3 -->
+<div class="modal-overlay" id="modal-trades3">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('trades3')">&times;</button>
+    <h3>&#127775; Trades: Job Site Problem Simulation</h3>
+    <div class="prompt-box">You are going to simulate a real job site diagnostic scenario for a student in a skilled trades class. The scenario: [e.g., "a 15-amp circuit keeps tripping in a residential kitchen" or "a commercial HVAC unit is cooling one zone but not another"]. Present the problem to the student as if you were the lead technician briefing them. Then guide them through a diagnostic process using the Socratic method — ask them what they would check first and why, present new information based on their answer, and push back if their reasoning is wrong. Do NOT give them the answer. Make them earn it through correct diagnostic thinking. After they reach the correct solution (or after 6 exchanges), debrief: what they got right, what they missed, and what a licensed technician would do next.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-trades3')">&#128203; Copy Prompt</button>
   </div>
 </div>
 
