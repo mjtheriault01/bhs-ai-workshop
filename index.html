@@ -766,7 +766,7 @@
     .spotlight-front, .spotlight-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: 12px; padding: 22px; overflow: hidden; }
     .spotlight-front { display: flex; flex-direction: column; justify-content: space-between; }
     .spotlight-back { transform: rotateY(180deg); background: #fff; overflow-y: auto; border: 2px solid #e5e7eb; }
-    .spotlight-flip-hint { font-size: 0.7rem; color: rgba(255,255,255,0.72); text-align: center; padding-top: 10px; }
+    .spotlight-flip-hint { font-size: 0.7rem; color: rgba(255,255,255,0.72); text-align: center; margin-top: auto; padding-top: 10px; }
     .spotlight-back-hint { font-size: 0.7rem; color: #9D2235; text-align: center; margin-top: 10px; font-weight: 700; }
 
     /* ─── FEEDBACK ─── */
@@ -805,6 +805,21 @@
   </style>
 </head>
 <body>
+
+<!-- PASSWORD GATE -->
+<div id="pw-gate" style="display:none;position:fixed;inset:0;background:linear-gradient(135deg,#7a1a28,#9D2235);z-index:99999;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;">
+  <div style="font-size:3rem;margin-bottom:12px;">&#127891;</div>
+  <h1 style="color:#FFC72C;font-family:Verdana,sans-serif;font-size:1.8rem;font-weight:700;margin-bottom:6px;">BHS AI Institute Day</h1>
+  <p style="color:rgba(255,255,255,0.8);font-family:Verdana,sans-serif;font-size:0.9rem;margin-bottom:32px;">Enter the access code to continue</p>
+  <div id="pw-shake" style="display:flex;flex-direction:column;align-items:center;gap:12px;">
+    <input id="pw-input" type="password" placeholder="Access code" autocomplete="off"
+      style="padding:14px 20px;border-radius:8px;border:3px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.12);color:#fff;font-family:Verdana,sans-serif;font-size:1.1rem;text-align:center;letter-spacing:0.2em;outline:none;width:220px;transition:border 0.2s;"
+      onfocus="this.style.borderColor='#FFC72C'" onblur="this.style.borderColor='rgba(255,255,255,0.3)'"
+      onkeydown="if(event.key==='Enter')checkPW()" />
+    <button onclick="checkPW()" style="padding:14px 40px;background:#FFC72C;color:#1a1a1a;border:none;border-radius:8px;font-family:Verdana,sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:transform 0.15s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">Enter &#8594;</button>
+    <div id="pw-error" style="color:#ffcccc;font-family:Verdana,sans-serif;font-size:0.85rem;height:20px;"></div>
+  </div>
+</div>
 
 <!-- NAV -->
 <nav>
@@ -1824,9 +1839,51 @@
 <!-- ─── LEARNING LAB ─── -->
 <section id="lab" style="background:#eff6ff;">
   <div style="max-width:960px;margin:0 auto;padding:64px 24px;">
-    <span style="display:inline-block;background:#9D2235;color:#fff;font-size:0.7rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:4px 14px;border-radius:4px;margin-bottom:14px;">&#127918; Gamified Learning Lab</span>
-    <h2 style="font-size:1.6rem;font-weight:700;color:#1e3a5f;margin-bottom:8px;">Learn by Doing</h2>
-    <p style="color:#53565A;font-size:0.9rem;line-height:1.75;max-width:700px;margin-bottom:40px;">Four interactive games designed to build real AI skills. No slides — just hands-on learning with immediate feedback.</p>
+    <div style="text-align:center;margin-bottom:36px;">
+      <span style="display:inline-block;background:#9D2235;color:#fff;font-size:0.88rem;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:10px 28px;border-radius:4px;margin-bottom:20px;">&#127918; Gamified Learning Lab</span>
+      <h2 style="font-size:2.6rem;font-weight:700;color:#1e3a5f;margin-bottom:12px;">Learn by Doing</h2>
+      <p style="color:#53565A;font-size:0.95rem;line-height:1.75;max-width:700px;margin:0 auto;">Four interactive games designed to build real AI skills. No slides — just hands-on learning with immediate feedback.</p>
+    </div>
+
+    <!-- ── LAB SCOREBOARD ── -->
+    <div id="lab-scoreboard" style="background:linear-gradient(135deg,#1e3a5f,#0f172a);border-radius:14px;padding:28px 32px;margin-bottom:28px;box-shadow:0 4px 20px rgba(0,0,0,0.18);">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:20px;">
+        <div>
+          <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#94a3b8;margin-bottom:4px;">Your Lab Progress</div>
+          <div style="font-size:1.5rem;font-weight:700;color:#FFC72C;">Achievement Tracker</div>
+        </div>
+        <div style="text-align:center;background:#0f172a;border-radius:10px;padding:12px 24px;">
+          <div id="lab-total-score" style="font-size:2.2rem;font-weight:700;color:#FFC72C;line-height:1;">0</div>
+          <div style="font-size:0.68rem;color:#94a3b8;margin-top:2px;">of 26 pts</div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;">
+        <div style="background:#1e293b;border-radius:8px;padding:14px;">
+          <div style="font-size:1.1rem;margin-bottom:4px;">&#128272;</div>
+          <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Privacy Sorter</div>
+          <div id="sb-privacy" style="font-size:1.4rem;font-weight:700;color:#e2e8f0;">—</div>
+          <div style="background:#0f172a;border-radius:999px;height:5px;margin-top:8px;overflow:hidden;"><div id="sb-privacy-bar" style="height:100%;background:#FFC72C;border-radius:999px;width:0%;transition:width 0.5s;"></div></div>
+        </div>
+        <div style="background:#1e293b;border-radius:8px;padding:14px;">
+          <div style="font-size:1.1rem;margin-bottom:4px;">&#128295;</div>
+          <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Prompt Surgeon</div>
+          <div id="sb-prompt" style="font-size:1.4rem;font-weight:700;color:#e2e8f0;">—</div>
+          <div style="background:#0f172a;border-radius:999px;height:5px;margin-top:8px;overflow:hidden;"><div id="sb-prompt-bar" style="height:100%;background:#60a5fa;border-radius:999px;width:0%;transition:width 0.5s;"></div></div>
+        </div>
+        <div style="background:#1e293b;border-radius:8px;padding:14px;">
+          <div style="font-size:1.1rem;margin-bottom:4px;">&#128308;&#127993;&#128994;</div>
+          <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">Stoplight Match</div>
+          <div id="sb-stoplight" style="font-size:1.4rem;font-weight:700;color:#e2e8f0;">—</div>
+          <div style="background:#0f172a;border-radius:999px;height:5px;margin-top:8px;overflow:hidden;"><div id="sb-stoplight-bar" style="height:100%;background:#4ade80;border-radius:999px;width:0%;transition:width 0.5s;"></div></div>
+        </div>
+        <div style="background:#1e293b;border-radius:8px;padding:14px;">
+          <div style="font-size:1.1rem;margin-bottom:4px;">&#127881;</div>
+          <div style="font-size:0.72rem;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:6px;">AI Literacy Quiz</div>
+          <div id="sb-quiz" style="font-size:1.4rem;font-weight:700;color:#e2e8f0;">—</div>
+          <div style="background:#0f172a;border-radius:999px;height:5px;margin-top:8px;overflow:hidden;"><div id="sb-quiz-bar" style="height:100%;background:#a78bfa;border-radius:999px;width:0%;transition:width 0.5s;"></div></div>
+        </div>
+      </div>
+    </div>
 
     <!-- ── GAME 1: PRIVACY SORT ── -->
     <div style="background:#fff;border-radius:14px;padding:32px;margin-bottom:28px;box-shadow:0 4px 20px rgba(0,0,0,0.08);border-top:5px solid #9D2235;">
@@ -2202,6 +2259,87 @@
   <p style="font-size:0.95rem;opacity:0.9;max-width:500px;margin:0 auto 36px;line-height:1.75;">Tell us what you learned, what you'll try first, and what would make this even better. Takes about 3 minutes.</p>
   <a href="feedback-form.html" target="_blank" style="display:inline-block;padding:16px 44px;background:#FFC72C;color:#1a1a1a;border-radius:8px;font-family:Verdana,sans-serif;font-size:1rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">Give Feedback &#8594;</a>
 </section>
+
+<!-- FLOATING FEEDBACK BUTTON -->
+<button onclick="openFeedback()" id="feedback-fab" style="position:fixed;bottom:28px;right:28px;z-index:5000;background:#9D2235;color:#fff;border:none;border-radius:999px;padding:14px 22px;font-family:Verdana,sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.3);display:flex;align-items:center;gap:8px;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 28px rgba(0,0,0,0.35)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.3)'">
+  <span style="font-size:1.2rem;">&#128172;</span> Leave Feedback
+</button>
+
+<!-- FEEDBACK MODAL -->
+<div id="feedback-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:6000;align-items:center;justify-content:center;padding:20px;">
+  <div style="background:#fff;border-radius:16px;max-width:540px;width:100%;padding:36px;position:relative;max-height:90vh;overflow-y:auto;animation:popIn 0.25s ease;">
+    <button onclick="closeFeedback()" style="position:absolute;top:14px;right:18px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#888;line-height:1;" onmouseover="this.style.color='#9D2235'" onmouseout="this.style.color='#888'">&times;</button>
+    <div style="text-align:center;margin-bottom:24px;">
+      <div style="font-size:2.5rem;margin-bottom:8px;">&#127881;</div>
+      <h3 style="font-size:1.3rem;font-weight:700;color:#9D2235;margin-bottom:4px;">How'd We Do?</h3>
+      <p style="font-size:0.85rem;color:#666;">Your feedback makes the next AI Institute Day even better. Takes 60 seconds!</p>
+    </div>
+
+    <!-- Mood picker -->
+    <div style="margin-bottom:22px;">
+      <label style="display:block;font-size:0.8rem;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;">How are you feeling right now?</label>
+      <div style="display:flex;justify-content:center;gap:12px;" id="mood-picker">
+        <button type="button" class="mood-btn" onclick="selectMood(this,'Overwhelmed')" title="Overwhelmed" style="font-size:2rem;background:none;border:3px solid transparent;border-radius:10px;cursor:pointer;padding:6px;transition:all 0.15s;">&#128565;</button>
+        <button type="button" class="mood-btn" onclick="selectMood(this,'Skeptical')" title="Skeptical" style="font-size:2rem;background:none;border:3px solid transparent;border-radius:10px;cursor:pointer;padding:6px;transition:all 0.15s;">&#129300;</button>
+        <button type="button" class="mood-btn" onclick="selectMood(this,'Curious')" title="Curious" style="font-size:2rem;background:none;border:3px solid transparent;border-radius:10px;cursor:pointer;padding:6px;transition:all 0.15s;">&#128513;</button>
+        <button type="button" class="mood-btn" onclick="selectMood(this,'Excited')" title="Excited" style="font-size:2rem;background:none;border:3px solid transparent;border-radius:10px;cursor:pointer;padding:6px;transition:all 0.15s;">&#129321;</button>
+        <button type="button" class="mood-btn" onclick="selectMood(this,'Mind Blown')" title="Mind Blown" style="font-size:2rem;background:none;border:3px solid transparent;border-radius:10px;cursor:pointer;padding:6px;transition:all 0.15s;">&#129327;</button>
+      </div>
+      <input type="hidden" id="fb-mood" value="" />
+    </div>
+
+    <!-- Star rating -->
+    <div style="margin-bottom:22px;">
+      <label style="display:block;font-size:0.8rem;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;">Overall session rating</label>
+      <div id="star-rating" style="display:flex;gap:6px;font-size:2rem;cursor:pointer;">
+        <span class="star" data-val="1" onclick="setStars(1)" onmouseover="hoverStars(1)" onmouseout="resetStars()">&#9733;</span>
+        <span class="star" data-val="2" onclick="setStars(2)" onmouseover="hoverStars(2)" onmouseout="resetStars()">&#9733;</span>
+        <span class="star" data-val="3" onclick="setStars(3)" onmouseover="hoverStars(3)" onmouseout="resetStars()">&#9733;</span>
+        <span class="star" data-val="4" onclick="setStars(4)" onmouseover="hoverStars(4)" onmouseout="resetStars()">&#9733;</span>
+        <span class="star" data-val="5" onclick="setStars(5)" onmouseover="hoverStars(5)" onmouseout="resetStars()">&#9733;</span>
+      </div>
+      <input type="hidden" id="fb-stars" value="0" />
+      <div id="star-label" style="font-size:0.8rem;color:#888;margin-top:4px;height:18px;"></div>
+    </div>
+
+    <!-- Favorite part -->
+    <div style="margin-bottom:18px;">
+      <label style="display:block;font-size:0.8rem;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;">&#127775; What was your favorite part?</label>
+      <textarea id="fb-fav" rows="2" placeholder="The games, the prompting tips, the &quot;aha&quot; moment when..." style="width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:8px;font-family:Verdana,sans-serif;font-size:0.85rem;resize:vertical;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#9D2235'" onblur="this.style.borderColor='#ddd'"></textarea>
+    </div>
+
+    <!-- One thing to change -->
+    <div style="margin-bottom:18px;">
+      <label style="display:block;font-size:0.8rem;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;">&#128161; One thing you'd change?</label>
+      <textarea id="fb-change" rows="2" placeholder="More time for the games, different topic, shorter sessions..." style="width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:8px;font-family:Verdana,sans-serif;font-size:0.85rem;resize:vertical;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#9D2235'" onblur="this.style.borderColor='#ddd'"></textarea>
+    </div>
+
+    <!-- One word -->
+    <div style="margin-bottom:24px;">
+      <label style="display:block;font-size:0.8rem;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;">&#128172; Describe today in ONE word</label>
+      <input type="text" id="fb-word" maxlength="30" placeholder="Enlightening? Overwhelming? Useful? Let's hear it." style="width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:8px;font-family:Verdana,sans-serif;font-size:0.85rem;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#9D2235'" onblur="this.style.borderColor='#ddd'" />
+    </div>
+
+    <!-- Will you try it? -->
+    <div style="margin-bottom:24px;">
+      <label style="display:block;font-size:0.8rem;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;">&#128640; Will you try AI in your classroom this week?</label>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;" id="try-picker">
+        <button type="button" class="try-btn" onclick="selectTry(this,'Absolutely!')" style="padding:8px 18px;border:2px solid #ddd;border-radius:999px;background:#fff;font-family:Verdana,sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.15s;">Absolutely! &#128293;</button>
+        <button type="button" class="try-btn" onclick="selectTry(this,'Probably yes')" style="padding:8px 18px;border:2px solid #ddd;border-radius:999px;background:#fff;font-family:Verdana,sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.15s;">Probably yes &#128522;</button>
+        <button type="button" class="try-btn" onclick="selectTry(this,'Still thinking...')" style="padding:8px 18px;border:2px solid #ddd;border-radius:999px;background:#fff;font-family:Verdana,sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.15s;">Still thinking... &#129300;</button>
+        <button type="button" class="try-btn" onclick="selectTry(this,'Need more practice')" style="padding:8px 18px;border:2px solid #ddd;border-radius:999px;background:#fff;font-family:Verdana,sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.15s;">Need more practice &#128218;</button>
+      </div>
+      <input type="hidden" id="fb-try" value="" />
+    </div>
+
+    <button onclick="submitFeedback()" style="width:100%;padding:16px;background:#9D2235;color:#fff;border:none;border-radius:8px;font-family:Verdana,sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:background 0.2s,transform 0.15s;" onmouseover="this.style.background='#7a1a28'" onmouseout="this.style.background='#9D2235'">
+      Submit Feedback &#127881;
+    </button>
+  </div>
+</div>
+
+<!-- CONFETTI CANVAS -->
+<canvas id="confetti-canvas" style="position:fixed;inset:0;pointer-events:none;z-index:7000;display:none;"></canvas>
 
 <!-- FOOTER -->
 <footer>
@@ -2736,6 +2874,8 @@ This turns AI into a critical thinking tool about art itself.</div>
         document.getElementById('score-msg').textContent = msgs[score] || msgs[0];
         scoreCard.classList.add('show');
         scoreCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        labScores.quiz = score;
+        updateLabBoard();
       }, 600);
     }
   }
@@ -2845,6 +2985,8 @@ This turns AI into a critical thinking tool about art itself.</div>
     document.getElementById('priv-final-msg').textContent = msgs[key] || msgs[0];
     document.getElementById('priv-progress').style.width = '100%';
     document.getElementById('priv-score-badge').textContent = privScore + ' / 10';
+    labScores.privacy = privScore;
+    updateLabBoard();
   }
 
   function privRestart() {
@@ -2927,6 +3069,8 @@ This turns AI into a critical thinking tool about art itself.</div>
     const lIdx = Math.min(filled, 4);
     document.getElementById('ps-label').textContent = psLabels[lIdx];
     document.getElementById('ps-label').style.color = psColors[lIdx];
+    labScores.prompt = filled;
+    updateLabBoard();
     let prompt = '';
     if (!role && !topic && !context && !format && !goal) {
       document.getElementById('ps-output').textContent = 'Fill in the fields on the left to build your expert prompt...';
@@ -3029,6 +3173,8 @@ This turns AI into a critical thinking tool about art itself.</div>
     res.style.display = 'block';
     res.textContent = correct + '/6 correct — ' + (correct === 6 ? 'Perfect! You\'ve mastered the Stoplight Model.' : correct >= 4 ? 'Nice work! Review the highlighted cards.' : 'Keep practicing — revisit the Stoplight section above.');
     res.style.color = correct === 6 ? '#27ae60' : correct >= 4 ? '#e67e22' : '#e74c3c';
+    labScores.stoplight = correct;
+    updateLabBoard();
   }
 
   function resetStoplight() {
@@ -3180,6 +3326,180 @@ This turns AI into a critical thinking tool about art itself.</div>
       btn.innerHTML = '&#128263; Music Off';
       btn.style.borderColor = '#FFC72C'; btn.style.color = '#FFC72C';
     }
+  }
+
+  // ── PASSWORD GATE ──
+  (function() {
+    if (sessionStorage.getItem('bhs-auth') !== '1') {
+      document.addEventListener('DOMContentLoaded', function() {
+        const gate = document.getElementById('pw-gate');
+        gate.style.display = 'flex';
+      });
+    }
+  })();
+
+  function checkPW() {
+    const val = document.getElementById('pw-input').value.trim().toUpperCase();
+    if (val === 'BHSAI') {
+      sessionStorage.setItem('bhs-auth', '1');
+      const gate = document.getElementById('pw-gate');
+      gate.style.opacity = '0';
+      gate.style.transition = 'opacity 0.4s';
+      setTimeout(() => gate.style.display = 'none', 400);
+    } else {
+      const box = document.getElementById('pw-shake');
+      const err = document.getElementById('pw-error');
+      err.textContent = 'Incorrect code — try again';
+      box.style.animation = 'none';
+      box.offsetHeight;
+      box.style.animation = 'shake 0.4s ease';
+      document.getElementById('pw-input').value = '';
+      setTimeout(() => err.textContent = '', 2500);
+    }
+  }
+
+  // Add shake keyframe dynamically
+  (function() {
+    const s = document.createElement('style');
+    s.textContent = '@keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-10px)}40%,80%{transform:translateX(10px)}}';
+    document.head.appendChild(s);
+  })();
+
+  // ── LAB SCOREBOARD ──
+  const labScores = { privacy: null, prompt: null, stoplight: null, quiz: null };
+
+  function updateLabBoard() {
+    const scoreMap = { privacy: 10, prompt: 5, stoplight: 6, quiz: 5 };
+    let total = 0;
+    if (labScores.privacy !== null) {
+      document.getElementById('sb-privacy').textContent = labScores.privacy + '/10';
+      document.getElementById('sb-privacy-bar').style.width = (labScores.privacy / 10 * 100) + '%';
+      total += labScores.privacy;
+    }
+    if (labScores.prompt !== null) {
+      const labels = ['Weak','Basic','Developing','Strong','Expert'];
+      document.getElementById('sb-prompt').textContent = labels[Math.min(labScores.prompt, 4)];
+      document.getElementById('sb-prompt-bar').style.width = (labScores.prompt / 5 * 100) + '%';
+      total += labScores.prompt;
+    }
+    if (labScores.stoplight !== null) {
+      document.getElementById('sb-stoplight').textContent = labScores.stoplight + '/6';
+      document.getElementById('sb-stoplight-bar').style.width = (labScores.stoplight / 6 * 100) + '%';
+      total += labScores.stoplight;
+    }
+    if (labScores.quiz !== null) {
+      document.getElementById('sb-quiz').textContent = labScores.quiz + '/5';
+      document.getElementById('sb-quiz-bar').style.width = (labScores.quiz / 5 * 100) + '%';
+      total += labScores.quiz;
+    }
+    document.getElementById('lab-total-score').textContent = total;
+    document.getElementById('lab-scoreboard').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  // ── FEEDBACK POPUP ──
+  let fbStars = 0;
+
+  function openFeedback() {
+    const m = document.getElementById('feedback-modal');
+    m.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeFeedback() {
+    document.getElementById('feedback-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
+  function selectMood(btn, label) {
+    document.querySelectorAll('.mood-btn').forEach(b => { b.style.borderColor = 'transparent'; b.style.background = 'none'; });
+    btn.style.borderColor = '#9D2235';
+    btn.style.background = '#fdf5f5';
+    document.getElementById('fb-mood').value = label;
+  }
+
+  function setStars(n) {
+    fbStars = n;
+    document.getElementById('fb-stars').value = n;
+    const starLabels = ['','Needs work','Getting there','Pretty good','Really great!','Outstanding!'];
+    document.getElementById('star-label').textContent = starLabels[n];
+    renderStars(n);
+  }
+
+  function hoverStars(n) { renderStars(n); }
+
+  function resetStars() { renderStars(fbStars); }
+
+  function renderStars(n) {
+    document.querySelectorAll('#star-rating .star').forEach((s, i) => {
+      s.style.color = i < n ? '#FFC72C' : '#ddd';
+    });
+  }
+
+  function selectTry(btn, label) {
+    document.querySelectorAll('.try-btn').forEach(b => { b.style.background = '#fff'; b.style.borderColor = '#ddd'; b.style.color = '#333'; });
+    btn.style.background = '#9D2235';
+    btn.style.borderColor = '#9D2235';
+    btn.style.color = '#fff';
+    document.getElementById('fb-try').value = label;
+  }
+
+  function submitFeedback() {
+    closeFeedback();
+    launchConfetti();
+    setTimeout(() => {
+      const fab = document.getElementById('feedback-fab');
+      fab.textContent = '✓ Thanks for the feedback!';
+      fab.style.background = '#27ae60';
+      fab.style.pointerEvents = 'none';
+    }, 200);
+  }
+
+  function launchConfetti() {
+    const canvas = document.getElementById('confetti-canvas');
+    canvas.style.display = 'block';
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const ctx = canvas.getContext('2d');
+    const pieces = Array.from({length: 120}, () => ({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height - canvas.height,
+      w: Math.random() * 10 + 5,
+      h: Math.random() * 6 + 3,
+      color: ['#9D2235','#FFC72C','#27ae60','#60a5fa','#a78bfa'][Math.floor(Math.random()*5)],
+      speed: Math.random() * 3 + 2,
+      angle: Math.random() * 360,
+      spin: (Math.random() - 0.5) * 6
+    }));
+    let frame = 0;
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      pieces.forEach(p => {
+        ctx.save();
+        ctx.translate(p.x + p.w/2, p.y + p.h/2);
+        ctx.rotate(p.angle * Math.PI / 180);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+        ctx.restore();
+        p.y += p.speed;
+        p.angle += p.spin;
+      });
+      frame++;
+      if (frame < 120) requestAnimationFrame(draw);
+      else { ctx.clearRect(0,0,canvas.width,canvas.height); canvas.style.display = 'none'; }
+    }
+    draw();
+  }
+
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeFeedback(); });
+
+  // ── REGISTER ──
+  function handleRegister(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = "✓ You're Registered!";
+    btn.style.background = '#2e7d32';
+    btn.style.color = '#fff';
+    btn.disabled = true;
   }
 
 </script>
