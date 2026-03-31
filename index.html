@@ -802,9 +802,39 @@
       .tab-btn { font-size: 0.72rem; padding: 7px 14px; }
       .quiz-multi { flex-direction: column; }
     }
+
+    /* ─── SCROLL PROGRESS BAR ─── */
+    #scroll-progress { position:fixed;top:0;left:0;height:4px;width:0%;background:#9D2235;z-index:10000;transition:width 0.1s linear;pointer-events:none; }
+
+    /* ─── ACCORDION MODULES ─── */
+    .acc-header {
+      width:100%;display:flex;align-items:center;justify-content:space-between;
+      padding:16px 28px;background:rgba(247,245,245,0.92);
+      backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+      border:none;border-left:5px solid #9D2235;border-bottom:1.5px solid rgba(157,34,53,0.15);
+      cursor:pointer;font-family:Verdana,sans-serif;text-align:left;
+      transition:background 0.2s,box-shadow 0.2s;
+    }
+    .acc-header:hover { background:rgba(255,255,255,0.99);box-shadow:0 0 24px rgba(157,34,53,0.18),inset 0 0 0 1px rgba(157,34,53,0.1); }
+    .acc-header.open { background:#fff;border-left-color:#FFC72C;box-shadow:0 2px 16px rgba(157,34,53,0.1); }
+    .acc-title { font-size:1rem;font-weight:700;color:#1a1a1a;margin-right:10px; }
+    .acc-time { font-size:0.72rem;color:#9D2235;background:rgba(157,34,53,0.08);padding:2px 9px;border-radius:999px;font-weight:700;white-space:nowrap; }
+    .acc-chevron { font-size:1.4rem;color:#9D2235;transition:transform 0.3s ease;line-height:1;flex-shrink:0; }
+    .acc-header.open .acc-chevron { transform:rotate(90deg); }
+    .acc-body { max-height:0;overflow:hidden;transition:max-height 0.45s ease; }
+    .acc-body.open { max-height:20000px;transition:max-height 0.7s ease; }
+    .acc-check {
+      width:24px;height:24px;border-radius:50%;border:2px solid #9D2235;
+      background:transparent;cursor:pointer;font-size:0.85rem;color:transparent;
+      display:inline-flex;align-items:center;justify-content:center;
+      transition:all 0.2s;flex-shrink:0;font-weight:700;
+    }
+    .acc-check:hover { background:rgba(157,34,53,0.1); }
+    .acc-check.done { background:#9D2235;color:#fff; }
   </style>
 </head>
 <body>
+<div id="scroll-progress"></div>
 
 <!-- PASSWORD GATE -->
 <div id="pw-gate" style="display:none;position:fixed;inset:0;background:linear-gradient(135deg,#7a1a28,#9D2235);z-index:99999;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;">
@@ -998,6 +1028,15 @@
   </div>
 </section>
 
+<div class="acc-module">
+  <div class="acc-header open" onclick="toggleModule(this)">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="acc-check" onclick="event.stopPropagation();toggleCheck(this)" role="button" tabindex="0" title="Mark complete">&#10003;</span>
+      <div><span class="acc-title">&#128218; Research Vault</span> <span class="acc-time">&#9201; 20 mins</span></div>
+    </div>
+    <span class="acc-chevron">&#8250;</span>
+  </div>
+  <div class="acc-body open" style="max-height:20000px;">
 <!-- ─── AI BASICS (ACCORDION) ─── -->
 <section id="ai-basics" style="background:#fff;">
   <div class="section">
@@ -1094,7 +1133,18 @@
     </div>
   </div>
 </section>
+  </div>
+</div>
 
+<div class="acc-module">
+  <div class="acc-header" onclick="toggleModule(this)">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="acc-check" onclick="event.stopPropagation();toggleCheck(this)" role="button" tabindex="0" title="Mark complete">&#10003;</span>
+      <div><span class="acc-title">&#127979; Subject Workflows</span> <span class="acc-time">&#9201; 20 mins</span></div>
+    </div>
+    <span class="acc-chevron">&#8250;</span>
+  </div>
+  <div class="acc-body">
 <!-- ─── SUBJECT TABS ─── -->
 <section id="subjects" style="background:#f7f5f5;">
   <div class="section">
@@ -1336,6 +1386,8 @@
     </div>
   </div>
 </section>
+  </div>
+</div>
 
 <!-- ─── STUDENT SPOTLIGHTS ─── -->
 <section id="spotlights" style="background:#fff;">
@@ -1503,6 +1555,15 @@
   </blockquote>
 </div>
 
+<div class="acc-module">
+  <div class="acc-header" onclick="toggleModule(this)">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="acc-check" onclick="event.stopPropagation();toggleCheck(this)" role="button" tabindex="0" title="Mark complete">&#10003;</span>
+      <div><span class="acc-title">&#9999; Prompt Engineering</span> <span class="acc-time">&#9201; 15 mins</span></div>
+    </div>
+    <span class="acc-chevron">&#8250;</span>
+  </div>
+  <div class="acc-body">
 <!-- ─── PROMPTING (BEFORE/AFTER + ACCORDION) ─── -->
 <section id="prompting" style="background:#fff;">
   <div class="section">
@@ -1599,7 +1660,18 @@
     </div>
   </div>
 </section>
+  </div>
+</div>
 
+<div class="acc-module">
+  <div class="acc-header" onclick="toggleModule(this)">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="acc-check" onclick="event.stopPropagation();toggleCheck(this)" role="button" tabindex="0" title="Mark complete">&#10003;</span>
+      <div><span class="acc-title">&#128300; Deep Research Archive</span> <span class="acc-time">&#9201; 15 mins</span></div>
+    </div>
+    <span class="acc-chevron">&#8250;</span>
+  </div>
+  <div class="acc-body">
 <!-- ─── DEEP RESEARCH ARCHIVE ─── -->
 <section id="deepdive" style="background:#0f172a;">
   <div style="max-width:960px;margin:0 auto;padding:64px 24px;">
@@ -1757,7 +1829,18 @@
 
   </div>
 </section>
+  </div>
+</div>
 
+<div class="acc-module">
+  <div class="acc-header" onclick="toggleModule(this)">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="acc-check" onclick="event.stopPropagation();toggleCheck(this)" role="button" tabindex="0" title="Mark complete">&#10003;</span>
+      <div><span class="acc-title">&#128994; Stoplight Model</span> <span class="acc-time">&#9201; 10 mins</span></div>
+    </div>
+    <span class="acc-chevron">&#8250;</span>
+  </div>
+  <div class="acc-body">
 <!-- ─── STOPLIGHT MODEL ─── -->
 <section id="stoplight" style="background:#fff;">
   <div class="section">
@@ -1835,7 +1918,18 @@
     </div>
   </div>
 </section>
+  </div>
+</div>
 
+<div class="acc-module">
+  <div class="acc-header" onclick="toggleModule(this)">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="acc-check" onclick="event.stopPropagation();toggleCheck(this)" role="button" tabindex="0" title="Mark complete">&#10003;</span>
+      <div><span class="acc-title">&#127918; Interactive Lab</span> <span class="acc-time">&#9201; 25 mins</span></div>
+    </div>
+    <span class="acc-chevron">&#8250;</span>
+  </div>
+  <div class="acc-body">
 <!-- ─── LEARNING LAB ─── -->
 <section id="lab" style="background:#eff6ff;">
   <div style="max-width:960px;margin:0 auto;padding:64px 24px;">
@@ -2088,7 +2182,18 @@
 
   </div>
 </section>
+  </div>
+</div>
 
+<div class="acc-module">
+  <div class="acc-header" onclick="toggleModule(this)">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="acc-check" onclick="event.stopPropagation();toggleCheck(this)" role="button" tabindex="0" title="Mark complete">&#10003;</span>
+      <div><span class="acc-title">&#127919; Knowledge Check</span> <span class="acc-time">&#9201; 10 mins</span></div>
+    </div>
+    <span class="acc-chevron">&#8250;</span>
+  </div>
+  <div class="acc-body">
 <!-- ─── QUIZ ─── -->
 <section id="quiz" class="quiz-bg">
   <div class="quiz-container">
@@ -2182,7 +2287,18 @@
 
   </div>
 </section>
+  </div>
+</div>
 
+<div class="acc-module">
+  <div class="acc-header" onclick="toggleModule(this)">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="acc-check" onclick="event.stopPropagation();toggleCheck(this)" role="button" tabindex="0" title="Mark complete">&#10003;</span>
+      <div><span class="acc-title">&#128736; AI Toolkit</span> <span class="acc-time">&#9201; 10 mins</span></div>
+    </div>
+    <span class="acc-chevron">&#8250;</span>
+  </div>
+  <div class="acc-body">
 <!-- ─── TOOLS ─── -->
 <section id="tools" style="background:#f7f5f5;">
   <div class="section">
@@ -2232,6 +2348,8 @@
     </div>
   </div>
 </section>
+  </div>
+</div>
 
 <!-- ─── SCHEDULE ─── -->
 <!-- ─── SUCCESS GALLERY ─── -->
@@ -3444,13 +3562,25 @@ This turns AI into a critical thinking tool about art itself.</div>
   }
 
   function submitFeedback() {
+    const data = new FormData();
+    data.append('mood', document.getElementById('fb-mood').value || '');
+    data.append('stars', document.getElementById('fb-stars').value || '0');
+    data.append('favorite', document.getElementById('fb-fav').value || '');
+    data.append('change', document.getElementById('fb-change').value || '');
+    data.append('word', document.getElementById('fb-word').value || '');
+    data.append('try_it', document.getElementById('fb-try').value || '');
+    data.append('source', 'popup');
+    fetch('https://script.google.com/macros/s/AKfycbw7jSbu7CQk3RCtBcLwiT6dyuhA2AJvzLB8Avz5_hM1xcAlA-zdKFMs4uE5HHOW4hzI/exec', {
+      method: 'POST', body: data
+    }).catch(() => {});
     closeFeedback();
     launchConfetti();
     setTimeout(() => {
       const fab = document.getElementById('feedback-fab');
-      fab.textContent = '✓ Thanks for the feedback!';
+      fab.innerHTML = '&#10003; Thanks for the feedback!';
       fab.style.background = '#27ae60';
       fab.style.pointerEvents = 'none';
+      setTimeout(() => { fab.style.background = '#9D2235'; fab.innerHTML = '&#128172; Leave Feedback'; fab.style.pointerEvents = ''; }, 6000);
     }, 200);
   }
 
@@ -3501,6 +3631,27 @@ This turns AI into a critical thinking tool about art itself.</div>
     btn.style.color = '#fff';
     btn.disabled = true;
   }
+
+  // ── ACCORDION MODULES ──
+  function toggleModule(header) {
+    const body = header.nextElementSibling;
+    const isOpen = header.classList.contains('open');
+    document.querySelectorAll('.acc-body').forEach(b => { b.classList.remove('open'); b.style.maxHeight = null; });
+    document.querySelectorAll('.acc-header').forEach(h => h.classList.remove('open'));
+    if (!isOpen) {
+      header.classList.add('open');
+      body.classList.add('open');
+      body.style.maxHeight = body.scrollHeight + 'px';
+    }
+  }
+  function toggleCheck(el) { el.classList.toggle('done'); }
+
+  // ── SCROLL PROGRESS ──
+  window.addEventListener('scroll', function() {
+    const d = document.documentElement.scrollHeight - window.innerHeight;
+    const bar = document.getElementById('scroll-progress');
+    if (bar && d > 0) bar.style.width = (window.scrollY / d * 100) + '%';
+  }, {passive: true});
 
 </script>
 
