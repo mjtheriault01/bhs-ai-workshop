@@ -831,10 +831,49 @@
     }
     .acc-check:hover { background:rgba(157,34,53,0.1); }
     .acc-check.done { background:#9D2235;color:#fff; }
+
+    /* ── PER-MODULE COLOR CONTRAST (3-color rotation) ── */
+    .acc-module:nth-child(3n+2) .acc-header { background:rgba(240,246,255,0.93); }
+    .acc-module:nth-child(3n+2) .acc-header:hover { background:rgba(230,240,255,0.99); }
+    .acc-module:nth-child(3n+2) .acc-header.open { background:rgba(235,244,255,1);border-left-color:#0057b8; }
+    .acc-module:nth-child(3n+2) .acc-time { color:#0057b8;background:rgba(0,87,184,0.08); }
+    .acc-module:nth-child(3n+2) .acc-chevron { color:#0057b8; }
+    .acc-module:nth-child(3n+2) .acc-check { border-color:#0057b8; }
+    .acc-module:nth-child(3n+2) .acc-check.done { background:#0057b8; }
+
+    .acc-module:nth-child(3n) .acc-header { background:rgba(255,251,235,0.93); }
+    .acc-module:nth-child(3n) .acc-header:hover { background:rgba(255,248,220,0.99); }
+    .acc-module:nth-child(3n) .acc-header.open { background:rgba(255,253,235,1);border-left-color:#b8860b; }
+    .acc-module:nth-child(3n) .acc-time { color:#b8860b;background:rgba(184,134,11,0.09); }
+    .acc-module:nth-child(3n) .acc-chevron { color:#b8860b; }
+    .acc-module:nth-child(3n) .acc-check { border-color:#b8860b; }
+    .acc-module:nth-child(3n) .acc-check.done { background:#b8860b; }
+
+    /* ── COMPLETION PROGRESS COUNTER ── */
+    #progress-counter { position:fixed;top:7px;right:14px;z-index:10001;background:rgba(157,34,53,0.92);color:#fff;font-size:0.65rem;font-weight:700;padding:3px 10px;border-radius:999px;font-family:Verdana,sans-serif;opacity:0;transition:opacity 0.4s;pointer-events:none;backdrop-filter:blur(6px);white-space:nowrap; }
+    #progress-counter.all-done { background:rgba(39,174,96,0.95); }
+
+    /* ── PRINT BUTTON ── */
+    .print-btn { background:none;border:1px solid rgba(0,0,0,0.15);border-radius:6px;padding:5px 12px;font-size:0.7rem;color:#888;cursor:pointer;font-family:Verdana,sans-serif;transition:all 0.15s; }
+    .print-btn:hover { border-color:#9D2235;color:#9D2235; }
+    .print-bar { text-align:right;padding:10px 28px 18px;border-top:1px solid rgba(0,0,0,0.06);margin-top:8px; }
+
+    /* ── PRINT MEDIA ── */
+    @media print {
+      nav,#scroll-progress,#progress-counter,#feedback-fab,#feedback-modal,#pw-gate,
+      .hero,#dashboard,.stats-bar,.quote-strip,#feedback,#confetti-canvas { display:none !important; }
+      .acc-module { display:none !important; }
+      .acc-module[data-printing] { display:block !important; }
+      .acc-module[data-printing] .acc-body { max-height:none !important; overflow:visible !important; display:block !important; }
+      .acc-module[data-printing] .acc-header { display:flex !important; border-left:5px solid #9D2235 !important; }
+      .print-bar { display:none !important; }
+      body { background:#fff !important; }
+    }
   </style>
 </head>
 <body>
 <div id="scroll-progress"></div>
+<div id="progress-counter">0 of 10 complete</div>
 
 <!-- PASSWORD GATE -->
 <div id="pw-gate" style="display:none;position:fixed;inset:0;background:linear-gradient(135deg,#7a1a28,#9D2235);z-index:99999;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;">
@@ -1389,6 +1428,15 @@
   </div>
 </div>
 
+<div class="acc-module">
+  <div class="acc-header" onclick="toggleModule(this)">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="acc-check" onclick="event.stopPropagation();toggleCheck(this)" role="button" tabindex="0" title="Mark complete">&#10003;</span>
+      <div><span class="acc-title">&#11088; Student Spotlights</span> <span class="acc-time">&#9201; 10 mins</span></div>
+    </div>
+    <span class="acc-chevron">&#8250;</span>
+  </div>
+  <div class="acc-body">
 <!-- ─── STUDENT SPOTLIGHTS ─── -->
 <section id="spotlights" style="background:#fff;">
   <div class="section">
@@ -1546,6 +1594,8 @@
     </div>
   </div>
 </section>
+  </div>
+</div>
 
 <!-- QUOTE -->
 <div class="quote-strip">
@@ -2352,23 +2402,34 @@
 </div>
 
 <!-- ─── SCHEDULE ─── -->
+<div class="acc-module">
+  <div class="acc-header" onclick="toggleModule(this)">
+    <div style="display:flex;align-items:center;gap:12px;">
+      <span class="acc-check" onclick="event.stopPropagation();toggleCheck(this)" role="button" tabindex="0" title="Mark complete">&#10003;</span>
+      <div><span class="acc-title">&#127775; Today's Share Out</span> <span class="acc-time">&#9201; 15 mins</span></div>
+    </div>
+    <span class="acc-chevron">&#8250;</span>
+  </div>
+  <div class="acc-body">
 <!-- ─── SUCCESS GALLERY ─── -->
-<section id="gallery" style="background:#0f172a;padding:64px 24px;">
+<section id="gallery" style="background:linear-gradient(135deg,#7a1a28 0%,#9D2235 60%,#c42a42 100%);padding:64px 24px;">
   <div style="max-width:960px;margin:0 auto;">
     <div style="font-size:0.65rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#FFC72C;margin-bottom:8px;">&#127775; Share-Out</div>
     <h2 style="font-size:1.5rem;font-weight:700;color:#fff;margin-bottom:8px;">Created Today</h2>
-    <p style="font-size:0.88rem;color:#94a3b8;max-width:640px;margin-bottom:32px;line-height:1.7;">This is a living gallery. During the share-out session, teachers post their assignments to the board below — live, from their phones. No login required.</p>
+    <p style="font-size:0.88rem;color:rgba(255,255,255,0.85);max-width:640px;margin-bottom:32px;line-height:1.7;">This is a living gallery. During the share-out session, teachers post their assignments to the board below — live, from their phones. No login required.</p>
 
-    <div style="border-radius:12px;overflow:hidden;border:2px solid #1e293b;">
+    <div style="border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,0.25);">
       <div class="padlet-embed" style="border:1px solid rgba(0,0,0,0.1);border-radius:2px;box-sizing:border-box;overflow:hidden;position:relative;width:100%;background:#F4F4F4"><p style="padding:0;margin:0"><iframe src="https://padlet.com/embed/pyftcdqng173yn11" frameborder="0" allow="camera;microphone;geolocation;display-capture;clipboard-write" style="width:100%;height:608px;display:block;padding:0;margin:0"></iframe></p><div style="display:flex;align-items:center;justify-content:end;margin:0;padding:8px 8px 8px 0"><a href="https://padlet.com?ref=embed" style="display:flex;align-items:center;gap:5px;flex-grow:0;margin:0;border:none;padding:0;text-decoration:none" target="_blank"><span aria-hidden style="color:#9E9E9E;font-size:10px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Oxygen,Ubuntu,Cantarell,sans-serif;line-height:1">Made with</span><img src="https://padlet.net/emails/padlet_email_logo_2026_text-dark-200.png" height="12" style="padding:0;margin:0;background:0 0;border:none;box-shadow:none;display:block" alt="Made with Padlet"></a></div></div>
     </div>
 
-    <div style="margin-top:20px;background:#1e293b;border-radius:10px;padding:18px 22px;border-left:4px solid #FFC72C;max-width:560px;">
+    <div style="margin-top:20px;background:rgba(0,0,0,0.25);border-radius:10px;padding:18px 22px;border-left:4px solid #FFC72C;max-width:560px;">
       <div style="font-size:0.7rem;font-weight:700;color:#FFC72C;margin-bottom:4px;">&#128241; How to Post</div>
-      <p style="font-size:0.78rem;color:#94a3b8;line-height:1.6;margin:0;">Open Padlet on your phone, tap the <strong style="color:#e2e8f0;">+</strong> button, and share what you built today — your assignment name, subject, and one sentence on how AI helped design it. No account needed.</p>
+      <p style="font-size:0.78rem;color:rgba(255,255,255,0.82);line-height:1.6;margin:0;">Open Padlet on your phone, tap the <strong style="color:#fff;">+</strong> button, and share what you built today — your assignment name, subject, and one sentence on how AI helped design it. No account needed.</p>
     </div>
   </div>
 </section>
+  </div>
+</div>
 
 <!-- ─── FEEDBACK ─── -->
 <section id="feedback" style="background:linear-gradient(135deg,#7a1a28,#9D2235);color:#fff;text-align:center;padding:72px 24px;">
@@ -3644,13 +3705,61 @@ This turns AI into a critical thinking tool about art itself.</div>
       body.style.maxHeight = body.scrollHeight + 'px';
     }
   }
-  function toggleCheck(el) { el.classList.toggle('done'); }
+  function toggleCheck(el) {
+    el.classList.toggle('done');
+    const checks = document.querySelectorAll('.acc-check');
+    const total = checks.length;
+    const done = document.querySelectorAll('.acc-check.done').length;
+    const bar = document.getElementById('scroll-progress');
+    const counter = document.getElementById('progress-counter');
+    const allDone = done === total && total > 0;
+    // Flash completion % on the top bar (gold → reverts to scroll after 3s)
+    if (bar) {
+      clearTimeout(window._barTimer);
+      bar.style.background = allDone ? '#27ae60' : '#FFC72C';
+      bar.style.height = '6px';
+      bar.style.width = (total > 0 ? Math.round(done / total * 100) : 0) + '%';
+      window._barTimer = setTimeout(function() {
+        bar.style.background = '#9D2235';
+        bar.style.height = '4px';
+        const d = document.documentElement.scrollHeight - window.innerHeight;
+        if (d > 0) bar.style.width = (window.scrollY / d * 100) + '%';
+      }, 3000);
+    }
+    // Show counter pill at top-right
+    if (counter) {
+      counter.textContent = done + ' of ' + total + ' sections complete' + (allDone ? ' \u2713' : '');
+      counter.classList.toggle('all-done', allDone);
+      counter.style.opacity = '1';
+      clearTimeout(window._ctTimer);
+      window._ctTimer = setTimeout(function() { counter.style.opacity = '0'; }, 4000);
+    }
+  }
+
+  // ── PRINT SECTION ──
+  function printSection(btn) {
+    var module = btn.closest('.acc-module');
+    document.querySelectorAll('.acc-module').forEach(function(m) { m.removeAttribute('data-printing'); });
+    module.setAttribute('data-printing', 'true');
+    window.print();
+    setTimeout(function() { module.removeAttribute('data-printing'); }, 500);
+  }
+
+  // ── AUTO-INJECT PRINT BUTTONS ──
+  (function() {
+    document.querySelectorAll('.acc-body').forEach(function(body) {
+      var bar = document.createElement('div');
+      bar.className = 'print-bar';
+      bar.innerHTML = '<button class="print-btn" onclick="printSection(this)">&#128424; Print this section</button>';
+      body.appendChild(bar);
+    });
+  })();
 
   // ── SCROLL PROGRESS ──
   window.addEventListener('scroll', function() {
     const d = document.documentElement.scrollHeight - window.innerHeight;
     const bar = document.getElementById('scroll-progress');
-    if (bar && d > 0) bar.style.width = (window.scrollY / d * 100) + '%';
+    if (bar && d > 0 && !window._barTimer) bar.style.width = (window.scrollY / d * 100) + '%';
   }, {passive: true});
 
 </script>
