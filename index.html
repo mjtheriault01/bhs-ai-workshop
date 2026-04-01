@@ -858,16 +858,29 @@
     .print-btn:hover { border-color:#9D2235;color:#9D2235; }
     .print-bar { text-align:right;padding:10px 28px 18px;border-top:1px solid rgba(0,0,0,0.06);margin-top:8px; }
 
-    /* ── PRINT MEDIA ── */
+    /* ── PRINT OVERLAY ── */
+    #print-overlay { display:none; }
     @media print {
-      nav,#scroll-progress,#progress-counter,#feedback-fab,#feedback-modal,#pw-gate,
-      .hero,#dashboard,.stats-bar,.quote-strip,#feedback,#confetti-canvas { display:none !important; }
-      .acc-module { display:none !important; }
-      .acc-module[data-printing] { display:block !important; }
-      .acc-module[data-printing] .acc-body { max-height:none !important; overflow:visible !important; display:block !important; }
-      .acc-module[data-printing] .acc-header { display:flex !important; border-left:5px solid #9D2235 !important; }
-      .print-bar { display:none !important; }
-      body { background:#fff !important; }
+      body > *:not(#print-overlay) { display:none !important; }
+      #print-overlay {
+        display:block !important;
+        font-family:Verdana,sans-serif;
+        padding:28px 36px;
+        max-width:700px;
+        color:#1a1a1a;
+      }
+      #print-overlay .pc-header { border-bottom:2px solid #9D2235; padding-bottom:10px; margin-bottom:18px; }
+      #print-overlay h2 { color:#9D2235; font-size:1.15rem; margin-bottom:3px; }
+      #print-overlay .pc-meta { font-size:0.7rem; color:#888; margin:0; }
+      #print-overlay h3 { color:#333; font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:0.07em; margin:14px 0 5px; border-bottom:1px solid #eee; padding-bottom:3px; }
+      #print-overlay ul { margin-left:16px; }
+      #print-overlay li { font-size:0.79rem; color:#333; line-height:1.85; margin-bottom:2px; }
+      #print-overlay p { font-size:0.79rem; color:#555; line-height:1.75; margin:4px 0 8px; }
+      #print-overlay .pc-box { border:1px solid #ddd; border-radius:5px; padding:10px 14px; margin:8px 0; font-size:0.79rem; line-height:1.75; }
+      #print-overlay .pc-gold { border-left:3px solid #FFC72C; background:#fffcee; padding-left:12px; }
+      #print-overlay .pc-red  { border-left:3px solid #dc2626; background:#fff5f5; padding-left:12px; }
+      #print-overlay .pc-yellow { border-left:3px solid #d97706; background:#fffbee; padding-left:12px; }
+      #print-overlay .pc-green  { border-left:3px solid #16a34a; background:#f0fff4; padding-left:12px; }
     }
   </style>
 </head>
@@ -1066,6 +1079,20 @@
     </video>
   </div>
 </section>
+
+<!-- ─── MODULE INTRO BANNER ─── -->
+<div style="background:linear-gradient(180deg,#f5f2f2,#fff);border-top:4px solid #9D2235;border-bottom:3px solid rgba(157,34,53,0.1);padding:48px 24px 40px;text-align:center;">
+  <div style="max-width:680px;margin:0 auto;">
+    <div style="font-size:2.6rem;margin-bottom:14px;">&#9889;</div>
+    <h2 style="font-size:1.85rem;font-weight:700;color:#9D2235;margin-bottom:12px;letter-spacing:-0.02em;">Click. Explore. Transform.</h2>
+    <p style="font-size:0.97rem;color:#53565A;line-height:1.8;max-width:540px;margin:0 auto 24px;">10 modules packed with AI tools, real classroom examples, and research-backed strategies — built for <strong>BHS teachers</strong>. Tap any bar to dive in. Check it off when you're done.</p>
+    <div style="display:inline-flex;align-items:center;gap:12px;background:#fff;border:2px solid #9D2235;border-radius:999px;padding:9px 24px;box-shadow:0 2px 10px rgba(157,34,53,0.1);">
+      <span style="font-size:1rem;">&#127919;</span>
+      <span style="font-size:0.72rem;font-weight:700;color:#9D2235;text-transform:uppercase;letter-spacing:0.08em;">Your Progress</span>
+      <span id="module-progress-text" style="font-size:0.8rem;font-weight:700;color:#53565A;">0 of 10 complete</span>
+    </div>
+  </div>
+</div>
 
 <div class="acc-module">
   <div class="acc-header open" onclick="toggleModule(this)">
@@ -1592,17 +1619,13 @@
       </div>
 
     </div>
+
+    <div style="margin-top:32px;background:#9D2235;border-radius:12px;padding:28px 36px;text-align:center;">
+      <blockquote style="font-size:0.95rem;color:#fff;line-height:1.85;font-style:italic;margin:0;max-width:680px;margin:0 auto;"><span style="color:#FFC72C;font-size:2rem;font-family:Georgia,serif;line-height:0;vertical-align:-0.35em;margin-right:3px;">&ldquo;</span>AI is not going to replace the teaching &mdash; but it can enhance how you use it, make the learning better, make the teaching better, and give better feedback.<span style="color:#FFC72C;font-size:2rem;font-family:Georgia,serif;line-height:0;vertical-align:-0.35em;margin-left:3px;">&rdquo;</span></blockquote>
+    </div>
   </div>
 </section>
   </div>
-</div>
-
-<!-- QUOTE -->
-<div class="quote-strip">
-  <blockquote>
-    AI is not going to replace the teaching — but it can enhance how you use it,
-    make the learning better, make the teaching better, and give better feedback.
-  </blockquote>
 </div>
 
 <div class="acc-module">
@@ -2438,6 +2461,9 @@
   <p style="font-size:0.95rem;opacity:0.9;max-width:500px;margin:0 auto 36px;line-height:1.75;">Tell us what you learned, what you'll try first, and what would make this even better. Takes about 3 minutes.</p>
   <a href="feedback-form.html" target="_blank" style="display:inline-block;padding:16px 44px;background:#FFC72C;color:#1a1a1a;border-radius:8px;font-family:Verdana,sans-serif;font-size:1rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">Give Feedback &#8594;</a>
 </section>
+
+<!-- PRINT OVERLAY (populated by JS, only visible during window.print()) -->
+<div id="print-overlay"></div>
 
 <!-- FLOATING FEEDBACK BUTTON -->
 <button onclick="openFeedback()" id="feedback-fab" style="position:fixed;bottom:28px;right:28px;z-index:5000;background:#9D2235;color:#fff;border:none;border-radius:999px;padding:14px 22px;font-family:Verdana,sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,0.3);display:flex;align-items:center;gap:8px;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)';this.style.boxShadow='0 8px 28px rgba(0,0,0,0.35)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 20px rgba(0,0,0,0.3)'">
@@ -3734,15 +3760,44 @@ This turns AI into a critical thinking tool about art itself.</div>
       clearTimeout(window._ctTimer);
       window._ctTimer = setTimeout(function() { counter.style.opacity = '0'; }, 4000);
     }
+    // Update intro banner progress text
+    var mpt = document.getElementById('module-progress-text');
+    if (mpt) mpt.textContent = done + ' of ' + total + ' complete' + (allDone ? ' \u2713' : '');
   }
+
+  // ── PRINT SUMMARIES ──
+  var PRINT_SUMMARIES = {
+    0: '<div class="pc-header"><h2>&#128218; Research Vault &mdash; AI Basics</h2><p class="pc-meta">BHS AI Institute Day &middot; April 6, 2026 &middot; Always Learning, Always Growing&trade;</p></div><h3>What is AI?</h3><ul><li>AI is a <strong>pattern recognizer</strong> trained on vast text &mdash; not a search engine or fact database</li><li>It predicts the most useful response based on context and training</li><li>It hallucinates &mdash; always verify factual claims from a primary or authoritative source</li></ul><h3>Enhance vs. Replace</h3><ul><li><strong>Augmentation:</strong> AI handles routine tasks so you focus on high-value teaching work</li><li><strong>Offloading:</strong> Surrendering the thinking to AI &mdash; teach students to recognize and avoid this</li><li>Ask: &ldquo;Who is doing the intellectual heavy lifting?&rdquo; It should always be the student</li></ul><h3>Myths vs. Reality</h3><ul><li>&ldquo;AI will replace teachers&rdquo; &rarr; AI cannot replicate relationships, mentorship, or adaptive human judgment</li><li>&ldquo;It always gives correct answers&rdquo; &rarr; AI errors are common &mdash; critical evaluation is the essential skill</li><li>&ldquo;It&rsquo;s cheating if students use it&rdquo; &rarr; Assignment design determines whether it&rsquo;s cheating</li></ul><h3>Illinois Legal Compliance (SOPPA / FERPA)</h3><ul><li>Never input student names, IDs, IEP/504 data, or raw student work into free AI tools</li><li>No personally identifiable information (PII) in prompts</li><li>Use anonymized or hypothetical scenarios for classroom practice</li><li>District-approved tools only for student-facing use</li></ul><div class="pc-box pc-gold"><strong>&ldquo;AI is not going to replace the teaching &mdash; but it can enhance how you use it, make the learning better, make the teaching better, and give better feedback.&rdquo;</strong></div>',
+
+    1: '<div class="pc-header"><h2>&#127979; Subject Workflows &mdash; Quick Wins by Department</h2><p class="pc-meta">BHS AI Institute Day &middot; April 6, 2026</p></div><h3>ELA</h3><ul><li>AI Feedback Loop: paste a student draft, ask for 3 specific areas for improvement (student revises independently)</li><li>Debate Prep: generate the strongest counterarguments to a student&rsquo;s thesis for practice</li></ul><h3>Math / Science</h3><ul><li>Step-by-step explainer: &ldquo;Explain this concept as if I&rsquo;ve never heard of it before&rdquo;</li><li>Error analysis: &ldquo;Here is a wrong student solution &mdash; what did they likely misunderstand?&rdquo;</li><li>Practice question generator with answer key (students verify every answer)</li></ul><h3>Social Studies</h3><ul><li>Differentiated text at 3 reading levels from a single passage</li><li>Primary source analysis starter questions for Socratic seminars</li></ul><h3>Fine Arts</h3><ul><li>Critique prompt generator for student artwork reflection writing</li><li>Artist research assistant &mdash; always verify dates/facts from primary sources</li></ul><h3>PE / Health &amp; CTE / INCubatorEdu</h3><ul><li>PE: personalized workout plan generator; health scenario discussion starters</li><li>CTE: roleplay as a skeptical investor for pitch rehearsal and revision</li></ul><h3>World Language</h3><ul><li>AI Conversation Partner: practice dialogues with instant grammar feedback</li><li>Cultural Immersion Scenario: &ldquo;Describe a typical Tuesday in [country]&rdquo;</li></ul><h3>Skilled Trades</h3><ul><li>Safety Checklist Generator: OSHA-aligned pre-task checklists from a job description</li><li>Technical Manual Translator: simplify complex specs into plain-language steps</li></ul><div class="pc-box pc-gold"><strong>Audit Rule:</strong> In every activity, students must be the <em>auditors</em> of AI output &mdash; verifying, critiquing, or building on what AI produces.</div>',
+
+    2: '<div class="pc-header"><h2>&#11088; Student Spotlights &mdash; Enhance, Not Replace in Action</h2><p class="pc-meta">BHS AI Institute Day &middot; April 6, 2026</p></div><p><em>Every example preserves the student&rsquo;s thinking &mdash; AI just made the learning richer.</em></p><ul><li><strong>The Debate Partner (ELA, 9th):</strong> Emma asked AI for the 5 strongest counterarguments to her thesis, then wrote her own rebuttal. Her teacher called the argument &ldquo;unusually sophisticated.&rdquo;</li><li><strong>The Socratic Loop (Math, 11th):</strong> James asked AI for one guiding question instead of the answer. Three Socratic questions later, he solved the proof himself.</li><li><strong>The AI Critic (Fine Arts, 10th):</strong> Sofia had AI generate 8 color palettes then wrote a critique of why they felt generic &mdash; best writing of the semester.</li><li><strong>The Error Hunters (Science, 12th):</strong> AP Bio group verified 20 AI-generated questions, found 3 errors. Explaining <em>why</em> AI was wrong became their best review session.</li><li><strong>The Pitch Coach (CTE, 11th):</strong> Marcus had ChatGPT roleplay as a skeptical investor. After 4 tough rounds he restructured his pitch &mdash; and won the competition.</li><li><strong>The Fact-Checkers (Social Studies, 10th):</strong> Students verified AI research with primary sources, found errors, and sparked the best Socratic debate of the year about bias and reliability.</li></ul><div class="pc-box pc-gold"><strong>The Pattern:</strong> In every case, the student was the auditor, critic, or decision-maker. AI provided raw material. Students provided the judgment.</div>',
+
+    3: '<div class="pc-header"><h2>&#9999; Prompt Engineering &mdash; Getting the Best from AI</h2><p class="pc-meta">BHS AI Institute Day &middot; April 6, 2026</p></div><h3>The CRAFT Formula</h3><ul><li><strong>C</strong>ontext: Who are you? What&rsquo;s the situation?</li><li><strong>R</strong>ole: Who should AI be? (&ldquo;Act as an experienced AP teacher&hellip;&rdquo;)</li><li><strong>A</strong>udience: Who is this for? Grade level, prior knowledge?</li><li><strong>F</strong>ormat: List? Paragraph? Rubric? Slide bullets?</li><li><strong>T</strong>one: Formal, encouraging, Socratic, plain language?</li></ul><h3>Weak &rarr; Expert Prompt</h3><div class="pc-box pc-red"><strong>Weak:</strong> &ldquo;Make a quiz about the Civil War&rdquo;</div><div class="pc-box pc-green"><strong>Expert:</strong> &ldquo;Act as an 8th-grade history teacher. Create a 10-question multiple-choice quiz on Civil War causes for students who have read Chapter 12. Include one trick question. Provide an answer key.&rdquo;</div><h3>Pro Tips</h3><ul><li><strong>Voice memo trick:</strong> Record your verbal brainstorm &rarr; transcribe &rarr; paste as prompt context. Saves 15+ min of typing per session.</li><li>If the first response isn&rsquo;t right: &ldquo;Good start. Now make it more [specific / shorter / focused on X].&rdquo;</li><li>Tell AI what NOT to do: &ldquo;Do not give away the answer &mdash; only ask guiding questions.&rdquo;</li></ul><div class="pc-box pc-gold"><strong>Remember:</strong> A specific, contextualized prompt produces dramatically better results than a vague one &mdash; every single time.</div>',
+
+    4: '<div class="pc-header"><h2>&#128300; Deep Research Archive &mdash; The Evidence</h2><p class="pc-meta">BHS AI Institute Day &middot; April 6, 2026</p></div><h3>I-TPACK Framework</h3><ul><li><strong>Content Knowledge (CK):</strong> What you teach</li><li><strong>Pedagogical Knowledge (PK):</strong> How you teach it</li><li><strong>Technological Knowledge (TK):</strong> The AI tools available</li><li><strong>Intelligent Literacy (IL):</strong> Understanding AI&rsquo;s capabilities, limits, and biases &mdash; the NEW layer every educator needs</li><li>The &ldquo;sweet spot&rdquo; = where all four intersect in your lesson design</li></ul><h3>Cognitive Load Theory</h3><ul><li><strong>Extrinsic Load:</strong> Formatting, logistics, admin tasks &mdash; AI can handle this efficiently</li><li><strong>Germane Load:</strong> Deep thinking, synthesis, analysis &mdash; this is where learning actually happens</li><li>Goal: Shift teacher and student time from extrinsic &rarr; germane tasks</li></ul><h3>The Time Reclaimer</h3><ul><li>5.9 hours saved per week (teacher survey average)</li><li>Equivalent to ~6 full weeks per school year returned to your professional life</li></ul><h3>SOPPA / FERPA Red Lines (Non-Negotiable)</h3><ul><li>Student names, IDs, or grades in any AI prompt</li><li>IEP/504 data, accommodations, or behavioral records</li><li>Raw student work uploaded to free or consumer AI tools</li><li>Solution: use anonymized, generalized, or hypothetical scenarios</li></ul>',
+
+    5: '<div class="pc-header"><h2>&#128994; The Stoplight Model &mdash; AI Use Framework</h2><p class="pc-meta">BHS AI Institute Day &middot; April 6, 2026</p></div><div class="pc-box pc-red"><strong>RED LIGHT &mdash; Human-Only Zone</strong><ul><li>Timed writing assessments and in-class essays</li><li>Lab observations and original data collection</li><li>Oral presentations, discussions, and performance tasks</li><li>Reflective journals and personal narratives</li><li>Standardized test prep and benchmark assessments</li></ul></div><div class="pc-box pc-yellow"><strong>YELLOW LIGHT &mdash; AI as Scaffold (student must audit)</strong><ul><li>Research brainstorming &rarr; student verifies every claim with a primary source</li><li>Draft feedback &rarr; student revises independently; cannot submit AI&rsquo;s version</li><li>Differentiated reading levels &rarr; teacher reviews for accuracy before distributing</li><li>Study guide outlines &rarr; student fills in from memory or class notes</li></ul></div><div class="pc-box pc-green"><strong>GREEN LIGHT &mdash; AI as Teacher Co-Pilot</strong><ul><li>Lesson planning and differentiation scaffolds</li><li>Parent communication drafts (always personalize before sending)</li><li>Rubric creation and IEP-friendly modifications</li><li>Sub plans, procedure drafts, and meeting agendas</li></ul></div><div class="pc-box pc-gold"><strong>The Audit Question:</strong> &ldquo;Who is doing the intellectual heavy lifting &mdash; the student or the AI?&rdquo; If it&rsquo;s the AI, redesign the task.</div>',
+
+    6: '<div class="pc-header"><h2>&#127918; Interactive Lab &mdash; Key Takeaways</h2><p class="pc-meta">BHS AI Institute Day &middot; April 6, 2026</p></div><h3>Privacy Red Line Sorter</h3><ul><li>Practiced identifying SOPPA/FERPA safe vs. &ldquo;Red Line&rdquo; scenarios</li><li>Red Lines: student names, IDs, IEP data, raw student work in free AI tools</li><li>Safe: anonymized scenarios, general subject matter, hypothetical students</li></ul><h3>Gift of Time Calculator</h3><ul><li>Estimated your personal weekly AI time savings across grading, planning, and admin</li><li>National average: 5.9 hrs/week &asymp; 6 full weeks per school year</li></ul><h3>Prompt Surgeon Lab</h3><ul><li>Transformed weak prompts into expert prompts using the CRAFT framework</li><li>Key insight: specificity is the single biggest driver of AI output quality</li></ul><h3>Stoplight Assignment Matcher</h3><ul><li>Matched assignment types to Red / Yellow / Green categories</li><li>Key insight: most academic integrity problems are Yellow Light assignments with no audit requirement</li><li>Fix: redesign so AI produces raw material and students provide the intellectual judgment</li></ul>',
+
+    7: '<div class="pc-header"><h2>&#127919; Knowledge Check &mdash; Core Concepts</h2><p class="pc-meta">BHS AI Institute Day &middot; April 6, 2026</p></div><h3>5 Concepts Every BHS Teacher Should Know</h3><ul><li><strong>1. AI is a pattern recognizer, not a fact database.</strong> It hallucinates. Teach verification as the primary AI skill.</li><li><strong>2. &ldquo;Enhance, Not Replace&rdquo; is a design principle.</strong> Ask: who is doing the thinking &mdash; the student or the AI?</li><li><strong>3. SOPPA / FERPA Red Lines are non-negotiable.</strong> No PII, no IEP data, no raw student work in free AI tools. Ever.</li><li><strong>4. Prompt quality determines output quality.</strong> CRAFT formula: Context, Role, Audience, Format, Tone.</li><li><strong>5. The Stoplight Model guides assignment design.</strong> Red = human only. Yellow = AI scaffold + student audit. Green = teacher co-pilot tasks.</li></ul><div class="pc-box pc-gold"><strong>Your First Action Step:</strong> Identify ONE assignment this week you could redesign as a Yellow Light activity &mdash; where AI provides raw material and students provide the intellectual judgment.</div>',
+
+    8: '<div class="pc-header"><h2>&#128736; AI Toolkit &mdash; Your Go-To Tools</h2><p class="pc-meta">BHS AI Institute Day &middot; April 6, 2026</p></div><ul><li><strong>ChatGPT (chatgpt.com):</strong> Best for lesson planning, differentiation, rubric creation, parent emails, and general brainstorming. Free tier available.</li><li><strong>Gemini (gemini.google.com):</strong> Integrates with Google Workspace &mdash; Docs, Slides, Sheets. Best for teachers already in the Google ecosystem.</li><li><strong>NotebookLM (notebooklm.google.com):</strong> Upload your own documents &mdash; textbook chapters, articles, notes &mdash; and chat with them. Great for student research with cited sources.</li><li><strong>Voice Memo &rarr; Transcript:</strong> Record your verbal brainstorm, transcribe (Otter.ai or built-in iPhone/Android), paste into AI as context. Saves 15+ minutes per planning session.</li><li><strong>Google Docs AI (Gemini in Docs):</strong> In-document drafting and editing suggestions. Best for collaborative document work.</li></ul><div class="pc-box pc-gold"><strong>Start here:</strong> Pick ONE tool. Use it for ONE task this week. Don&rsquo;t try to master everything at once &mdash; build the habit first, then expand.</div>',
+
+    9: '<div class="pc-header"><h2>&#127775; Today&rsquo;s Share Out &mdash; What We Built</h2><p class="pc-meta">BHS AI Institute Day &middot; April 6, 2026</p></div><h3>How to Post Your Work</h3><ul><li>Open the Padlet board on your phone</li><li>Tap the + button &mdash; no account required</li><li>Share: assignment name, subject, and one sentence on how AI helped you design it</li></ul><h3>What Makes a Strong Share-Out</h3><ul><li>&ldquo;I redesigned [assignment] so students use AI to [scaffold], then must [verify / create / evaluate]&hellip;&rdquo;</li><li>Name the Stoplight color: Yellow or Green Light?</li><li>What is the student&rsquo;s intellectual job in your new design?</li></ul><h3>Takeaways to Bring Back to Your Classroom</h3><ul><li>Start small: one Yellow Light redesign this week</li><li>Use the CRAFT formula for your first teacher-facing prompt</li><li>Make students <em>auditors</em> of AI output, not just consumers</li><li>Revisit this site anytime: <strong>bhs-ai-workshop.netlify.app</strong></li></ul><div class="pc-box pc-gold"><strong>&ldquo;AI is not going to replace the teaching &mdash; but it can enhance how you use it, make the learning better, make the teaching better, and give better feedback.&rdquo;</strong></div>'
+  };
 
   // ── PRINT SECTION ──
   function printSection(btn) {
     var module = btn.closest('.acc-module');
-    document.querySelectorAll('.acc-module').forEach(function(m) { m.removeAttribute('data-printing'); });
-    module.setAttribute('data-printing', 'true');
+    var modules = Array.from(document.querySelectorAll('.acc-module'));
+    var idx = modules.indexOf(module);
+    var overlay = document.getElementById('print-overlay');
+    if (!overlay) return;
+    overlay.innerHTML = PRINT_SUMMARIES[idx] || '<p>No summary available for this section.</p>';
     window.print();
-    setTimeout(function() { module.removeAttribute('data-printing'); }, 500);
+    setTimeout(function() { overlay.innerHTML = ''; }, 600);
   }
 
   // ── AUTO-INJECT PRINT BUTTONS ──
