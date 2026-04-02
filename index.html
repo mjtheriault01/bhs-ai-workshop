@@ -933,6 +933,20 @@
       #print-overlay .pc-yellow { border-left:3px solid #d97706; background:#fffbee; padding-left:12px; }
       #print-overlay .pc-green  { border-left:3px solid #16a34a; background:#f0fff4; padding-left:12px; }
     }
+    /* Feedback modal scale/rec buttons */
+    .fb-scale-btn { width:48px;height:48px;border-radius:8px;border:2px solid #ddd;background:#faf8f8;font-weight:700;font-size:0.9rem;cursor:pointer;transition:all 0.15s; }
+    .fb-scale-btn.sel-low  { background:#9D2235;color:#fff;border-color:#9D2235; }
+    .fb-scale-btn.sel-mid  { background:#FFC72C;color:#1a1a1a;border-color:#FFC72C; }
+    .fb-scale-btn.sel-high { background:#2e7d32;color:#fff;border-color:#2e7d32; }
+    .fb-rec-btn { width:40px;height:40px;border-radius:8px;border:2px solid #ddd;background:#faf8f8;font-weight:700;font-size:0.8rem;cursor:pointer;transition:all 0.15s; }
+    .fb-rec-btn.selected { background:#FFC72C;color:#1a1a1a;border-color:#FFC72C;font-weight:700; }
+    .fb-section-card { background:#fff;border-radius:12px;padding:24px;border:1px solid #e5e0e0;margin-bottom:16px; }
+    .fb-divider { height:1px;background:#f0ecec;margin:18px 0; }
+    .fb-field-label { display:block;font-size:0.82rem;font-weight:700;color:#1a1a1a;margin-bottom:4px; }
+    .fb-field-sub { display:block;font-weight:400;color:#53565A;font-size:0.78rem;margin-top:2px;margin-bottom:8px; }
+    .fb-text-input { width:100%;background:#faf8f8;border:1.5px solid #ddd;border-radius:8px;padding:10px 12px;font-size:0.85rem;font-family:Verdana,sans-serif;color:#1a1a1a;outline:none;transition:border-color 0.15s;box-sizing:border-box; }
+    .fb-text-input:focus { border-color:#9D2235; }
+    .fb-text-input::placeholder { color:#bbb; }
   </style>
 </head>
 <body>
@@ -997,7 +1011,7 @@
         <h2 style="font-size:1.7rem;font-weight:700;color:#1a1a1a;margin:0;">Workshop Command Center</h2>
       </div>
       <div style="display:flex;gap:10px;flex-wrap:wrap;">
-        <a href="feedback-form.html" target="_blank" style="padding:11px 22px;background:#9D2235;color:#fff;border-radius:6px;font-family:Verdana,sans-serif;font-size:0.82rem;font-weight:700;text-decoration:none;white-space:nowrap;">&#128172; Submit Feedback</a>
+        <button onclick="openFeedback()" style="padding:11px 22px;background:#9D2235;color:#fff;border-radius:6px;font-family:Verdana,sans-serif;font-size:0.82rem;font-weight:700;border:none;cursor:pointer;white-space:nowrap;">&#128172; Submit Feedback</button>
         <a href="#lab" style="padding:11px 22px;background:#fff;color:#9D2235;border:2px solid #9D2235;border-radius:6px;font-family:Verdana,sans-serif;font-size:0.82rem;font-weight:700;text-decoration:none;white-space:nowrap;">&#127918; Jump to Lab</a>
       </div>
     </div>
@@ -2506,7 +2520,7 @@
   <div style="font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:#FFC72C;margin-bottom:14px;">&#128172; End of Day</div>
   <h2 style="font-size:1.7rem;font-weight:700;margin-bottom:12px;">Share Your Feedback</h2>
   <p style="font-size:0.95rem;opacity:0.9;max-width:500px;margin:0 auto 36px;line-height:1.75;">Tell us what you learned, what you'll try first, and what would make this even better. Takes about 3 minutes.</p>
-  <a href="feedback-form.html" target="_blank" style="display:inline-block;padding:16px 44px;background:#FFC72C;color:#1a1a1a;border-radius:8px;font-family:Verdana,sans-serif;font-size:1rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">Give Feedback &#8594;</a>
+  <button onclick="openFeedback()" style="display:inline-block;padding:16px 44px;background:#FFC72C;color:#1a1a1a;border-radius:8px;font-family:Verdana,sans-serif;font-size:1rem;font-weight:700;border:none;cursor:pointer;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">Give Feedback &#8594;</button>
 </section></div>
 
 <!-- SIGN-IN OVERLAY -->
@@ -2544,75 +2558,170 @@
 </button>
 
 <!-- FEEDBACK MODAL -->
-<div id="feedback-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:6000;align-items:center;justify-content:center;padding:20px;">
-  <div style="background:#fff;border-radius:16px;max-width:540px;width:100%;padding:36px;position:relative;max-height:90vh;overflow-y:auto;animation:popIn 0.25s ease;">
-    <button onclick="closeFeedback()" style="position:absolute;top:14px;right:18px;background:none;border:none;font-size:1.5rem;cursor:pointer;color:#888;line-height:1;" onmouseover="this.style.color='#9D2235'" onmouseout="this.style.color='#888'">&times;</button>
-    <div style="text-align:center;margin-bottom:24px;">
-      <div style="font-size:2.5rem;margin-bottom:8px;">&#127881;</div>
-      <h3 style="font-size:1.3rem;font-weight:700;color:#9D2235;margin-bottom:4px;">How'd We Do?</h3>
-      <p style="font-size:0.85rem;color:#666;">Your feedback makes the next AI Institute Day even better. Takes 60 seconds!</p>
+<div id="feedback-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);z-index:6000;align-items:center;justify-content:center;padding:16px;">
+  <div style="background:#f7f5f5;border-radius:16px;max-width:600px;width:100%;position:relative;max-height:92vh;overflow-y:auto;animation:popIn 0.25s ease;display:flex;flex-direction:column;">
+    <!-- Modal header -->
+    <div style="background:linear-gradient(135deg,#7a1a28,#9D2235);color:#fff;text-align:center;padding:28px 24px 22px;border-radius:16px 16px 0 0;flex-shrink:0;">
+      <button onclick="closeFeedback()" style="position:absolute;top:12px;right:16px;background:rgba(255,255,255,0.15);border:none;border-radius:50%;width:32px;height:32px;font-size:1.2rem;cursor:pointer;color:#fff;line-height:1;" onmouseover="this.style.background='rgba(255,255,255,0.25)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">&times;</button>
+      <div style="font-size:0.62rem;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:#FFC72C;margin-bottom:8px;">BPS101 &nbsp;·&nbsp; April 6, 2026</div>
+      <h3 style="font-size:1.3rem;font-weight:700;margin-bottom:4px;">AI Institute Day — Feedback</h3>
+      <p style="font-size:0.78rem;opacity:0.85;">Takes about 3 minutes. Responses go directly to the planning team.</p>
     </div>
+    <div style="height:4px;background:#FFC72C;flex-shrink:0;"></div>
 
-    <!-- Mood picker -->
-    <div style="margin-bottom:22px;">
-      <label style="display:block;font-size:0.8rem;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;">How are you feeling right now?</label>
-      <div style="display:flex;justify-content:center;gap:12px;" id="mood-picker">
-        <button type="button" class="mood-btn" onclick="selectMood(this,'Overwhelmed')" title="Overwhelmed" style="font-size:2rem;background:none;border:3px solid transparent;border-radius:10px;cursor:pointer;padding:6px;transition:all 0.15s;">&#128565;</button>
-        <button type="button" class="mood-btn" onclick="selectMood(this,'Skeptical')" title="Skeptical" style="font-size:2rem;background:none;border:3px solid transparent;border-radius:10px;cursor:pointer;padding:6px;transition:all 0.15s;">&#129300;</button>
-        <button type="button" class="mood-btn" onclick="selectMood(this,'Curious')" title="Curious" style="font-size:2rem;background:none;border:3px solid transparent;border-radius:10px;cursor:pointer;padding:6px;transition:all 0.15s;">&#128513;</button>
-        <button type="button" class="mood-btn" onclick="selectMood(this,'Excited')" title="Excited" style="font-size:2rem;background:none;border:3px solid transparent;border-radius:10px;cursor:pointer;padding:6px;transition:all 0.15s;">&#129321;</button>
-        <button type="button" class="mood-btn" onclick="selectMood(this,'Mind Blown')" title="Mind Blown" style="font-size:2rem;background:none;border:3px solid transparent;border-radius:10px;cursor:pointer;padding:6px;transition:all 0.15s;">&#129327;</button>
+    <!-- Form body -->
+    <div id="fb-form-wrap" style="padding:20px;display:flex;flex-direction:column;gap:16px;">
+
+      <!-- Your Info -->
+      <div class="fb-section-card">
+        <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#9D2235;margin-bottom:2px;">Your Info</div>
+        <div style="font-size:1.05rem;font-weight:700;color:#1a1a1a;margin-bottom:2px;">Before We Begin</div>
+        <div class="fb-divider"></div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div>
+            <label class="fb-field-label" for="fb-name">Full Name <span style="color:#9D2235;">*</span></label>
+            <input id="fb-name" type="text" placeholder="e.g. Jane Smith" class="fb-text-input" />
+          </div>
+          <div>
+            <label class="fb-field-label" for="fb-email">BPS101 Email <span style="color:#9D2235;">*</span></label>
+            <input id="fb-email" type="email" placeholder="you@bps101.net" class="fb-text-input" />
+          </div>
+        </div>
       </div>
-      <input type="hidden" id="fb-mood" value="" />
-    </div>
 
-    <!-- Star rating -->
-    <div style="margin-bottom:22px;">
-      <label style="display:block;font-size:0.8rem;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;">Overall session rating</label>
-      <div id="star-rating" style="display:flex;gap:6px;font-size:2rem;cursor:pointer;">
-        <span class="star" data-val="1" onclick="setStars(1)" onmouseover="hoverStars(1)" onmouseout="resetStars()">&#9733;</span>
-        <span class="star" data-val="2" onclick="setStars(2)" onmouseover="hoverStars(2)" onmouseout="resetStars()">&#9733;</span>
-        <span class="star" data-val="3" onclick="setStars(3)" onmouseover="hoverStars(3)" onmouseout="resetStars()">&#9733;</span>
-        <span class="star" data-val="4" onclick="setStars(4)" onmouseover="hoverStars(4)" onmouseout="resetStars()">&#9733;</span>
-        <span class="star" data-val="5" onclick="setStars(5)" onmouseover="hoverStars(5)" onmouseout="resetStars()">&#9733;</span>
+      <!-- Section 1: The Aha Factor -->
+      <div class="fb-section-card">
+        <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#9D2235;margin-bottom:2px;">Section 1</div>
+        <div style="font-size:1.05rem;font-weight:700;color:#1a1a1a;margin-bottom:2px;">The Aha Factor &#9889;</div>
+        <p style="font-size:0.78rem;color:#53565A;margin-bottom:16px;">Rate your agreement &nbsp;·&nbsp; 1 = Strongly Disagree &nbsp; 5 = Strongly Agree</p>
+
+        <!-- Confidence -->
+        <div style="margin-bottom:20px;">
+          <label class="fb-field-label">Confidence <span style="color:#9D2235;">*</span>
+            <span class="fb-field-sub">I feel more confident using AI to enhance my teaching while protecting student privacy.</span>
+          </label>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'confidence',1)">1</button>
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'confidence',2)">2</button>
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'confidence',3)">3</button>
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'confidence',4)">4</button>
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'confidence',5)">5</button>
+            <span id="confidence-label" style="font-size:0.72rem;color:#53565A;font-style:italic;margin-left:4px;"></span>
+          </div>
+          <input type="hidden" id="val-confidence" />
+        </div>
+        <div class="fb-divider"></div>
+
+        <!-- Gift of Time -->
+        <div style="margin-bottom:20px;">
+          <label class="fb-field-label">Gift of Time <span style="color:#9D2235;">*</span>
+            <span class="fb-field-sub">I identified at least one AI workflow today that will save me 2+ hours of work per week.</span>
+          </label>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'gift',1)">1</button>
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'gift',2)">2</button>
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'gift',3)">3</button>
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'gift',4)">4</button>
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'gift',5)">5</button>
+            <span id="gift-label" style="font-size:0.72rem;color:#53565A;font-style:italic;margin-left:4px;"></span>
+          </div>
+          <input type="hidden" id="val-gift" />
+        </div>
+        <div class="fb-divider"></div>
+
+        <!-- Stoplight -->
+        <div>
+          <label class="fb-field-label">Stoplight Model <span style="color:#9D2235;">*</span>
+            <span class="fb-field-sub">The Red/Yellow/Green framework is a clear and practical tool I can use immediately.</span>
+          </label>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'stoplight',1)">1</button>
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'stoplight',2)">2</button>
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'stoplight',3)">3</button>
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'stoplight',4)">4</button>
+            <button type="button" class="fb-scale-btn" onclick="fbSelectScale(this,'stoplight',5)">5</button>
+            <span id="stoplight-label" style="font-size:0.72rem;color:#53565A;font-style:italic;margin-left:4px;"></span>
+          </div>
+          <input type="hidden" id="val-stoplight" />
+        </div>
       </div>
-      <input type="hidden" id="fb-stars" value="0" />
-      <div id="star-label" style="font-size:0.8rem;color:#888;margin-top:4px;height:18px;"></div>
-    </div>
 
-    <!-- Favorite part -->
-    <div style="margin-bottom:18px;">
-      <label style="display:block;font-size:0.8rem;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;">&#127775; What was your favorite part?</label>
-      <textarea id="fb-fav" rows="2" placeholder="The games, the prompting tips, the &quot;aha&quot; moment when..." style="width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:8px;font-family:Verdana,sans-serif;font-size:0.85rem;resize:vertical;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#9D2235'" onblur="this.style.borderColor='#ddd'"></textarea>
-    </div>
+      <!-- Section 2: The Practical Win -->
+      <div class="fb-section-card">
+        <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#9D2235;margin-bottom:2px;">Section 2</div>
+        <div style="font-size:1.05rem;font-weight:700;color:#1a1a1a;margin-bottom:2px;">The Practical Win &#127919;</div>
+        <p style="font-size:0.78rem;color:#53565A;margin-bottom:16px;">Short answers — a sentence or two is perfect.</p>
 
-    <!-- One thing to change -->
-    <div style="margin-bottom:18px;">
-      <label style="display:block;font-size:0.8rem;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;">&#128161; One thing you'd change?</label>
-      <textarea id="fb-change" rows="2" placeholder="More time for the games, different topic, shorter sessions..." style="width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:8px;font-family:Verdana,sans-serif;font-size:0.85rem;resize:vertical;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#9D2235'" onblur="this.style.borderColor='#ddd'"></textarea>
-    </div>
-
-    <!-- One word -->
-    <div style="margin-bottom:24px;">
-      <label style="display:block;font-size:0.8rem;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:6px;">&#128172; Describe today in ONE word</label>
-      <input type="text" id="fb-word" maxlength="30" placeholder="Enlightening? Overwhelming? Useful? Let's hear it." style="width:100%;padding:10px 12px;border:2px solid #ddd;border-radius:8px;font-family:Verdana,sans-serif;font-size:0.85rem;outline:none;transition:border 0.2s;" onfocus="this.style.borderColor='#9D2235'" onblur="this.style.borderColor='#ddd'" />
-    </div>
-
-    <!-- Will you try it? -->
-    <div style="margin-bottom:24px;">
-      <label style="display:block;font-size:0.8rem;font-weight:700;color:#333;text-transform:uppercase;letter-spacing:0.07em;margin-bottom:10px;">&#128640; Will you try AI in your classroom this week?</label>
-      <div style="display:flex;gap:10px;flex-wrap:wrap;" id="try-picker">
-        <button type="button" class="try-btn" onclick="selectTry(this,'Absolutely!')" style="padding:8px 18px;border:2px solid #ddd;border-radius:999px;background:#fff;font-family:Verdana,sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.15s;">Absolutely! &#128293;</button>
-        <button type="button" class="try-btn" onclick="selectTry(this,'Probably yes')" style="padding:8px 18px;border:2px solid #ddd;border-radius:999px;background:#fff;font-family:Verdana,sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.15s;">Probably yes &#128522;</button>
-        <button type="button" class="try-btn" onclick="selectTry(this,'Still thinking...')" style="padding:8px 18px;border:2px solid #ddd;border-radius:999px;background:#fff;font-family:Verdana,sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.15s;">Still thinking... &#129300;</button>
-        <button type="button" class="try-btn" onclick="selectTry(this,'Need more practice')" style="padding:8px 18px;border:2px solid #ddd;border-radius:999px;background:#fff;font-family:Verdana,sans-serif;font-size:0.82rem;font-weight:700;cursor:pointer;transition:all 0.15s;">Need more practice &#128218;</button>
+        <div style="margin-bottom:16px;">
+          <label class="fb-field-label" for="fb-creation">The Creation <span style="color:#9D2235;">*</span>
+            <span class="fb-field-sub">What is one Yellow or Green Light assignment you drafted or imagined today?</span>
+          </label>
+          <textarea id="fb-creation" rows="3" placeholder="e.g. I want students to use AI to generate counterarguments, then write their own rebuttals..." class="fb-text-input" style="resize:vertical;"></textarea>
+        </div>
+        <div class="fb-divider"></div>
+        <div>
+          <label class="fb-field-label" for="fb-value">The Value <span style="color:#9D2235;">*</span>
+            <span class="fb-field-sub">What was the most useful part of this training for you personally?</span>
+          </label>
+          <textarea id="fb-value" rows="3" placeholder="e.g. The Stoplight Model gave me a framework I can actually explain to students and parents..." class="fb-text-input" style="resize:vertical;"></textarea>
+        </div>
       </div>
-      <input type="hidden" id="fb-try" value="" />
+
+      <!-- Section 3: The Shout-Out (optional) -->
+      <div class="fb-section-card" style="border-top:4px solid #FFC72C;">
+        <div style="font-size:0.62rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#53565A;margin-bottom:2px;">Section 3 &nbsp;·&nbsp; Optional</div>
+        <div style="font-size:1.05rem;font-weight:700;color:#1a1a1a;margin-bottom:2px;">The Shout-Out &#127775;</div>
+        <p style="font-size:0.78rem;color:#53565A;margin-bottom:16px;">No pressure — but we love hearing from you.</p>
+
+        <div style="margin-bottom:20px;">
+          <label class="fb-field-label">How likely are you to recommend this AI training to a colleague?
+            <span class="fb-field-sub">1 = Not at all likely &nbsp;·&nbsp; 10 = Absolutely would</span>
+          </label>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;">
+            <button type="button" class="fb-rec-btn" onclick="fbSelectRec(this,1)">1</button>
+            <button type="button" class="fb-rec-btn" onclick="fbSelectRec(this,2)">2</button>
+            <button type="button" class="fb-rec-btn" onclick="fbSelectRec(this,3)">3</button>
+            <button type="button" class="fb-rec-btn" onclick="fbSelectRec(this,4)">4</button>
+            <button type="button" class="fb-rec-btn" onclick="fbSelectRec(this,5)">5</button>
+            <button type="button" class="fb-rec-btn" onclick="fbSelectRec(this,6)">6</button>
+            <button type="button" class="fb-rec-btn" onclick="fbSelectRec(this,7)">7</button>
+            <button type="button" class="fb-rec-btn" onclick="fbSelectRec(this,8)">8</button>
+            <button type="button" class="fb-rec-btn" onclick="fbSelectRec(this,9)">9</button>
+            <button type="button" class="fb-rec-btn" onclick="fbSelectRec(this,10)">10</button>
+            <span id="rec-label" style="font-size:0.72rem;color:#53565A;font-style:italic;margin-left:4px;"></span>
+          </div>
+          <input type="hidden" id="val-recommend" />
+        </div>
+        <div class="fb-divider"></div>
+        <div>
+          <label class="fb-field-label" for="fb-testimonial">Testimonial
+            <span class="fb-field-sub">A quote, a reaction, a moment that stuck with you — anything you'd like to share.</span>
+          </label>
+          <textarea id="fb-testimonial" rows="3" placeholder="e.g. I finally feel like AI is something I can actually use without feeling overwhelmed..." class="fb-text-input" style="resize:vertical;"></textarea>
+        </div>
+      </div>
+
+      <!-- Error -->
+      <div id="fb-error" style="display:none;background:#fde8e8;border:1.5px solid #9D2235;color:#7a1a28;border-radius:8px;padding:12px 16px;font-size:0.82rem;"></div>
+
+      <!-- Submit -->
+      <button id="fb-submit-btn" onclick="submitFeedback()" style="width:100%;padding:16px;background:#9D2235;color:#fff;border:none;border-radius:10px;font-family:Verdana,sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:background 0.2s;" onmouseover="this.style.background='#7a1a28'" onmouseout="this.style.background='#9D2235'">
+        Submit Feedback &#8594;
+      </button>
+      <p style="text-align:center;font-size:0.7rem;color:#aaa;margin-top:-8px;">Your response is saved securely for BHS planning purposes only.</p>
     </div>
 
-    <button onclick="submitFeedback()" style="width:100%;padding:16px;background:#9D2235;color:#fff;border:none;border-radius:8px;font-family:Verdana,sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:background 0.2s,transform 0.15s;" onmouseover="this.style.background='#7a1a28'" onmouseout="this.style.background='#9D2235'">
-      Submit Feedback &#127881;
-    </button>
+    <!-- Thank You screen -->
+    <div id="fb-thankyou" style="display:none;padding:48px 24px;text-align:center;">
+      <div style="width:72px;height:72px;background:#9D2235;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:1.8rem;color:#fff;">&#10003;</div>
+      <h2 style="font-size:1.6rem;font-weight:700;color:#9D2235;margin-bottom:10px;">Thank You!</h2>
+      <p style="font-size:0.95rem;color:#53565A;line-height:1.75;margin-bottom:28px;">Good luck implementing what you learned today.<br /><strong style="color:#9D2235;">Enhance, not replace.</strong></p>
+      <div style="background:#fff;border-radius:12px;padding:20px;border:1.5px solid #e5e0e0;border-top:4px solid #FFC72C;margin-bottom:20px;">
+        <p style="font-weight:700;color:#1a1a1a;margin-bottom:4px;">BHS AI Institute Day &nbsp;·&nbsp; April 6, 2026</p>
+        <p style="font-size:0.76rem;color:#53565A;">Always Learning, Always Growing&#8482; &nbsp;·&nbsp; Batavia Public School District 101</p>
+      </div>
+      <button onclick="closeFeedback()" style="padding:12px 32px;background:#9D2235;color:#fff;border:none;border-radius:8px;font-family:Verdana,sans-serif;font-size:0.9rem;font-weight:700;cursor:pointer;">Close &#10005;</button>
+    </div>
   </div>
 </div>
 
@@ -3738,12 +3847,21 @@ This turns AI into a critical thinking tool about art itself.</div>
   }
 
   // ── FEEDBACK POPUP ──
-  let fbStars = 0;
+  const FB_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbw7jSbu7CQk3RCtBcLwiT6dyuhA2AJvzLB8Avz5_hM1xcAlA-zdKFMs4uE5HHOW4hzI/exec';
+  const fbScaleLabels = ['','Strongly Disagree','Disagree','Neutral','Agree','Strongly Agree'];
 
   function openFeedback() {
     const m = document.getElementById('feedback-modal');
     m.style.display = 'flex';
     document.body.style.overflow = 'hidden';
+    // Reset form to fresh state
+    document.getElementById('fb-form-wrap').style.display = 'flex';
+    document.getElementById('fb-thankyou').style.display = 'none';
+    const btn = document.getElementById('fb-submit-btn');
+    btn.textContent = 'Submit Feedback \u2192';
+    btn.disabled = false;
+    btn.style.background = '#9D2235';
+    document.getElementById('fb-error').style.display = 'none';
   }
 
   function closeFeedback() {
@@ -3751,60 +3869,78 @@ This turns AI into a critical thinking tool about art itself.</div>
     document.body.style.overflow = '';
   }
 
-  function selectMood(btn, label) {
-    document.querySelectorAll('.mood-btn').forEach(b => { b.style.borderColor = 'transparent'; b.style.background = 'none'; });
-    btn.style.borderColor = '#9D2235';
-    btn.style.background = '#fdf5f5';
-    document.getElementById('fb-mood').value = label;
-  }
-
-  function setStars(n) {
-    fbStars = n;
-    document.getElementById('fb-stars').value = n;
-    const starLabels = ['','Needs work','Getting there','Pretty good','Really great!','Outstanding!'];
-    document.getElementById('star-label').textContent = starLabels[n];
-    renderStars(n);
-  }
-
-  function hoverStars(n) { renderStars(n); }
-
-  function resetStars() { renderStars(fbStars); }
-
-  function renderStars(n) {
-    document.querySelectorAll('#star-rating .star').forEach((s, i) => {
-      s.style.color = i < n ? '#FFC72C' : '#ddd';
+  function fbSelectScale(btn, group, val) {
+    btn.closest('div').querySelectorAll('.fb-scale-btn').forEach(b => {
+      b.classList.remove('sel-low','sel-mid','sel-high');
     });
+    const cls = val <= 2 ? 'sel-low' : val === 3 ? 'sel-mid' : 'sel-high';
+    btn.classList.add(cls);
+    document.getElementById('val-' + group).value = val;
+    document.getElementById(group + '-label').textContent = fbScaleLabels[val];
   }
 
-  function selectTry(btn, label) {
-    document.querySelectorAll('.try-btn').forEach(b => { b.style.background = '#fff'; b.style.borderColor = '#ddd'; b.style.color = '#333'; });
-    btn.style.background = '#9D2235';
-    btn.style.borderColor = '#9D2235';
-    btn.style.color = '#fff';
-    document.getElementById('fb-try').value = label;
+  function fbSelectRec(btn, val) {
+    document.querySelectorAll('.fb-rec-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    document.getElementById('val-recommend').value = val;
+    document.getElementById('rec-label').textContent =
+      val <= 3 ? 'Not likely' : val <= 6 ? 'Somewhat likely' : val <= 8 ? 'Very likely' : 'Absolutely!';
   }
 
   function submitFeedback() {
-    const data = new FormData();
-    data.append('mood', document.getElementById('fb-mood').value || '');
-    data.append('stars', document.getElementById('fb-stars').value || '0');
-    data.append('favorite', document.getElementById('fb-fav').value || '');
-    data.append('change', document.getElementById('fb-change').value || '');
-    data.append('word', document.getElementById('fb-word').value || '');
-    data.append('try_it', document.getElementById('fb-try').value || '');
-    data.append('source', 'popup');
-    fetch('https://script.google.com/macros/s/AKfycbw7jSbu7CQk3RCtBcLwiT6dyuhA2AJvzLB8Avz5_hM1xcAlA-zdKFMs4uE5HHOW4hzI/exec', {
-      method: 'POST', body: data
+    const errEl = document.getElementById('fb-error');
+    errEl.style.display = 'none';
+
+    const name       = (document.getElementById('fb-name').value || '').trim();
+    const email      = (document.getElementById('fb-email').value || '').trim();
+    const confidence = document.getElementById('val-confidence').value;
+    const gift       = document.getElementById('val-gift').value;
+    const stoplight  = document.getElementById('val-stoplight').value;
+    const creation   = (document.getElementById('fb-creation').value || '').trim();
+    const value      = (document.getElementById('fb-value').value || '').trim();
+
+    const missing = [];
+    if (!name)       missing.push('Full Name');
+    if (!email)      missing.push('BPS101 Email');
+    if (!confidence) missing.push('Confidence rating');
+    if (!gift)       missing.push('Gift of Time rating');
+    if (!stoplight)  missing.push('Stoplight Model rating');
+    if (!creation)   missing.push('The Creation');
+    if (!value)      missing.push('The Value');
+
+    if (missing.length) {
+      errEl.textContent = 'Please complete: ' + missing.join(', ') + '.';
+      errEl.style.display = 'block';
+      errEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
+
+    const btn = document.getElementById('fb-submit-btn');
+    btn.textContent = 'Submitting...';
+    btn.disabled = true;
+    btn.style.background = '#53565A';
+
+    const payload = {
+      name, email, confidence, gift, stoplight, creation, value,
+      recommend:   document.getElementById('val-recommend').value || 'Not answered',
+      testimonial: (document.getElementById('fb-testimonial').value || '').trim() || 'Not answered',
+      timestamp:   new Date().toISOString()
+    };
+
+    fetch(FB_SCRIPT_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
     }).catch(() => {});
-    closeFeedback();
-    launchConfetti();
-    setTimeout(() => {
-      const fab = document.getElementById('feedback-fab');
-      fab.innerHTML = '&#10003; Thanks for the feedback!';
-      fab.style.background = '#27ae60';
-      fab.style.pointerEvents = 'none';
-      setTimeout(() => { fab.style.background = '#9D2235'; fab.innerHTML = '&#128172; Leave Feedback'; fab.style.pointerEvents = ''; }, 6000);
-    }, 200);
+
+    document.getElementById('fb-form-wrap').style.display = 'none';
+    document.getElementById('fb-thankyou').style.display = 'block';
+
+    const fab = document.getElementById('feedback-fab');
+    fab.innerHTML = '&#10003; Thanks for the feedback!';
+    fab.style.background = '#27ae60';
+    fab.style.pointerEvents = 'none';
+    setTimeout(() => { fab.style.background = '#9D2235'; fab.innerHTML = '&#128172; Leave Feedback'; fab.style.pointerEvents = ''; }, 6000);
   }
 
   function launchConfetti() {
