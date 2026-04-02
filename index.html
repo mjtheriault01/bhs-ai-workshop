@@ -853,8 +853,30 @@
     /* ── SECTION VIEW ── */
     .section-view { display:none; }
     .section-home-nav { position:sticky;top:0;z-index:200;background:#fff;border-bottom:2px solid rgba(157,34,53,0.15);padding:10px 20px;display:flex;align-items:center;gap:14px;box-shadow:0 2px 8px rgba(0,0,0,0.07); }
-    .section-home-nav-btn { background:none;border:2px solid #9D2235;color:#9D2235;font-family:Verdana,sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;padding:7px 16px;border-radius:8px;transition:background 0.15s,color 0.15s; }
+    .section-home-nav-btn { background:none;border:2px solid #9D2235;color:#9D2235;font-family:Verdana,sans-serif;font-size:0.8rem;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;padding:7px 16px;border-radius:8px;transition:background 0.15s,color 0.15s;flex-shrink:0; }
     .section-home-nav-btn:hover { background:#9D2235;color:#fff; }
+    .section-home-title { font-size:0.78rem;color:#888;font-family:Verdana,sans-serif;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis; }
+    .section-complete-btn { background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;border:none;border-radius:8px;padding:10px 22px;font-family:Verdana,sans-serif;font-size:0.88rem;font-weight:700;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 3px 12px rgba(22,163,74,0.35);flex-shrink:0;white-space:nowrap; }
+    .section-complete-btn:hover { transform:translateY(-2px);box-shadow:0 6px 20px rgba(22,163,74,0.45); }
+    @media(max-width:600px) { .section-home-title { display:none; } .section-complete-btn { font-size:0.75rem;padding:8px 12px; } }
+
+    /* SIGN-IN OVERLAY */
+    .signin-overlay { position:fixed;inset:0;background:rgba(26,26,26,0.92);z-index:9999;display:flex;align-items:center;justify-content:center;padding:24px; }
+    .signin-box { background:#fff;border-radius:18px;padding:48px 40px;max-width:460px;width:100%;text-align:center;box-shadow:0 16px 60px rgba(0,0,0,0.5); }
+    .signin-box h2 { font-size:1.55rem;font-weight:700;color:#9D2235;margin-bottom:8px;font-family:Verdana,sans-serif; }
+    .signin-box p { font-size:0.9rem;color:#53565A;line-height:1.6;margin-bottom:28px;font-family:Verdana,sans-serif; }
+    .signin-input { width:100%;padding:14px 18px;font-family:Verdana,sans-serif;font-size:1rem;border:2px solid #e0dada;border-radius:8px;outline:none;box-sizing:border-box;margin-bottom:16px;transition:border-color 0.15s; }
+    .signin-input:focus { border-color:#9D2235; }
+    .signin-btn { width:100%;padding:15px;background:linear-gradient(135deg,#9D2235,#c42a42);color:#fff;border:none;border-radius:8px;font-family:Verdana,sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 4px 16px rgba(157,34,53,0.3); }
+    .signin-btn:hover { transform:translateY(-2px);box-shadow:0 8px 24px rgba(157,34,53,0.4); }
+
+    /* ADMIN PANEL */
+    .admin-panel { background:#0f172a;padding:48px 24px;margin-top:32px; }
+    .admin-panel h2 { font-size:1.4rem;font-weight:700;color:#FFC72C;margin-bottom:24px;font-family:Verdana,sans-serif; }
+    .admin-table { width:100%;border-collapse:collapse;font-family:Verdana,sans-serif;font-size:0.8rem; }
+    .admin-table th { background:#1e293b;color:#94a3b8;padding:10px 14px;text-align:left;font-weight:700;text-transform:uppercase;letter-spacing:0.06em; }
+    .admin-table td { padding:10px 14px;border-bottom:1px solid #1e293b;color:#e2e8f0; }
+    .admin-table tr:hover td { background:#1e293b; }
 
     /* ── MISSION COMPLETE BAR ── */
     .mission-complete-bar { padding:52px 24px;text-align:center;background:linear-gradient(135deg,#f9f6f6,#fff);border-top:3px solid rgba(157,34,53,0.1); }
@@ -934,16 +956,16 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#dashboard" style="color:#FFC72C;font-weight:700;">&#128197; Today</a>
-  <a href="#ai-basics">AI Basics</a>
-  <a href="#subjects">By Subject</a>
-  <a href="#prompting">Prompting</a>
-  <a href="#deepdive">&#128218; Deep Dive</a>
-  <a href="#stoplight">Stoplight</a>
-  <a href="#lab">&#127918; Lab</a>
-  <a href="#tools">Tools</a>
-  <a href="#gallery">Gallery</a>
-  <a href="#feedback">Feedback</a>
+  <a href="#mission-grid" style="color:#FFC72C;font-weight:700;">&#127968; Dashboard</a>
+  <a href="javascript:void(0)" onclick="openSection('research')">&#128218; Research Vault</a>
+  <a href="javascript:void(0)" onclick="openSection('subjects')">&#127979; Subject Workflows</a>
+  <a href="javascript:void(0)" onclick="openSection('spotlights')">&#11088; Spotlights</a>
+  <a href="javascript:void(0)" onclick="openSection('prompting')">&#9999; Prompting</a>
+  <a href="javascript:void(0)" onclick="openSection('stoplight')">&#128994; Stoplight</a>
+  <a href="javascript:void(0)" onclick="openSection('deepdive')">&#128300; Deep Research</a>
+  <a href="javascript:void(0)" onclick="openSection('lab')">&#127918; Interactive Lab</a>
+  <a href="javascript:void(0)" onclick="openSection('toolkit')">&#128736; AI Toolkit</a>
+  <a href="javascript:void(0)" onclick="openSection('shareout')">&#127775; Share Out</a>
 </nav>
 
 <!-- HERO -->
@@ -1147,7 +1169,9 @@
         <div style="background:linear-gradient(135deg,#7a1a28,#9D2235);border-radius:16px;padding:48px 32px;box-shadow:0 8px 32px rgba(157,34,53,0.3);">
           <div style="font-size:3.5rem;margin-bottom:14px;">&#127942;</div>
           <h2 style="font-size:1.7rem;font-weight:700;color:#FFC72C;margin-bottom:10px;font-family:Verdana,sans-serif;">Training Complete!</h2>
-          <p style="font-size:0.95rem;color:rgba(255,255,255,0.9);max-width:440px;margin:0 auto 28px;line-height:1.75;font-family:Verdana,sans-serif;">You&rsquo;ve completed all 9 missions of the BHS AI Institute Day. Congratulations &mdash; here is your digital certificate of completion.</p>
+          <p style="font-size:0.95rem;color:rgba(255,255,255,0.9);max-width:440px;margin:0 auto 24px;line-height:1.75;font-family:Verdana,sans-serif;">You&rsquo;ve completed all 9 missions of the BHS AI Institute Day. Enter your name and download your certificate.</p>
+          <input type="text" id="cert-name" placeholder="Your full name for the certificate" style="width:100%;max-width:360px;padding:13px 18px;font-family:Verdana,sans-serif;font-size:0.95rem;border:none;border-radius:8px;margin-bottom:16px;box-sizing:border-box;text-align:center;">
+          <br>
           <button onclick="downloadCertificate()" style="background:#FFC72C;color:#1a1a1a;border:none;border-radius:10px;padding:16px 44px;font-family:Verdana,sans-serif;font-size:1rem;font-weight:700;cursor:pointer;transition:transform 0.15s,box-shadow 0.15s;box-shadow:0 4px 16px rgba(0,0,0,0.2);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 24px rgba(0,0,0,0.25)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(0,0,0,0.2)'">&#128196; Download My Certificate</button>
         </div>
       </div>
@@ -1156,7 +1180,7 @@
 </div>
 
 <div class="section-view" id="view-research">
-<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back to Dashboard</button><span style="font-size:0.78rem;color:#888;font-family:Verdana,sans-serif;font-weight:700;">&#128218; Research Vault</span></div>
+<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back</button><span class="section-home-title">&#128218; Research Vault</span><button class="section-complete-btn" onclick="completeSection('research')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button></div>
 <!-- ─── AI BASICS (ACCORDION) ─── -->
 <section id="ai-basics" style="background:#fff;">
   <div class="section">
@@ -1252,14 +1276,10 @@
 
     </div>
   </div>
-</section>
-<div class="mission-complete-bar">
-  <button class="mission-complete-btn" onclick="completeSection('research')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button>
-</div>
-</div>
+</section></div>
 
 <div class="section-view" id="view-subjects">
-<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back to Dashboard</button><span style="font-size:0.78rem;color:#888;font-family:Verdana,sans-serif;font-weight:700;">&#127979; Subject Workflows</span></div>
+<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back</button><span class="section-home-title">&#127979; Subject Workflows</span><button class="section-complete-btn" onclick="completeSection('subjects')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button></div>
 <!-- ─── SUBJECT TABS ─── -->
 <section id="subjects" style="background:#f7f5f5;">
   <div class="section">
@@ -1550,14 +1570,10 @@
 
     </div>
   </div>
-</section>
-<div class="mission-complete-bar">
-  <button class="mission-complete-btn" onclick="completeSection('subjects')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button>
-</div>
-</div>
+</section></div>
 
 <div class="section-view" id="view-spotlights">
-<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back to Dashboard</button><span style="font-size:0.78rem;color:#888;font-family:Verdana,sans-serif;font-weight:700;">&#11088; Student Spotlights</span></div>
+<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back</button><span class="section-home-title">&#11088; Student Spotlights</span><button class="section-complete-btn" onclick="completeSection('spotlights')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button></div>
 <!-- ─── STUDENT SPOTLIGHTS ─── -->
 <section id="spotlights" style="background:#fff;">
   <div class="section">
@@ -1718,14 +1734,10 @@
       <blockquote style="font-size:0.95rem;color:#fff;line-height:1.85;font-style:italic;margin:0;max-width:680px;margin:0 auto;"><span style="color:#FFC72C;font-size:2rem;font-family:Georgia,serif;line-height:0;vertical-align:-0.35em;margin-right:3px;">&ldquo;</span>AI is not going to replace the teaching &mdash; but it can enhance how you use it, make the learning better, make the teaching better, and give better feedback.<span style="color:#FFC72C;font-size:2rem;font-family:Georgia,serif;line-height:0;vertical-align:-0.35em;margin-left:3px;">&rdquo;</span></blockquote>
     </div>
   </div>
-</section>
-<div class="mission-complete-bar">
-  <button class="mission-complete-btn" onclick="completeSection('spotlights')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button>
-</div>
-</div>
+</section></div>
 
 <div class="section-view" id="view-prompting">
-<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back to Dashboard</button><span style="font-size:0.78rem;color:#888;font-family:Verdana,sans-serif;font-weight:700;">&#9999;&#65039; Prompt Engineering</span></div>
+<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back</button><span class="section-home-title">&#9999;&#65039; Prompt Engineering</span><button class="section-complete-btn" onclick="completeSection('prompting')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button></div>
 <!-- ─── PROMPTING (BEFORE/AFTER + ACCORDION) ─── -->
 <section id="prompting" style="background:#fff;">
   <div class="section">
@@ -1821,14 +1833,10 @@
 
     </div>
   </div>
-</section>
-<div class="mission-complete-bar">
-  <button class="mission-complete-btn" onclick="completeSection('prompting')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button>
-</div>
-</div>
+</section></div>
 
 <div class="section-view" id="view-deepdive">
-<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back to Dashboard</button><span style="font-size:0.78rem;color:#888;font-family:Verdana,sans-serif;font-weight:700;">&#128300; Deep Research Archive</span></div>
+<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back</button><span class="section-home-title">&#128300; Deep Research Archive</span><button class="section-complete-btn" onclick="completeSection('deepdive')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button></div>
 <!-- ─── DEEP RESEARCH ARCHIVE ─── -->
 <section id="deepdive" style="background:#0f172a;">
   <div style="max-width:960px;margin:0 auto;padding:64px 24px;">
@@ -1985,14 +1993,10 @@
     </div>
 
   </div>
-</section>
-<div class="mission-complete-bar">
-  <button class="mission-complete-btn" onclick="completeSection('deepdive')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button>
-</div>
-</div>
+</section></div>
 
 <div class="section-view" id="view-stoplight">
-<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back to Dashboard</button><span style="font-size:0.78rem;color:#888;font-family:Verdana,sans-serif;font-weight:700;">&#128994; Stoplight Model</span></div>
+<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back</button><span class="section-home-title">&#128994; Stoplight Model</span><button class="section-complete-btn" onclick="completeSection('stoplight')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button></div>
 <!-- ─── STOPLIGHT MODEL ─── -->
 <section id="stoplight" style="background:#fff;">
   <div class="section">
@@ -2069,14 +2073,10 @@
       </div>
     </div>
   </div>
-</section>
-<div class="mission-complete-bar">
-  <button class="mission-complete-btn" onclick="completeSection('stoplight')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button>
-</div>
-</div>
+</section></div>
 
 <div class="section-view" id="view-lab">
-<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back to Dashboard</button><span style="font-size:0.78rem;color:#888;font-family:Verdana,sans-serif;font-weight:700;">&#127918; Interactive Lab</span></div>
+<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back</button><span class="section-home-title">&#127918; Interactive Lab</span><button class="section-complete-btn" onclick="completeSection('lab')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button></div>
 <!-- ─── LEARNING LAB ─── -->
 <section id="lab" style="background:#eff6ff;">
   <div style="max-width:960px;margin:0 auto;padding:64px 24px;">
@@ -2422,14 +2422,10 @@
     </div>
 
   </div>
-</section>
-<div class="mission-complete-bar">
-  <button class="mission-complete-btn" onclick="completeSection('lab')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button>
-</div>
-</div>
+</section></div>
 
 <div class="section-view" id="view-toolkit">
-<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back to Dashboard</button><span style="font-size:0.78rem;color:#888;font-family:Verdana,sans-serif;font-weight:700;">&#128736;&#65039; AI Toolkit</span></div>
+<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back</button><span class="section-home-title">&#128736;&#65039; AI Toolkit</span><button class="section-complete-btn" onclick="completeSection('toolkit')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button></div>
 <!-- ─── TOOLS ─── -->
 <section id="tools" style="background:#f7f5f5;">
   <div class="section">
@@ -2478,15 +2474,11 @@
       </div>
     </div>
   </div>
-</section>
-<div class="mission-complete-bar">
-  <button class="mission-complete-btn" onclick="completeSection('toolkit')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button>
-</div>
-</div>
+</section></div>
 
 <!-- ─── SCHEDULE ─── -->
 <div class="section-view" id="view-shareout">
-<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back to Dashboard</button><span style="font-size:0.78rem;color:#888;font-family:Verdana,sans-serif;font-weight:700;">&#127775; Today's Share Out</span></div>
+<div class="section-home-nav"><button class="section-home-nav-btn" onclick="returnToDashboard()">&#127968; Back</button><span class="section-home-title">&#127775; Today's Share Out</span><button class="section-complete-btn" onclick="completeSection('shareout')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button></div>
 <!-- ─── SUCCESS GALLERY ─── -->
 <section id="gallery" style="background:linear-gradient(135deg,#7a1a28 0%,#9D2235 60%,#c42a42 100%);padding:64px 24px;">
   <div style="max-width:960px;margin:0 auto;">
@@ -2511,10 +2503,32 @@
   <h2 style="font-size:1.7rem;font-weight:700;margin-bottom:12px;">Share Your Feedback</h2>
   <p style="font-size:0.95rem;opacity:0.9;max-width:500px;margin:0 auto 36px;line-height:1.75;">Tell us what you learned, what you'll try first, and what would make this even better. Takes about 3 minutes.</p>
   <a href="feedback-form.html" target="_blank" style="display:inline-block;padding:16px 44px;background:#FFC72C;color:#1a1a1a;border-radius:8px;font-family:Verdana,sans-serif;font-size:1rem;font-weight:700;text-decoration:none;transition:opacity 0.2s;" onmouseover="this.style.opacity='0.88'" onmouseout="this.style.opacity='1'">Give Feedback &#8594;</a>
-</section>
-<div class="mission-complete-bar">
-  <button class="mission-complete-btn" onclick="completeSection('shareout')">&#9989; Mission Accomplished &mdash; Return to Dashboard</button>
+</section></div>
+
+<!-- SIGN-IN OVERLAY -->
+<div class="signin-overlay" id="signin-overlay" style="display:none;">
+  <div class="signin-box">
+    <div style="font-size:3rem;margin-bottom:12px;">&#127891;</div>
+    <h2>Welcome to BHS AI Institute Day</h2>
+    <p>Enter your name to begin. Your progress will be saved and your name will appear on your certificate.</p>
+    <input type="text" id="signin-name" class="signin-input" placeholder="Your full name" autocomplete="name" onkeydown="if(event.key==='Enter')submitSignIn()">
+    <button class="signin-btn" onclick="submitSignIn()">Start Training &#8594;</button>
+  </div>
 </div>
+
+<!-- ADMIN PANEL (visible when ?admin=1 + correct password) -->
+<div id="admin-panel" class="admin-panel" style="display:none;">
+  <div style="max-width:900px;margin:0 auto;">
+    <h2>&#128272; Admin — Participant Log</h2>
+    <p style="font-size:0.8rem;color:#94a3b8;margin-bottom:24px;font-family:Verdana,sans-serif;">Live data from Google Sheets &mdash; refreshes every 60 seconds. <button onclick="fetchAdminLog()" style="background:#1e293b;color:#FFC72C;border:1px solid #FFC72C;border-radius:4px;padding:4px 10px;font-family:Verdana,sans-serif;font-size:0.75rem;cursor:pointer;">&#8635; Refresh Now</button></p>
+    <div style="overflow-x:auto;">
+      <table class="admin-table" id="admin-table">
+        <thead><tr><th>Name</th><th>Signed In</th><th>Missions Complete</th><th>Last Activity</th></tr></thead>
+        <tbody id="admin-log-body"><tr><td colspan="4" style="color:#64748b;font-style:italic;">Loading participant data&hellip;</td></tr></tbody>
+      </table>
+    </div>
+    <p style="font-size:0.72rem;color:#475569;margin-top:16px;font-family:Verdana,sans-serif;">To configure: set <code style="background:#1e293b;padding:2px 6px;border-radius:3px;">BHS_ADMIN_SHEET_URL</code> in the JS to your published Google Sheet CSV URL.</p>
+  </div>
 </div>
 
 <!-- PRINT OVERLAY (populated by JS, only visible during window.print()) -->
@@ -3837,6 +3851,83 @@ This turns AI into a critical thinking tool about art itself.</div>
     btn.disabled = true;
   }
 
+  // ── CONFIG (fill these in) ──
+  // Google Apps Script URL that accepts POST with fields: action, name, section, progress, timestamp
+  var BHS_LOG_URL = 'YOUR_APPS_SCRIPT_URL_HERE';
+  // Published Google Sheet CSV URL for admin panel (File → Share → Publish to web → CSV)
+  var BHS_ADMIN_SHEET_URL = 'YOUR_SHEET_CSV_URL_HERE';
+  var BHS_ADMIN_PASSWORD = 'bhs2026admin';
+
+  // ── PARTICIPANT SIGN-IN ──
+  function checkSignIn() {
+    var name = localStorage.getItem('bhs-participant-name');
+    if (!name) {
+      document.getElementById('signin-overlay').style.display = 'flex';
+      setTimeout(function() { var el = document.getElementById('signin-name'); if (el) el.focus(); }, 100);
+    } else {
+      prefillCertName(name);
+    }
+  }
+
+  function submitSignIn() {
+    var el = document.getElementById('signin-name');
+    var name = el ? el.value.trim() : '';
+    if (!name) { if (el) el.style.borderColor = '#9D2235'; return; }
+    localStorage.setItem('bhs-participant-name', name);
+    document.getElementById('signin-overlay').style.display = 'none';
+    prefillCertName(name);
+    logParticipant('signin', '');
+  }
+
+  function prefillCertName(name) {
+    var el = document.getElementById('cert-name');
+    if (el && !el.value) el.value = name;
+  }
+
+  function logParticipant(action, section) {
+    if (!BHS_LOG_URL || BHS_LOG_URL === 'YOUR_APPS_SCRIPT_URL_HERE') return;
+    var name = localStorage.getItem('bhs-participant-name') || 'Unknown';
+    var completed = JSON.parse(localStorage.getItem('bhs-ai-completed') || '[]');
+    var fd = new FormData();
+    fd.append('action', action);
+    fd.append('name', name);
+    fd.append('section', section);
+    fd.append('progress', completed.length + '/9');
+    fd.append('timestamp', new Date().toLocaleString('en-US', {timeZone:'America/Chicago'}));
+    fetch(BHS_LOG_URL, { method: 'POST', body: fd }).catch(function() {});
+  }
+
+  // ── ADMIN PANEL ──
+  function showAdminPanel() {
+    var panel = document.getElementById('admin-panel');
+    if (panel) {
+      panel.style.display = 'block';
+      panel.scrollIntoView({ behavior: 'smooth' });
+    }
+    fetchAdminLog();
+    setInterval(fetchAdminLog, 60000);
+  }
+
+  function fetchAdminLog() {
+    var tbody = document.getElementById('admin-log-body');
+    if (!tbody) return;
+    if (!BHS_ADMIN_SHEET_URL || BHS_ADMIN_SHEET_URL === 'YOUR_SHEET_CSV_URL_HERE') {
+      tbody.innerHTML = '<tr><td colspan="4" style="color:#64748b;font-style:italic;">Configure BHS_ADMIN_SHEET_URL to see live data. For now, data is being sent to your Apps Script on every sign-in and mission completion.</td></tr>';
+      return;
+    }
+    fetch(BHS_ADMIN_SHEET_URL + '&cachebust=' + Date.now())
+      .then(function(r) { return r.text(); })
+      .then(function(csv) {
+        var rows = csv.trim().split('\n').slice(1).filter(function(r) { return r.trim(); });
+        if (!rows.length) { tbody.innerHTML = '<tr><td colspan="4" style="color:#64748b;">No participants yet.</td></tr>'; return; }
+        tbody.innerHTML = rows.map(function(row) {
+          var cols = row.split(',').map(function(c) { return c.replace(/^"|"$/g,''); });
+          return '<tr>' + cols.map(function(c) { return '<td>' + (c||'—') + '</td>'; }).join('') + '</tr>';
+        }).join('');
+      })
+      .catch(function() { tbody.innerHTML = '<tr><td colspan="4" style="color:#ef4444;">Could not load sheet. Check that the URL is published and accessible.</td></tr>'; });
+  }
+
   // ── SPA MISSION SYSTEM ──
   var BHS_SECTIONS = ['research','subjects','spotlights','prompting','stoplight','deepdive','lab','toolkit','shareout'];
 
@@ -3867,6 +3958,7 @@ This turns AI into a critical thinking tool about art itself.</div>
     if (!completed.includes(id)) { completed.push(id); }
     localStorage.setItem('bhs-ai-completed', JSON.stringify(completed));
     launchConfetti();
+    logParticipant('complete', id);
     var params = new URLSearchParams(window.location.search);
     if (params.get('mission')) {
       setTimeout(function() { window.close(); }, 1200);
@@ -3905,9 +3997,16 @@ This turns AI into a critical thinking tool about art itself.</div>
   }
 
   function downloadCertificate() {
+    var nameEl = document.getElementById('cert-name');
+    var participantName = (nameEl && nameEl.value.trim()) ? nameEl.value.trim() : (localStorage.getItem('bhs-participant-name') || '');
+    if (!participantName) {
+      if (nameEl) { nameEl.focus(); nameEl.style.border = '2px solid #9D2235'; }
+      alert('Please enter your name before downloading the certificate.');
+      return;
+    }
     var win = window.open('', '_blank');
     var today = new Date().toLocaleDateString('en-US', {year:'numeric', month:'long', day:'numeric'});
-    win.document.write('<!DOCTYPE html><html><head><title>Training Certificate</title><style>body{font-family:Verdana,sans-serif;text-align:center;padding:60px 40px;color:#1a1a1a;} .border{border:8px double #9D2235;padding:40px;max-width:680px;margin:0 auto;} h1{font-size:2rem;color:#9D2235;margin-bottom:8px;} .seal{font-size:3.5rem;margin:20px 0;} .name-line{border-bottom:2px solid #9D2235;width:300px;margin:28px auto;height:36px;} .sub{font-size:0.9rem;color:#53565A;margin-top:6px;} .gold{color:#b8860b;font-weight:700;font-size:1rem;} .footer{margin-top:32px;font-size:0.72rem;color:#888;}</style></head><body><div class="border"><div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:#9D2235;margin-bottom:10px;">Certificate of Completion</div><div class="seal">&#127942;</div><h1>BHS AI Institute Day</h1><p style="font-size:0.85rem;color:#53565A;">Batavia High School &mdash; Batavia Public School District 101</p><p style="margin:24px 0 6px;font-size:0.88rem;">This certifies that</p><div class="name-line"></div><p class="sub">has successfully completed all 9 missions of the</p><p class="gold">AI in Education Professional Development Program</p><p style="margin-top:6px;font-size:0.8rem;color:#53565A;">April 6, 2026 &mdash; &ldquo;Enhance, Not Replace&rdquo;</p><p class="footer">Issued: '+today+' &middot; Always Learning, Always Growing&trade; &middot; bhs-ai-workshop.netlify.app</p></div></body></html>');
+    win.document.write('<!DOCTYPE html><html><head><title>Training Certificate</title><style>body{font-family:Verdana,sans-serif;text-align:center;padding:60px 40px;color:#1a1a1a;} .border{border:8px double #9D2235;padding:40px;max-width:680px;margin:0 auto;} h1{font-size:2rem;color:#9D2235;margin-bottom:8px;} .seal{font-size:3.5rem;margin:20px 0;} .name-line{border-bottom:2px solid #9D2235;width:300px;margin:28px auto;height:36px;} .sub{font-size:0.9rem;color:#53565A;margin-top:6px;} .gold{color:#b8860b;font-weight:700;font-size:1rem;} .footer{margin-top:32px;font-size:0.72rem;color:#888;}</style></head><body><div class="border"><div style="font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:#9D2235;margin-bottom:10px;">Certificate of Completion</div><div class="seal">&#127942;</div><h1>BHS AI Institute Day</h1><p style="font-size:0.85rem;color:#53565A;">Batavia High School &mdash; Batavia Public School District 101</p><p style="margin:24px 0 6px;font-size:0.88rem;">This certifies that</p><div style="font-size:1.55rem;font-weight:700;color:#1a1a1a;border-bottom:2px solid #9D2235;width:360px;margin:16px auto 6px;padding-bottom:8px;">'+participantName+'</div><p class="sub">has successfully completed all 9 missions of the</p><p class="gold">AI in Education Professional Development Program</p><p style="margin-top:6px;font-size:0.8rem;color:#53565A;">April 6, 2026 &mdash; &ldquo;Enhance, Not Replace&rdquo;</p><p class="footer">Issued: '+today+' &middot; Always Learning, Always Growing&trade; &middot; bhs-ai-workshop.netlify.app</p></div></body></html>');
     win.document.close();
     setTimeout(function() { win.print(); }, 400);
   }
@@ -3939,6 +4038,18 @@ This turns AI into a critical thinking tool about art itself.</div>
       var dash = document.getElementById('master-dashboard');
       if (dash) dash.style.display = 'block';
       updateMasteryDashboard();
+      // Admin mode
+      if (params.get('admin') === '1') {
+        var pw = prompt('Admin password:');
+        if (pw === BHS_ADMIN_PASSWORD) {
+          showAdminPanel();
+        } else if (pw !== null) {
+          alert('Incorrect password.');
+        }
+      } else {
+        // Show sign-in for regular participants
+        checkSignIn();
+      }
     }
   })();
 
