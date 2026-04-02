@@ -941,7 +941,6 @@
   <a href="#deepdive">&#128218; Deep Dive</a>
   <a href="#stoplight">Stoplight</a>
   <a href="#lab">&#127918; Lab</a>
-  <a href="#quiz">Quiz</a>
   <a href="#tools">Tools</a>
   <a href="#gallery">Gallery</a>
   <a href="#feedback">Feedback</a>
@@ -1132,7 +1131,7 @@
         <h2 style="font-size:1.85rem;font-weight:700;color:#9D2235;margin-bottom:10px;font-family:Verdana,sans-serif;">Your AI Training Missions</h2>
         <p style="font-size:0.92rem;color:#53565A;line-height:1.75;max-width:500px;margin:0 auto;font-family:Verdana,sans-serif;">9 missions. Your pace. Open path &mdash; start anywhere. Hit <strong>&ldquo;Mission Accomplished&rdquo;</strong> at the end of each one to bank your progress.</p>
       </div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px;">
+      <div id="mission-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:18px;">
         <div class="mission-card" id="card-research" onclick="openSection('research')"><div class="card-status-badge" id="badge-research">Incomplete</div><div class="card-check-icon" id="check-research">&#10003;</div><div style="font-size:2.6rem;margin-bottom:14px;">&#128218;</div><h3 class="card-title">Research Vault</h3><p class="card-desc">AI basics, Enhance vs. Replace, myths, and IL legal compliance</p><div class="card-time">&#9201; 20 mins</div></div>
         <div class="mission-card" id="card-subjects" onclick="openSection('subjects')"><div class="card-status-badge" id="badge-subjects">Incomplete</div><div class="card-check-icon" id="check-subjects">&#10003;</div><div style="font-size:2.6rem;margin-bottom:14px;">&#127979;</div><h3 class="card-title">Subject Workflows</h3><p class="card-desc">AI quick wins by department — ELA, Math, Science, SPED, Admin &amp; more</p><div class="card-time">&#9201; 20 mins</div></div>
         <div class="mission-card" id="card-spotlights" onclick="openSection('spotlights')"><div class="card-status-badge" id="badge-spotlights">Incomplete</div><div class="card-check-icon" id="check-spotlights">&#10003;</div><div style="font-size:2.6rem;margin-bottom:14px;">&#11088;</div><h3 class="card-title">Student Spotlights</h3><p class="card-desc">Real classroom examples of &ldquo;Enhance, Not Replace&rdquo; in action</p><div class="card-time">&#9201; 10 mins</div></div>
@@ -3844,22 +3843,25 @@ This turns AI into a critical thinking tool about art itself.</div>
   var BHS_SECTIONS = ['research','subjects','spotlights','prompting','stoplight','deepdive','lab','toolkit','shareout'];
 
   function openSection(id) {
-    document.getElementById('master-dashboard').style.display = 'none';
-    BHS_SECTIONS.forEach(function(s) {
-      var v = document.getElementById('view-'+s);
-      if (v) v.style.display = (s === id) ? 'block' : 'none';
-    });
-    window.scrollTo(0, 0);
+    window.open(location.pathname + '?mission=' + id, '_blank');
   }
 
   function returnToDashboard() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('mission')) {
+      window.close();
+      return;
+    }
+    // Fallback: same-page mode (e.g. popup blocker)
     BHS_SECTIONS.forEach(function(s) {
       var v = document.getElementById('view-'+s);
       if (v) v.style.display = 'none';
     });
     var dash = document.getElementById('master-dashboard');
     if (dash) dash.style.display = 'block';
-    window.scrollTo(0, 0);
+    var grid = document.getElementById('mission-grid');
+    if (grid) { grid.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    else { window.scrollTo(0, 0); }
   }
 
   function completeSection(id) {
@@ -3867,8 +3869,13 @@ This turns AI into a critical thinking tool about art itself.</div>
     if (!completed.includes(id)) { completed.push(id); }
     localStorage.setItem('bhs-ai-completed', JSON.stringify(completed));
     launchConfetti();
-    updateMasteryDashboard();
-    setTimeout(returnToDashboard, 400);
+    var params = new URLSearchParams(window.location.search);
+    if (params.get('mission')) {
+      setTimeout(function() { window.close(); }, 1200);
+    } else {
+      updateMasteryDashboard();
+      setTimeout(returnToDashboard, 400);
+    }
   }
 
   function updateMasteryDashboard() {
@@ -3908,9 +3915,35 @@ This turns AI into a critical thinking tool about art itself.</div>
   }
 
   (function initSPA() {
-    returnToDashboard();
-    updateMasteryDashboard();
+    var params = new URLSearchParams(window.location.search);
+    var mission = params.get('mission');
+    if (mission && BHS_SECTIONS.includes(mission)) {
+      // Sub-tab: show only the requested section
+      var dash = document.getElementById('master-dashboard');
+      if (dash) dash.style.display = 'none';
+      BHS_SECTIONS.forEach(function(s) {
+        var v = document.getElementById('view-'+s);
+        if (v) v.style.display = (s === mission) ? 'block' : 'none';
+      });
+      window.scrollTo(0, 0);
+    } else {
+      // Main tab: show dashboard
+      BHS_SECTIONS.forEach(function(s) {
+        var v = document.getElementById('view-'+s);
+        if (v) v.style.display = 'none';
+      });
+      var dash = document.getElementById('master-dashboard');
+      if (dash) dash.style.display = 'block';
+      updateMasteryDashboard();
+    }
   })();
+
+  // Auto-refresh dashboard when a sub-tab completes a mission
+  window.addEventListener('storage', function(e) {
+    if (e.key === 'bhs-ai-completed') {
+      updateMasteryDashboard();
+    }
+  });
 
   // ── ACCORDION MODULES ──
   function toggleModule(header) {
