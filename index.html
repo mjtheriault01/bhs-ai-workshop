@@ -1231,6 +1231,7 @@
         <button class="tab-btn" onclick="switchTab(this,'cte')">&#128188; CTE / INCubatorEdu</button>
         <button class="tab-btn" onclick="switchTab(this,'wl')">&#127760; World Language</button>
         <button class="tab-btn" onclick="switchTab(this,'trades')">&#128295; Skilled Trades</button>
+        <button class="tab-btn" onclick="switchTab(this,'sped')">&#127919; SPED</button>
       </div>
 
       <!-- ELA -->
@@ -1445,6 +1446,30 @@
             <h3>Job Site Problem Simulation</h3>
             <p>Describe a real-world scenario (wiring fault, plumbing leak, HVAC malfunction). AI walks students through a diagnostic process — asking questions, presenting symptoms, and guiding them toward the solution. Students must justify every decision before AI confirms.</p>
             <button class="btn-red" onclick="openModal('trades3')">&#128196; See the Prompt</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- SPED -->
+      <div class="tab-pane" id="tab-sped">
+        <div class="tier-grid">
+          <div class="tier-card">
+            <span class="tier-badge easy">&#9889; Quick Win</span>
+            <h3>IEP Goal-Aligned Activity Builder</h3>
+            <p>Describe a student's IEP goal and current skill level (using anonymized, generalized language — no student names or identifying details). AI generates a tiered set of practice activities at multiple access points, plus a scaffolded version and an extension for students who are ready for more.</p>
+            <button class="btn-red" onclick="openModal('sped1')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge mid">&#128293; Intermediate</span>
+            <h3>Differentiated Text Adapter</h3>
+            <p>Paste any classroom reading or assignment. AI rewrites it at multiple complexity levels — simplified vocabulary, chunked paragraphs, added visual cues (headers, bullet points), and an audio-friendly version. Each version preserves the core content and learning target.</p>
+            <button class="btn-red" onclick="openModal('sped2')">&#128196; See the Prompt</button>
+          </div>
+          <div class="tier-card">
+            <span class="tier-badge adv">&#127775; Advanced</span>
+            <h3>Co-Teaching Lesson Planner</h3>
+            <p>Describe an upcoming lesson and the support needs in your classroom (using general descriptions, never student names). AI designs a co-taught lesson structure with parallel teaching stations, role clarity for the gen ed and SPED teacher, and built-in UDL checkpoints for multiple means of engagement, representation, and expression.</p>
+            <button class="btn-red" onclick="openModal('sped3')">&#128196; See the Prompt</button>
           </div>
         </div>
       </div>
@@ -2847,6 +2872,36 @@ This turns AI into a critical thinking tool about art itself.</div>
   </div>
 </div>
 
+<!-- SPED 1 -->
+<div class="modal-overlay" id="modal-sped1">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('sped1')">&times;</button>
+    <h3>&#127919; SPED: IEP Goal-Aligned Activity Builder</h3>
+    <div class="prompt-box">I am a special education teacher working with a student (do not use any real names or identifying information). The student is working on the following IEP goal: [describe the goal in general terms — e.g., "improve reading fluency at a 2nd-grade level" or "increase independence in multi-step task completion"]. Their current skill level is: [brief description]. Please create: 1) Three tiered practice activities for this skill — Entry Level (maximum scaffolding), On-Level (moderate support), and Extension (minimal support for a student ready to go further). 2) For each activity, list the materials needed, estimated time, and one way to collect data toward the IEP goal. 3) Suggest one visual support or graphic organizer that could be paired with each activity. Keep all language practical and classroom-ready.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-sped1')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- SPED 2 -->
+<div class="modal-overlay" id="modal-sped2">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('sped2')">&times;</button>
+    <h3>&#128293; SPED: Differentiated Text Adapter</h3>
+    <div class="prompt-box">Here is a classroom reading or assignment text: [paste the original content]. Please adapt this text in three versions while preserving the core learning objective: 1) ACCESS VERSION — rewrite at a 3rd-grade reading level with: short sentences (max 10 words), common vocabulary only (define any content-specific terms in parentheses), chunked paragraphs of no more than 3 sentences, and bold key vocabulary. 2) STANDARD VERSION — rewrite at a 6th-grade reading level with moderate scaffolding: clear topic sentences, defined vocabulary, and subheadings to chunk content. 3) EXTENSION VERSION — preserve the original complexity but add: two critical thinking questions at the end, one "connect to real life" prompt, and a challenge task for students ready to go deeper. For all three versions, maintain the same key facts, concepts, and learning target.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-sped2')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
+<!-- SPED 3 -->
+<div class="modal-overlay" id="modal-sped3">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal('sped3')">&times;</button>
+    <h3>&#127775; SPED: Co-Teaching Lesson Planner</h3>
+    <div class="prompt-box">I am planning a co-taught lesson (general education teacher + special education teacher). Subject and grade: [e.g., "10th-grade Biology, mitosis unit"]. Lesson objective: [what students should know or be able to do]. Support needs in this classroom (describe generally — no student names): [e.g., "several students need chunked directions and frequent check-ins; two students benefit from movement breaks; some need extended time on written tasks"]. Please design a co-taught lesson using the Parallel Teaching or Station Teaching model. Include: 1) Clear role descriptions for the gen ed teacher and SPED teacher at each phase, 2) UDL-aligned checkpoints for multiple means of Engagement, Representation, and Action &amp; Expression, 3) Two differentiated versions of the key task or activity, 4) One formative assessment strategy that works for all learners, 5) A brief note on how to collect progress-monitoring data during the lesson without disrupting the flow. Keep the plan practical — I should be able to hand it to a co-teacher with minimal explanation.</div>
+    <button class="copy-btn" onclick="copyPrompt(this,'modal-sped3')">&#128203; Copy Prompt</button>
+  </div>
+</div>
+
 <!-- TOOL: ChatGPT -->
 <div class="modal-overlay" id="modal-tool-chatgpt">
   <div class="modal">
@@ -3769,7 +3824,7 @@ This turns AI into a critical thinking tool about art itself.</div>
   var PRINT_SUMMARIES = {
     0: '<div class="pc-header"><h2>&#128218; Research Vault &mdash; AI Basics</h2><p class="pc-meta">BHS AI Institute Day &middot; April 6, 2026 &middot; Always Learning, Always Growing&trade;</p></div><h3>What is AI?</h3><ul><li>AI is a <strong>pattern recognizer</strong> trained on vast text &mdash; not a search engine or fact database</li><li>It predicts the most useful response based on context and training</li><li>It hallucinates &mdash; always verify factual claims from a primary or authoritative source</li></ul><h3>Enhance vs. Replace</h3><ul><li><strong>Augmentation:</strong> AI handles routine tasks so you focus on high-value teaching work</li><li><strong>Offloading:</strong> Surrendering the thinking to AI &mdash; teach students to recognize and avoid this</li><li>Ask: &ldquo;Who is doing the intellectual heavy lifting?&rdquo; It should always be the student</li></ul><h3>Myths vs. Reality</h3><ul><li>&ldquo;AI will replace teachers&rdquo; &rarr; AI cannot replicate relationships, mentorship, or adaptive human judgment</li><li>&ldquo;It always gives correct answers&rdquo; &rarr; AI errors are common &mdash; critical evaluation is the essential skill</li><li>&ldquo;It&rsquo;s cheating if students use it&rdquo; &rarr; Assignment design determines whether it&rsquo;s cheating</li></ul><h3>Illinois Legal Compliance (SOPPA / FERPA)</h3><ul><li>Never input student names, IDs, IEP/504 data, or raw student work into free AI tools</li><li>No personally identifiable information (PII) in prompts</li><li>Use anonymized or hypothetical scenarios for classroom practice</li><li>District-approved tools only for student-facing use</li></ul><div class="pc-box pc-gold"><strong>&ldquo;AI is not going to replace the teaching &mdash; but it can enhance how you use it, make the learning better, make the teaching better, and give better feedback.&rdquo;</strong></div>',
 
-    1: '<div class="pc-header"><h2>&#127979; Subject Workflows &mdash; Quick Wins by Department</h2><p class="pc-meta">BHS AI Institute Day &middot; April 6, 2026</p></div><h3>ELA</h3><ul><li>AI Feedback Loop: paste a student draft, ask for 3 specific areas for improvement (student revises independently)</li><li>Debate Prep: generate the strongest counterarguments to a student&rsquo;s thesis for practice</li></ul><h3>Math / Science</h3><ul><li>Step-by-step explainer: &ldquo;Explain this concept as if I&rsquo;ve never heard of it before&rdquo;</li><li>Error analysis: &ldquo;Here is a wrong student solution &mdash; what did they likely misunderstand?&rdquo;</li><li>Practice question generator with answer key (students verify every answer)</li></ul><h3>Social Studies</h3><ul><li>Differentiated text at 3 reading levels from a single passage</li><li>Primary source analysis starter questions for Socratic seminars</li></ul><h3>Fine Arts</h3><ul><li>Critique prompt generator for student artwork reflection writing</li><li>Artist research assistant &mdash; always verify dates/facts from primary sources</li></ul><h3>PE / Health &amp; CTE / INCubatorEdu</h3><ul><li>PE: personalized workout plan generator; health scenario discussion starters</li><li>CTE: roleplay as a skeptical investor for pitch rehearsal and revision</li></ul><h3>World Language</h3><ul><li>AI Conversation Partner: practice dialogues with instant grammar feedback</li><li>Cultural Immersion Scenario: &ldquo;Describe a typical Tuesday in [country]&rdquo;</li></ul><h3>Skilled Trades</h3><ul><li>Safety Checklist Generator: OSHA-aligned pre-task checklists from a job description</li><li>Technical Manual Translator: simplify complex specs into plain-language steps</li></ul><div class="pc-box pc-gold"><strong>Audit Rule:</strong> In every activity, students must be the <em>auditors</em> of AI output &mdash; verifying, critiquing, or building on what AI produces.</div>',
+    1: '<div class="pc-header"><h2>&#127979; Subject Workflows &mdash; Quick Wins by Department</h2><p class="pc-meta">BHS AI Institute Day &middot; April 6, 2026</p></div><h3>ELA</h3><ul><li>AI Feedback Loop: paste a student draft, ask for 3 specific areas for improvement (student revises independently)</li><li>Debate Prep: generate the strongest counterarguments to a student&rsquo;s thesis for practice</li></ul><h3>Math / Science</h3><ul><li>Step-by-step explainer: &ldquo;Explain this concept as if I&rsquo;ve never heard of it before&rdquo;</li><li>Error analysis: &ldquo;Here is a wrong student solution &mdash; what did they likely misunderstand?&rdquo;</li><li>Practice question generator with answer key (students verify every answer)</li></ul><h3>Social Studies</h3><ul><li>Differentiated text at 3 reading levels from a single passage</li><li>Primary source analysis starter questions for Socratic seminars</li></ul><h3>Fine Arts</h3><ul><li>Critique prompt generator for student artwork reflection writing</li><li>Artist research assistant &mdash; always verify dates/facts from primary sources</li></ul><h3>PE / Health &amp; CTE / INCubatorEdu</h3><ul><li>PE: personalized workout plan generator; health scenario discussion starters</li><li>CTE: roleplay as a skeptical investor for pitch rehearsal and revision</li></ul><h3>World Language</h3><ul><li>AI Conversation Partner: practice dialogues with instant grammar feedback</li><li>Cultural Immersion Scenario: &ldquo;Describe a typical Tuesday in [country]&rdquo;</li></ul><h3>Skilled Trades</h3><ul><li>Safety Checklist Generator: OSHA-aligned pre-task checklists from a job description</li><li>Technical Manual Translator: simplify complex specs into plain-language steps</li></ul><h3>SPED</h3><ul><li>IEP Goal-Aligned Activity Builder: tiered practice activities at multiple access points (use anonymized descriptions only)</li><li>Differentiated Text Adapter: rewrite any reading at 3 levels (Access / Standard / Extension) preserving the same learning target</li><li>Co-Teaching Lesson Planner: Parallel or Station Teaching design with UDL checkpoints and co-teacher role clarity</li></ul><div class="pc-box pc-gold"><strong>Audit Rule:</strong> In every activity, students must be the <em>auditors</em> of AI output &mdash; verifying, critiquing, or building on what AI produces.</div>',
 
     2: '<div class="pc-header"><h2>&#11088; Student Spotlights &mdash; Enhance, Not Replace in Action</h2><p class="pc-meta">BHS AI Institute Day &middot; April 6, 2026</p></div><p><em>Every example preserves the student&rsquo;s thinking &mdash; AI just made the learning richer.</em></p><ul><li><strong>The Debate Partner (ELA, 9th):</strong> Emma asked AI for the 5 strongest counterarguments to her thesis, then wrote her own rebuttal. Her teacher called the argument &ldquo;unusually sophisticated.&rdquo;</li><li><strong>The Socratic Loop (Math, 11th):</strong> James asked AI for one guiding question instead of the answer. Three Socratic questions later, he solved the proof himself.</li><li><strong>The AI Critic (Fine Arts, 10th):</strong> Sofia had AI generate 8 color palettes then wrote a critique of why they felt generic &mdash; best writing of the semester.</li><li><strong>The Error Hunters (Science, 12th):</strong> AP Bio group verified 20 AI-generated questions, found 3 errors. Explaining <em>why</em> AI was wrong became their best review session.</li><li><strong>The Pitch Coach (CTE, 11th):</strong> Marcus had ChatGPT roleplay as a skeptical investor. After 4 tough rounds he restructured his pitch &mdash; and won the competition.</li><li><strong>The Fact-Checkers (Social Studies, 10th):</strong> Students verified AI research with primary sources, found errors, and sparked the best Socratic debate of the year about bias and reliability.</li></ul><div class="pc-box pc-gold"><strong>The Pattern:</strong> In every case, the student was the auditor, critic, or decision-maker. AI provided raw material. Students provided the judgment.</div>',
 
