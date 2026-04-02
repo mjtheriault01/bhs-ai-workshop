@@ -961,7 +961,7 @@
     <span>&#9203; Morning Session</span>
     <span>&#127775; All Comfort Levels Welcome</span>
   </div>
-  <a href="#ai-basics" class="btn-gold">Start Exploring &#8595;</a>
+  <a href="#mission-grid" class="btn-gold">Start Exploring &#8595;</a>
 </section>
 
 <!-- ─── WORKSHOP DASHBOARD ─── -->
@@ -2329,8 +2329,6 @@
 
   </div>
 </section>
-  </div>
-</div>
 
 <!-- ─── QUIZ ─── -->
 <section id="quiz" class="quiz-bg">
@@ -3918,16 +3916,22 @@ This turns AI into a critical thinking tool about art itself.</div>
     var params = new URLSearchParams(window.location.search);
     var mission = params.get('mission');
     if (mission && BHS_SECTIONS.includes(mission)) {
-      // Sub-tab: show only the requested section
-      var dash = document.getElementById('master-dashboard');
-      if (dash) dash.style.display = 'none';
+      // Sub-tab: hide all page chrome, show only the target section
+      document.querySelectorAll('body > *').forEach(function(el) {
+        var tag = el.tagName.toLowerCase();
+        if (tag === 'script' || tag === 'style') return;
+        if (el.classList.contains('section-view')) return;
+        if (el.classList.contains('modal-overlay')) return;
+        if (el.id === 'print-overlay') return;
+        el.style.display = 'none';
+      });
       BHS_SECTIONS.forEach(function(s) {
         var v = document.getElementById('view-'+s);
         if (v) v.style.display = (s === mission) ? 'block' : 'none';
       });
       window.scrollTo(0, 0);
     } else {
-      // Main tab: show dashboard
+      // Main tab: show dashboard, hide section-views
       BHS_SECTIONS.forEach(function(s) {
         var v = document.getElementById('view-'+s);
         if (v) v.style.display = 'none';
