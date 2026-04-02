@@ -1176,6 +1176,10 @@
         </div>
       </div>
     </div>
+    <!-- Reset progress -->
+    <div style="text-align:center;margin-top:28px;padding-bottom:8px;">
+      <button onclick="resetProgress()" style="background:none;border:none;color:#aaa;font-family:Verdana,sans-serif;font-size:0.72rem;cursor:pointer;text-decoration:underline;padding:4px 8px;">&#8635; Reset My Progress</button>
+    </div>
   </div>
 </div>
 
@@ -3882,6 +3886,13 @@ This turns AI into a critical thinking tool about art itself.</div>
   function prefillCertName(name) {
     var el = document.getElementById('cert-name');
     if (el && !el.value) el.value = name;
+  }
+
+  function resetProgress() {
+    if (!confirm('Reset your progress? This will clear all completed missions and your name. You\'ll start fresh from the sign-in screen.')) return;
+    localStorage.removeItem('bhs-ai-completed');
+    localStorage.removeItem('bhs-participant-name');
+    location.reload();
   }
 
   function logParticipant(action, section) {
