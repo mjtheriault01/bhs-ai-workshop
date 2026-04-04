@@ -2525,7 +2525,17 @@
 
 <!-- SIGN-IN OVERLAY -->
 <div class="signin-overlay" id="signin-overlay" style="display:none;">
-  <div class="signin-box">
+  <!-- Step 1: Password -->
+  <div class="signin-box" id="signin-step-password">
+    <div style="font-size:3rem;margin-bottom:12px;">&#128274;</div>
+    <h2>BHS AI Institute Day</h2>
+    <p>Enter the session password to continue.</p>
+    <input type="password" id="signin-password" class="signin-input" placeholder="Session password" onkeydown="if(event.key==='Enter')submitPassword()">
+    <div id="signin-pw-error" style="display:none;color:#9D2235;font-size:0.82rem;font-weight:700;margin-top:-8px;margin-bottom:4px;">Incorrect password — try again.</div>
+    <button class="signin-btn" onclick="submitPassword()">Continue &#8594;</button>
+  </div>
+  <!-- Step 2: Name -->
+  <div class="signin-box" id="signin-step-name" style="display:none;">
     <div style="font-size:3rem;margin-bottom:12px;">&#127891;</div>
     <h2>Welcome to BHS AI Institute Day</h2>
     <p>Enter your name to begin. Your progress will be saved and your name will appear on your certificate.</p>
@@ -3999,13 +4009,33 @@ This turns AI into a critical thinking tool about art itself.</div>
   var BHS_ADMIN_PASSWORD = 'bhs2026admin';
 
   // ── PARTICIPANT SIGN-IN ──
+  var BHS_SESSION_PASSWORD = 'bhsai';
+
   function checkSignIn() {
     var name = localStorage.getItem('bhs-participant-name');
     if (!name) {
       document.getElementById('signin-overlay').style.display = 'flex';
-      setTimeout(function() { var el = document.getElementById('signin-name'); if (el) el.focus(); }, 100);
+      // Show password step first
+      document.getElementById('signin-step-password').style.display = '';
+      document.getElementById('signin-step-name').style.display = 'none';
+      setTimeout(function() { var el = document.getElementById('signin-password'); if (el) el.focus(); }, 100);
     } else {
       prefillCertName(name);
+    }
+  }
+
+  function submitPassword() {
+    var el = document.getElementById('signin-password');
+    var pw = el ? el.value : '';
+    var errEl = document.getElementById('signin-pw-error');
+    if (pw === BHS_SESSION_PASSWORD) {
+      errEl.style.display = 'none';
+      document.getElementById('signin-step-password').style.display = 'none';
+      document.getElementById('signin-step-name').style.display = '';
+      setTimeout(function() { var n = document.getElementById('signin-name'); if (n) n.focus(); }, 100);
+    } else {
+      errEl.style.display = 'block';
+      if (el) { el.value = ''; el.focus(); el.style.borderColor = '#9D2235'; }
     }
   }
 
