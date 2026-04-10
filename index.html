@@ -3863,7 +3863,6 @@ This turns AI into a critical thinking tool about art itself.</div>
       total += labScores.quiz;
     }
     document.getElementById('lab-total-score').textContent = total;
-    document.getElementById('lab-scoreboard').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
   }
 
   // ── FEEDBACK POPUP ──
@@ -4025,10 +4024,16 @@ This turns AI into a critical thinking tool about art itself.</div>
     var name = localStorage.getItem('bhs-participant-name');
     if (!name) {
       document.getElementById('signin-overlay').style.display = 'flex';
-      // Show password step first
-      document.getElementById('signin-step-password').style.display = '';
-      document.getElementById('signin-step-name').style.display = 'none';
-      setTimeout(function() { var el = document.getElementById('signin-password'); if (el) el.focus(); }, 100);
+      // If password was already entered this session, skip to name step
+      if (sessionStorage.getItem('bhs-pw-unlocked') === '1') {
+        document.getElementById('signin-step-password').style.display = 'none';
+        document.getElementById('signin-step-name').style.display = '';
+        setTimeout(function() { var n = document.getElementById('signin-name'); if (n) n.focus(); }, 100);
+      } else {
+        document.getElementById('signin-step-password').style.display = '';
+        document.getElementById('signin-step-name').style.display = 'none';
+        setTimeout(function() { var el = document.getElementById('signin-password'); if (el) el.focus(); }, 100);
+      }
     } else {
       prefillCertName(name);
     }
@@ -4039,6 +4044,7 @@ This turns AI into a critical thinking tool about art itself.</div>
     var pw = el ? el.value : '';
     var errEl = document.getElementById('signin-pw-error');
     if (pw === BHS_SESSION_PASSWORD) {
+      sessionStorage.setItem('bhs-pw-unlocked', '1');
       errEl.style.display = 'none';
       document.getElementById('signin-step-password').style.display = 'none';
       document.getElementById('signin-step-name').style.display = '';
